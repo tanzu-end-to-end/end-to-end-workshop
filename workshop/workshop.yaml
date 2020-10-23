@@ -1,0 +1,8 @@
+name: End to End Workshop
+
+modules:
+    activate:
+    - workshop-overview
+    - setup-environment
+    - exercises/01-sample-content
+    - workshop-summary
