@@ -1,1 +1,1 @@
-This is the initial landing page for your workshop. Include in this page a description of what your workshop is about.
+In this workshop, we'll be using solutions from the Tanzu project suite from VMware to deliver an application on Kubernetes.

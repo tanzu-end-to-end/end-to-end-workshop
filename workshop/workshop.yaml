@@ -2,7 +2,8 @@ name: End to End Workshop
 
 modules:
     activate:
-    - workshop-overview
-    - setup-environment
-    - exercises/01-sample-content
-    - workshop-summary
+    - exercises/01-set-up-petclinic
+    - exercises/02-set-up-concourse-pipeline
+    - exercises/03-set-up-to-dashboard
+    - exercises/04-tbs-stack-update
+    - exercises/05-load-generation

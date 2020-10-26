@@ -1,12 +1,16 @@
 modules:
-    workshop-overview:
-        name: Workshop Overview
-        exit_sign: Setup Environment
-    setup-environment:
-        name: Setup Environment
-        exit_sign: Start Workshop
-    exercises/01-sample-content:
-        name: Sample Content
-    workshop-summary:
-        name: Workshop Summary
-        exit_sign: Finish Workshop
+    exercises/01-set-up-petclinic:
+        name: Set up Spring Petclinic
+        exit_sign: Set up Concourse Pipeline
+    exercises/02-set-up-concourse-pipeline:
+        name: Set up Concourse Pipeline
+        exit_sign: Set up Tanzu Observability Dashboard
+    exercises/03-set-up-to-dashboard:
+        name: Set up Tanzu Observability Dashboard
+        exit_sign: Update TBS Stack to Remediate CVEs
+    exercises/04-tbs-stack-update:
+        name: Update TBS Stack to Remediate CVEs
+        exit_sign: Load Generation
+    exercises/05-load-generation:
+        name: Load Generation
+        
