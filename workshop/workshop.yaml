@@ -7,3 +7,11 @@ modules:
     - exercises/03-set-up-to-dashboard
     - exercises/04-tbs-stack-update
     - exercises/05-load-generation
+    - exercises/edit-application
+    - exercises/concourse-pipeline
+    - exercises/harbor
+    - exercises/kubeapps
+    - exercises/octant
+    - exercises/tanzu-observability
+#    - exercises/tanzu-mission-control
+#    - exercises/tanzu-application-catalog

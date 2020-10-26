@@ -1,0 +1,19 @@
+Kubernetes has a basic dashboard included with it aptly called the "Kubernetes Dashboard."  This tool can give you some basic insight into a cluster, but it is often barred by many organization due to potential security risks.  VMware has created a developer focused dashboard called Octant that you can use to get more details about your cluster, and perform a number of operations commonly used by developers like viewing logs, or getting a terminal into a running container to debug it.
+
+For this workshop Octant has been deployed as a container into the workshop environment running in your Kubernetes cluster. Normally you would deploy Octant to your own local desktop machine and access your Kubernetes cluster from there.
+
+In this workshop environment, because of the constraints imposed, you will not be able to exercise all features of Octant. Specifically, you will only be able to access resources in the Kubernetes namespace associated with your workshop session. You will not be able to view cluster level resources, or switch to other namespaces.
+
+To view the Octant web interface, click on the Console tab in the workshop dashboard. You should find that Octant is already connected to the Kubernetes cluster and it is displaying an overview for the {{session_namespace}} namespace.
+
+On the left side of the Octant UI, click on the first icon below the double "greater-than" symbol.  This is the "Applications" section of the Octant UI.  The resulting screen should show you all the "Deployments", "ReplicaSets", "StatefulSets", etc. you have in your namespace.  Click on the `petclinic-db-mysql-master` text to drill down into the MySQL database we deployed with Kubeapps earlier.
+
+In the resulting view, you will get a diagram of all Kubernetes objects directly related to this deployment.  You'll see the "petclinic-db-mysql-master" pod is managed by a "StatefulSet", is using a service account, references some secrets, is exposed via Service.  Click on the Pod at the top of the tree diagram.  On the right side of the screen, you'll see a tile show up with a small green heptagon in it.  Click the green heptagon to open up a detailed view of the MySQL Pod.
+
+From this view, you can now see much more detail about the running Pod.  You can scroll down to see the containers running in the pod (just 1 in our case), any defined resource limits (none in our case), volumes mounted to the pod, and other information.  Next, scroll back up to the top and click on the "Logs" tab.
+
+In the resulting view, you can view the logs for the deployed pod.  Click the dropdown under the "Since" label and select "Creation" to see all the logs published for the pod since it started.  You can type "WARN" into the "Filter" text box to highlight all the text that matches what you typed.  You can click on the back and forward arrows next to the Filter text box to navigate between all the instances of the found text in the logs.  If you click on the "Show only filtered" toggle button, the log messages will be filtered to only show lines that contain the filter text we typed earlier.  Next, click on the "Terminal" tab near the top of the UI to open a terminal session to the pod.
+
+In the terminal view, you can can explore the file system for the pod.  You are logged in as the user defined for the container within the pod, which in this case is a non-root user.  Type "ls /" to view the root of the filesystem for the container.  Feel free to explore a bit to examine the container, and then move on to the next step.
+
+There is a lot more you could explore with the Octant interface.  Have fun exploring for a bit, and then move on to the next exercise.
