@@ -13,7 +13,8 @@ text: <wavefront.version>2.0.1</wavefront.version>
 Next, just under the `</properties>` closing tag, add the following block.
 
 ```workshop:copy
-text: <dependencyManagement>
+text: |-
+  <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>com.wavefront</groupId>
@@ -36,7 +37,8 @@ text: <dependencyManagement>
 Search for the `<dependencies>` starting tag.  Insert the following just below that opening tag.
 
 ```workshop:copy
-text: <dependency>
+text: |-
+  <dependency>
     <groupId>com.wavefront</groupId>
     <artifactId>wavefront-spring-boot-starter</artifactId>
   </dependency>
@@ -51,7 +53,8 @@ Commit your change.
 Next, we want to prevent data from being sent to Tanzu Observability while builds or tests are run.  Edit the ` `, look for the `@SpringBootTest` annotation, and paste the following text just above it.
 
 ```workshop:copy
-text: import org.springframework.test.context.ActiveProfiles;
+text: |-
+  import org.springframework.test.context.ActiveProfiles;
   
   @ActiveProfiles("test")
 ```
@@ -61,7 +64,8 @@ Commit your change.
 Finally, add a new folder under `src/test` called `resources`.  In the new folder you created, add a new file called `application-test.properties` add the following text.
 
 ```workshop:copy
-text: management.metrics.export.wavefront.enabled=false
+text: |-
+  management.metrics.export.wavefront.enabled=false
   management.metrics.export.wavefront.apiToken=foo
 ```
 
