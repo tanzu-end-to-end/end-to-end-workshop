@@ -14,7 +14,7 @@ spec:
   - Chris DeLashmutt <cdelashmutt@vmware.com>
   content:
     #image: quay.io/eduk8s/lab-markdown-sample:master
-    files: github.com/tanzu-end-to-end/end-to-end-workshop?ref=main
+    files: github.com/tanzu-end-to-end/end-to-end-workshop/home?ref=main
   session:
     namespaces:
       budget: small
