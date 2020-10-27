@@ -1,7 +1,6 @@
 For this workshop, we'll be using the cannonical Spring PetClinic example application.  Fork the repository to your Github account so we can add a few things to it.
 
-```dashboard:create-dashboard
-name: Github
+```dashboard:open-url
 url: https://github.com/spring-projects/spring-petclinic/fork
 ```
 
