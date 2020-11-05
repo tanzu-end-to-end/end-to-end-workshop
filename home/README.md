@@ -1,1 +1,0 @@
-Home directory for the user in the workshop
