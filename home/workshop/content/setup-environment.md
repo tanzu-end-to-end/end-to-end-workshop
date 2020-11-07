@@ -12,8 +12,13 @@ session: 1
 ```
 Now, set your pipeline.
 ```terminal:execute
-command: fly -t concourse set-pipeline -c pipeline/spring-petclinic.yaml -p spring-petclinic
+command: fly -t concourse set-pipeline -c pipeline/spring-petclinic.yaml -p spring-petclinic -n
 session: 1
+```
+
+Now, let's open a browser window to your pipeline.  Login with user "test" and password "test"
+```dashboard:open-url
+url: https://concourse.{{ ingress_domain }}/teams/{{ session_namespace }}/pipelines/spring-petclinic
 ```
 
 Next, login to harbor with the user "admin" and password "Harbor12345", and navigate to your project called {{ session_namespace }}
@@ -33,3 +38,5 @@ url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }
 ```
 
 Now, paste the token you copied above into the box and click "Login".
+
+Need to finish the rest of setup, but this is an example.
