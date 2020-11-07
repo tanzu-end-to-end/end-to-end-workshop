@@ -1,4 +1,7 @@
 modules:
+    setup-environment:
+        name: Set up environment
+        exit_sign: Set up Spring Petclinic
     exercises/01-set-up-petclinic:
         name: Set up Spring Petclinic
         exit_sign: Set up Concourse Pipeline
