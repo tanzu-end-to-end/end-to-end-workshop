@@ -2,6 +2,7 @@ name: End to End Workshop
 
 modules:
     activate:
+    - setup-environment
     - exercises/01-set-up-petclinic
     - exercises/02-set-up-concourse-pipeline
     - exercises/03-set-up-to-dashboard
