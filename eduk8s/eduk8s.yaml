@@ -1,0 +1,1180 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Namespace","metadata":{"annotations":{},"name":"eduk8s"}}
+    name: eduk8s
+- apiVersion: apiextensions.k8s.io/v1beta1
+  kind: CustomResourceDefinition
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apiextensions.k8s.io/v1beta1","kind":"CustomResourceDefinition","metadata":{"annotations":{},"name":"systemprofiles.training.eduk8s.io"},"spec":{"group":"training.eduk8s.io","names":{"categories":["eduk8s","eduk8s-training"],"kind":"SystemProfile","plural":"systemprofiles","singular":"systemprofile"},"scope":"Cluster","validation":{"openAPIV3Schema":{"properties":{"spec":{"properties":{"analytics":{"properties":{"google":{"properties":{"trackingId":{"type":"string"}},"type":"object"}},"type":"object"},"dockerd":{"properties":{"mirror":{"properties":{"password":{"type":"string"},"remote":{"type":"string"},"username":{"type":"string"}},"required":["remote"],"type":"object"},"mtu":{"type":"integer"},"privileged":{"type":"boolean"},"rootless":{"type":"boolean"}},"type":"object"},"environment":{"properties":{"secrets":{"properties":{"pull":{"items":{"type":"string"},"type":"array"}},"type":"object"}},"type":"object"},"ingress":{"properties":{"class":{"type":"string"},"domain":{"type":"string"},"protocol":{"type":"string"},"secret":{"type":"string"}},"type":"object"},"portal":{"properties":{"clients":{"properties":{"robot":{"properties":{"id":{"type":"string"},"secret":{"type":"string"}},"type":"object"}},"type":"object"},"credentials":{"properties":{"admin":{"properties":{"password":{"type":"string"},"username":{"type":"string"}},"type":"object"},"robot":{"properties":{"password":{"type":"string"},"username":{"type":"string"}},"type":"object"}},"type":"object"},"image":{"type":"string"}},"type":"object"},"registry":{"properties":{"host":{"type":"string"},"namespace":{"type":"string"},"secret":{"type":"string"}},"type":"object"},"storage":{"properties":{"class":{"type":"string"},"group":{"type":"integer"},"user":{"type":"integer"}},"type":"object"},"theme":{"properties":{"dashboard":{"properties":{"script":{"type":"string"},"style":{"type":"string"}},"type":"object"},"portal":{"properties":{"script":{"type":"string"},"style":{"type":"string"}},"type":"object"},"workshop":{"properties":{"script":{"type":"string"},"style":{"type":"string"}},"type":"object"}},"type":"object"},"workshop":{"properties":{"images":{"type":"object"}},"type":"object"}},"type":"object"}},"type":"object"}},"versions":[{"name":"v1alpha1","served":true,"storage":true}]}}
+    name: systemprofiles.training.eduk8s.io
+  spec:
+    group: training.eduk8s.io
+    names:
+      categories:
+      - eduk8s
+      - eduk8s-training
+      kind: SystemProfile
+      plural: systemprofiles
+      singular: systemprofile
+    scope: Cluster
+    validation:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              analytics:
+                properties:
+                  google:
+                    properties:
+                      trackingId:
+                        type: string
+                    type: object
+                type: object
+              dockerd:
+                properties:
+                  mirror:
+                    properties:
+                      password:
+                        type: string
+                      remote:
+                        type: string
+                      username:
+                        type: string
+                    required:
+                    - remote
+                    type: object
+                  mtu:
+                    type: integer
+                  privileged:
+                    type: boolean
+                  rootless:
+                    type: boolean
+                type: object
+              environment:
+                properties:
+                  secrets:
+                    properties:
+                      pull:
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                type: object
+              ingress:
+                properties:
+                  class:
+                    type: string
+                  domain:
+                    type: string
+                  protocol:
+                    type: string
+                  secret:
+                    type: string
+                type: object
+              portal:
+                properties:
+                  clients:
+                    properties:
+                      robot:
+                        properties:
+                          id:
+                            type: string
+                          secret:
+                            type: string
+                        type: object
+                    type: object
+                  credentials:
+                    properties:
+                      admin:
+                        properties:
+                          password:
+                            type: string
+                          username:
+                            type: string
+                        type: object
+                      robot:
+                        properties:
+                          password:
+                            type: string
+                          username:
+                            type: string
+                        type: object
+                    type: object
+                  image:
+                    type: string
+                type: object
+              registry:
+                properties:
+                  host:
+                    type: string
+                  namespace:
+                    type: string
+                  secret:
+                    type: string
+                type: object
+              storage:
+                properties:
+                  class:
+                    type: string
+                  group:
+                    type: integer
+                  user:
+                    type: integer
+                type: object
+              theme:
+                properties:
+                  dashboard:
+                    properties:
+                      script:
+                        type: string
+                      style:
+                        type: string
+                    type: object
+                  portal:
+                    properties:
+                      script:
+                        type: string
+                      style:
+                        type: string
+                    type: object
+                  workshop:
+                    properties:
+                      script:
+                        type: string
+                      style:
+                        type: string
+                    type: object
+                type: object
+              workshop:
+                properties:
+                  images:
+                    type: object
+                type: object
+            type: object
+        type: object
+    versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+- apiVersion: apiextensions.k8s.io/v1beta1
+  kind: CustomResourceDefinition
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apiextensions.k8s.io/v1beta1","kind":"CustomResourceDefinition","metadata":{"annotations":{},"name":"trainingportals.training.eduk8s.io"},"spec":{"additionalPrinterColumns":[{"JSONPath":".status.eduk8s.url","description":"The URL for accessing the portal.","name":"URL","priority":0,"type":"string"},{"JSONPath":".status.eduk8s.credentials.admin.username","description":"The username for accessing admin pages.","name":"AdminUsername","priority":0,"type":"string"},{"JSONPath":".status.eduk8s.credentials.admin.password","description":"The password for accessing admin pages.","name":"AdminPassword","priority":0,"type":"string"}],"group":"training.eduk8s.io","names":{"categories":["eduk8s","eduk8s-training"],"kind":"TrainingPortal","plural":"trainingportals","singular":"trainingportal"},"scope":"Cluster","validation":{"openAPIV3Schema":{"properties":{"spec":{"properties":{"analytics":{"properties":{"google":{"properties":{"trackingId":{"type":"string"}},"type":"object"}},"type":"object"},"portal":{"properties":{"capacity":{"type":"integer"},"catalog":{"properties":{"visibility":{"pattern":"^(public|private)$","type":"string"}},"type":"object"},"clients":{"properties":{"robot":{"properties":{"id":{"type":"string"},"secret":{"type":"string"}},"type":"object"}},"type":"object"},"credentials":{"properties":{"admin":{"properties":{"password":{"type":"string"},"username":{"type":"string"}},"type":"object"},"robot":{"properties":{"password":{"type":"string"},"username":{"type":"string"}},"type":"object"}},"type":"object"},"expires":{"pattern":"^\\d+(s|m|h)$","type":"string"},"image":{"type":"string"},"index":{"type":"string"},"ingress":{"properties":{"class":{"type":"string"},"domain":{"type":"string"},"hostname":{"type":"string"},"protocol":{"type":"string"},"secret":{"type":"string"}},"type":"object"},"initial":{"type":"integer"},"logo":{"type":"string"},"orphaned":{"pattern":"^\\d+(s|m|h)$","type":"string"},"password":{"type":"string"},"registration":{"properties":{"enabled":{"type":"boolean"},"type":{"pattern":"^(one-step|anonymous)$","type":"string"}},"type":"object"},"reserved":{"type":"integer"},"sessions":{"properties":{"anonymous":{"type":"integer"},"maximum":{"type":"integer"},"registered":{"type":"integer"}},"type":"object"},"theme":{"properties":{"frame":{"properties":{"ancestors":{"items":{"type":"string"},"type":"array"}},"type":"object"}},"type":"object"},"title":{"type":"string"}},"type":"object"},"system":{"properties":{"profile":{"type":"string"}},"type":"object"},"workshops":{"items":{"properties":{"capacity":{"type":"integer"},"env":{"items":{"properties":{"name":{"type":"string"},"value":{"type":"string"}},"required":["name"],"type":"object"},"type":"array"},"expires":{"pattern":"^\\d+(s|m|h)$","type":"string"},"initial":{"type":"integer"},"name":{"type":"string"},"orphaned":{"pattern":"^\\d+(s|m|h)$","type":"string"},"reserved":{"type":"integer"}},"required":["name"],"type":"object"},"type":"array"}},"type":"object"},"status":{"properties":{"eduk8s":{"properties":{"clients":{"properties":{"robot":{"properties":{"id":{"type":"string"},"secret":{"type":"string"}},"required":["id","secret"],"type":"object"}},"required":["robot"],"type":"object"},"credentials":{"properties":{"admin":{"properties":{"password":{"type":"string"},"username":{"type":"string"}},"required":["username","password"],"type":"object"},"robot":{"properties":{"password":{"type":"string"},"username":{"type":"string"}},"required":["username","password"],"type":"object"}},"required":["admin","robot"],"type":"object"},"environments":{"items":{"properties":{"name":{"type":"string"},"workshop":{"properties":{"name":{"type":"string"}},"required":["name"],"type":"object"}},"required":["name","workshop"],"type":"object"},"type":"array"},"url":{"type":"string"},"workshops":{"items":{"properties":{"description":{"type":"string"},"name":{"type":"string"},"title":{"type":"string"},"url":{"type":"string"},"vendor":{"type":"string"}},"required":["name","vendor","title","description","url"],"type":"object"},"type":"array"}},"required":["url","credentials","environments"],"type":"object"}},"type":"object"}},"type":"object"}},"versions":[{"name":"v1alpha1","served":true,"storage":true}]}}
+    name: trainingportals.training.eduk8s.io
+  spec:
+    additionalPrinterColumns:
+    - JSONPath: .status.eduk8s.url
+      description: The URL for accessing the portal.
+      name: URL
+      priority: 0
+      type: string
+    - JSONPath: .status.eduk8s.credentials.admin.username
+      description: The username for accessing admin pages.
+      name: AdminUsername
+      priority: 0
+      type: string
+    - JSONPath: .status.eduk8s.credentials.admin.password
+      description: The password for accessing admin pages.
+      name: AdminPassword
+      priority: 0
+      type: string
+    group: training.eduk8s.io
+    names:
+      categories:
+      - eduk8s
+      - eduk8s-training
+      kind: TrainingPortal
+      plural: trainingportals
+      singular: trainingportal
+    scope: Cluster
+    validation:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              analytics:
+                properties:
+                  google:
+                    properties:
+                      trackingId:
+                        type: string
+                    type: object
+                type: object
+              portal:
+                properties:
+                  capacity:
+                    type: integer
+                  catalog:
+                    properties:
+                      visibility:
+                        pattern: ^(public|private)$
+                        type: string
+                    type: object
+                  clients:
+                    properties:
+                      robot:
+                        properties:
+                          id:
+                            type: string
+                          secret:
+                            type: string
+                        type: object
+                    type: object
+                  credentials:
+                    properties:
+                      admin:
+                        properties:
+                          password:
+                            type: string
+                          username:
+                            type: string
+                        type: object
+                      robot:
+                        properties:
+                          password:
+                            type: string
+                          username:
+                            type: string
+                        type: object
+                    type: object
+                  expires:
+                    pattern: ^\d+(s|m|h)$
+                    type: string
+                  image:
+                    type: string
+                  index:
+                    type: string
+                  ingress:
+                    properties:
+                      class:
+                        type: string
+                      domain:
+                        type: string
+                      hostname:
+                        type: string
+                      protocol:
+                        type: string
+                      secret:
+                        type: string
+                    type: object
+                  initial:
+                    type: integer
+                  logo:
+                    type: string
+                  orphaned:
+                    pattern: ^\d+(s|m|h)$
+                    type: string
+                  password:
+                    type: string
+                  registration:
+                    properties:
+                      enabled:
+                        type: boolean
+                      type:
+                        pattern: ^(one-step|anonymous)$
+                        type: string
+                    type: object
+                  reserved:
+                    type: integer
+                  sessions:
+                    properties:
+                      anonymous:
+                        type: integer
+                      maximum:
+                        type: integer
+                      registered:
+                        type: integer
+                    type: object
+                  theme:
+                    properties:
+                      frame:
+                        properties:
+                          ancestors:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
+                  title:
+                    type: string
+                type: object
+              system:
+                properties:
+                  profile:
+                    type: string
+                type: object
+              workshops:
+                items:
+                  properties:
+                    capacity:
+                      type: integer
+                    env:
+                      items:
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                        required:
+                        - name
+                        type: object
+                      type: array
+                    expires:
+                      pattern: ^\d+(s|m|h)$
+                      type: string
+                    initial:
+                      type: integer
+                    name:
+                      type: string
+                    orphaned:
+                      pattern: ^\d+(s|m|h)$
+                      type: string
+                    reserved:
+                      type: integer
+                  required:
+                  - name
+                  type: object
+                type: array
+            type: object
+          status:
+            properties:
+              eduk8s:
+                properties:
+                  clients:
+                    properties:
+                      robot:
+                        properties:
+                          id:
+                            type: string
+                          secret:
+                            type: string
+                        required:
+                        - id
+                        - secret
+                        type: object
+                    required:
+                    - robot
+                    type: object
+                  credentials:
+                    properties:
+                      admin:
+                        properties:
+                          password:
+                            type: string
+                          username:
+                            type: string
+                        required:
+                        - username
+                        - password
+                        type: object
+                      robot:
+                        properties:
+                          password:
+                            type: string
+                          username:
+                            type: string
+                        required:
+                        - username
+                        - password
+                        type: object
+                    required:
+                    - admin
+                    - robot
+                    type: object
+                  environments:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        workshop:
+                          properties:
+                            name:
+                              type: string
+                          required:
+                          - name
+                          type: object
+                      required:
+                      - name
+                      - workshop
+                      type: object
+                    type: array
+                  url:
+                    type: string
+                  workshops:
+                    items:
+                      properties:
+                        description:
+                          type: string
+                        name:
+                          type: string
+                        title:
+                          type: string
+                        url:
+                          type: string
+                        vendor:
+                          type: string
+                      required:
+                      - name
+                      - vendor
+                      - title
+                      - description
+                      - url
+                      type: object
+                    type: array
+                required:
+                - url
+                - credentials
+                - environments
+                type: object
+            type: object
+        type: object
+    versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+- apiVersion: apiextensions.k8s.io/v1beta1
+  kind: CustomResourceDefinition
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apiextensions.k8s.io/v1beta1","kind":"CustomResourceDefinition","metadata":{"annotations":{},"name":"workshopenvironments.training.eduk8s.io"},"spec":{"additionalPrinterColumns":[{"JSONPath":".status.eduk8s.namespace","description":"The namespace in which the workshop is deployed.","name":"Namespace","priority":0,"type":"string"},{"JSONPath":".status.eduk8s.workshop.name","description":"The name of the workshop definition.","name":"Workshop","priority":0,"type":"string"},{"JSONPath":".status.eduk8s.workshop.spec.image","description":"The image used to deploy the workshop.","name":"Image","priority":0,"type":"string"},{"JSONPath":".status.eduk8s.workshop.spec.url","description":"URL for further information on the workshop.","name":"URL","priority":0,"type":"string"}],"group":"training.eduk8s.io","names":{"categories":["eduk8s","eduk8s-training"],"kind":"WorkshopEnvironment","plural":"workshopenvironments","singular":"workshopenvironment"},"scope":"Cluster","validation":{"openAPIV3Schema":{"properties":{"spec":{"properties":{"analytics":{"properties":{"google":{"properties":{"trackingId":{"type":"string"}},"type":"object"}},"type":"object"},"environment":{"properties":{"objects":{"items":{"type":"object"},"type":"array"}},"type":"object"},"request":{"properties":{"enabled":{"type":"boolean"},"namespaces":{"items":{"type":"string"},"type":"array"},"token":{"type":"string"}},"required":["enabled"],"type":"object"},"session":{"properties":{"env":{"items":{"properties":{"name":{"type":"string"},"value":{"type":"string"}},"required":["name"],"type":"object"},"type":"array"},"ingress":{"properties":{"class":{"type":"string"},"domain":{"type":"string"},"protocol":{"type":"string"},"secret":{"type":"string"}},"type":"object"},"password":{"type":"string"},"username":{"type":"string"}},"required":null,"type":"object"},"system":{"properties":{"profile":{"type":"string"}},"type":"object"},"workshop":{"properties":{"name":{"type":"string"}},"required":["name"],"type":"object"}},"required":["workshop"],"type":"object"},"status":{"properties":{"eduk8s":{"properties":{"namespace":{"type":"string"},"workshop":{"properties":{"name":{"type":"string"},"spec":{"type":"object"}},"required":["name","spec"],"type":"object"}},"required":["namespace","workshop"],"type":"object"}},"type":"object"}},"type":"object"}},"versions":[{"name":"v1alpha1","served":true,"storage":true}]}}
+    name: workshopenvironments.training.eduk8s.io
+  spec:
+    additionalPrinterColumns:
+    - JSONPath: .status.eduk8s.namespace
+      description: The namespace in which the workshop is deployed.
+      name: Namespace
+      priority: 0
+      type: string
+    - JSONPath: .status.eduk8s.workshop.name
+      description: The name of the workshop definition.
+      name: Workshop
+      priority: 0
+      type: string
+    - JSONPath: .status.eduk8s.workshop.spec.image
+      description: The image used to deploy the workshop.
+      name: Image
+      priority: 0
+      type: string
+    - JSONPath: .status.eduk8s.workshop.spec.url
+      description: URL for further information on the workshop.
+      name: URL
+      priority: 0
+      type: string
+    group: training.eduk8s.io
+    names:
+      categories:
+      - eduk8s
+      - eduk8s-training
+      kind: WorkshopEnvironment
+      plural: workshopenvironments
+      singular: workshopenvironment
+    scope: Cluster
+    validation:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              analytics:
+                properties:
+                  google:
+                    properties:
+                      trackingId:
+                        type: string
+                    type: object
+                type: object
+              environment:
+                properties:
+                  objects:
+                    items:
+                      type: object
+                    type: array
+                type: object
+              request:
+                properties:
+                  enabled:
+                    type: boolean
+                  namespaces:
+                    items:
+                      type: string
+                    type: array
+                  token:
+                    type: string
+                required:
+                - enabled
+                type: object
+              session:
+                properties:
+                  env:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  ingress:
+                    properties:
+                      class:
+                        type: string
+                      domain:
+                        type: string
+                      protocol:
+                        type: string
+                      secret:
+                        type: string
+                    type: object
+                  password:
+                    type: string
+                  username:
+                    type: string
+                required: null
+                type: object
+              system:
+                properties:
+                  profile:
+                    type: string
+                type: object
+              workshop:
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - workshop
+            type: object
+          status:
+            properties:
+              eduk8s:
+                properties:
+                  namespace:
+                    type: string
+                  workshop:
+                    properties:
+                      name:
+                        type: string
+                      spec:
+                        type: object
+                    required:
+                    - name
+                    - spec
+                    type: object
+                required:
+                - namespace
+                - workshop
+                type: object
+            type: object
+        type: object
+    versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+- apiVersion: apiextensions.k8s.io/v1beta1
+  kind: CustomResourceDefinition
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apiextensions.k8s.io/v1beta1","kind":"CustomResourceDefinition","metadata":{"annotations":{},"name":"workshoprequests.training.eduk8s.io"},"spec":{"additionalPrinterColumns":[{"JSONPath":".status.eduk8s.url","description":"The URL to access the workshop.","name":"URL","priority":0,"type":"string"},{"JSONPath":".status.eduk8s.username","description":"The username to access the workshop.","name":"Username","priority":0,"type":"string"},{"JSONPath":".status.eduk8s.password","description":"The password to access the workshop.","name":"Password","priority":0,"type":"string"}],"group":"training.eduk8s.io","names":{"categories":["eduk8s","eduk8s-training"],"kind":"WorkshopRequest","plural":"workshoprequests","singular":"workshoprequest"},"scope":"Namespaced","validation":{"openAPIV3Schema":{"properties":{"spec":{"properties":{"environment":{"properties":{"name":{"type":"string"},"token":{"type":"string"}},"required":["name"],"type":"object"}},"required":["environment"],"type":"object"},"status":{"properties":{"eduk8s":{"properties":{"password":{"type":"string"},"session":{"properties":{"apiVersion":{"type":"string"},"kind":{"type":"string"},"name":{"type":"string"},"uid":{"type":"string"}},"type":"object"},"url":{"type":"string"},"username":{"type":"string"}},"type":"object"}},"type":"object"}},"type":"object"}},"versions":[{"name":"v1alpha1","served":true,"storage":true}]}}
+    name: workshoprequests.training.eduk8s.io
+  spec:
+    additionalPrinterColumns:
+    - JSONPath: .status.eduk8s.url
+      description: The URL to access the workshop.
+      name: URL
+      priority: 0
+      type: string
+    - JSONPath: .status.eduk8s.username
+      description: The username to access the workshop.
+      name: Username
+      priority: 0
+      type: string
+    - JSONPath: .status.eduk8s.password
+      description: The password to access the workshop.
+      name: Password
+      priority: 0
+      type: string
+    group: training.eduk8s.io
+    names:
+      categories:
+      - eduk8s
+      - eduk8s-training
+      kind: WorkshopRequest
+      plural: workshoprequests
+      singular: workshoprequest
+    scope: Namespaced
+    validation:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              environment:
+                properties:
+                  name:
+                    type: string
+                  token:
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - environment
+            type: object
+          status:
+            properties:
+              eduk8s:
+                properties:
+                  password:
+                    type: string
+                  session:
+                    properties:
+                      apiVersion:
+                        type: string
+                      kind:
+                        type: string
+                      name:
+                        type: string
+                      uid:
+                        type: string
+                    type: object
+                  url:
+                    type: string
+                  username:
+                    type: string
+                type: object
+            type: object
+        type: object
+    versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+- apiVersion: apiextensions.k8s.io/v1beta1
+  kind: CustomResourceDefinition
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apiextensions.k8s.io/v1beta1","kind":"CustomResourceDefinition","metadata":{"annotations":{},"name":"workshops.training.eduk8s.io"},"spec":{"additionalPrinterColumns":[{"JSONPath":".spec.content.image","description":"The location of the image for the workshop.","name":"Image","priority":0,"type":"string"},{"JSONPath":".spec.content.files","description":"The location of the files for the workshop.","name":"Files","priority":0,"type":"string"},{"JSONPath":".spec.url","description":"URL for further information on the workshop.","name":"URL","priority":0,"type":"string"}],"group":"training.eduk8s.io","names":{"categories":["eduk8s","eduk8s-training"],"kind":"Workshop","plural":"workshops","singular":"workshop"},"scope":"Cluster","validation":{"openAPIV3Schema":{"properties":{"spec":{"properties":{"authors":{"items":{"type":"string"},"type":"array"},"content":{"properties":{"files":{"type":"string"},"image":{"type":"string"}},"type":"object"},"description":{"type":"string"},"difficulty":{"pattern":"^(beginner|intermediate|advanced|extreme)$","type":"string"},"duration":{"pattern":"^\\d+(s|m|h)$","type":"string"},"environment":{"properties":{"objects":{"items":{"type":"object"},"type":"array"}},"type":"object"},"logo":{"type":"string"},"session":{"properties":{"applications":{"properties":{"console":{"properties":{"enabled":{"type":"boolean"},"openshift":{"properties":{"image":{"type":"string"},"version":{"type":"string"}},"type":"object"},"vendor":{"type":"string"}},"required":["enabled"],"type":"object"},"docker":{"properties":{"enabled":{"type":"boolean"},"memory":{"type":"string"},"storage":{"type":"string"}},"required":["enabled"],"type":"object"},"editor":{"properties":{"enabled":{"type":"boolean"}},"required":["enabled"],"type":"object"},"registry":{"properties":{"enabled":{"type":"boolean"},"memory":{"type":"string"},"storage":{"type":"string"}},"required":["enabled"],"type":"object"},"slides":{"properties":{"enabled":{"type":"boolean"}},"required":["enabled"],"type":"object"},"terminal":{"properties":{"enabled":{"type":"boolean"},"layout":{"type":"string"}},"required":["enabled"],"type":"object"},"webdav":{"properties":{"enabled":{"type":"boolean"}},"required":["enabled"],"type":"object"},"workshop":{"properties":{"enabled":{"type":"boolean"}},"required":["enabled"],"type":"object"}},"type":"object"},"budget":{"type":"string"},"dashboards":{"items":{"properties":{"name":{"type":"string"},"url":{"type":"string"}},"required":["name","url"],"type":"object"},"type":"array"},"env":{"items":{"properties":{"name":{"type":"string"},"value":{"type":"string"}},"required":["name"],"type":"object"},"type":"array"},"ingresses":{"items":{"properties":{"headers":{"items":{"properties":{"name":{"type":"string"},"value":{"type":"string"}},"required":["name"],"type":"object"},"type":"array"},"host":{"type":"string"},"name":{"type":"string"},"port":{"type":"integer"},"protocol":{"type":"string"}},"required":["name"],"type":"object"},"type":"array"},"namespaces":{"properties":{"budget":{"type":"string"},"limits":{"properties":{"default":{"properties":{"cpu":{"type":"string"},"memory":{"type":"string"}},"type":"object"},"defaultRequest":{"properties":{"cpu":{"type":"string"},"memory":{"type":"string"}},"type":"object"},"max":{"properties":{"cpu":{"type":"string"},"memory":{"type":"string"}},"type":"object"},"min":{"properties":{"cpu":{"type":"string"},"memory":{"type":"string"}},"type":"object"}},"type":"object"},"role":{"type":"string"},"secondary":{"items":{"properties":{"budget":{"type":"string"},"limits":{"properties":{"default":{"properties":{"cpu":{"type":"string"},"memory":{"type":"string"}},"type":"object"},"defaultRequest":{"properties":{"cpu":{"type":"string"},"memory":{"type":"string"}},"type":"object"},"max":{"properties":{"cpu":{"type":"string"},"memory":{"type":"string"}},"type":"object"},"min":{"properties":{"cpu":{"type":"string"},"memory":{"type":"string"}},"type":"object"}},"type":"object"},"name":{"type":"string"},"role":{"type":"string"}},"required":["name"],"type":"object"},"type":"array"}},"type":"object"},"objects":{"items":{"type":"object"},"type":"array"},"patches":{"type":"object"},"resources":{"properties":{"memory":{"type":"string"},"storage":{"type":"string"}},"type":"object"},"role":{"type":"string"},"security":{"properties":{"policy":{"type":"string"}},"type":"object"}},"type":"object"},"tags":{"items":{"type":"string"},"type":"array"},"title":{"type":"string"},"url":{"type":"string"},"vendor":{"type":"string"}},"required":["title","description"],"type":"object"},"status":{"type":"object"}},"type":"object"}},"versions":[{"name":"v1alpha1","served":false,"storage":false},{"name":"v1alpha2","served":true,"storage":true}]}}
+    name: workshops.training.eduk8s.io
+  spec:
+    additionalPrinterColumns:
+    - JSONPath: .spec.content.image
+      description: The location of the image for the workshop.
+      name: Image
+      priority: 0
+      type: string
+    - JSONPath: .spec.content.files
+      description: The location of the files for the workshop.
+      name: Files
+      priority: 0
+      type: string
+    - JSONPath: .spec.url
+      description: URL for further information on the workshop.
+      name: URL
+      priority: 0
+      type: string
+    group: training.eduk8s.io
+    names:
+      categories:
+      - eduk8s
+      - eduk8s-training
+      kind: Workshop
+      plural: workshops
+      singular: workshop
+    scope: Cluster
+    validation:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              authors:
+                items:
+                  type: string
+                type: array
+              content:
+                properties:
+                  files:
+                    type: string
+                  image:
+                    type: string
+                type: object
+              description:
+                type: string
+              difficulty:
+                pattern: ^(beginner|intermediate|advanced|extreme)$
+                type: string
+              duration:
+                pattern: ^\d+(s|m|h)$
+                type: string
+              environment:
+                properties:
+                  objects:
+                    items:
+                      type: object
+                    type: array
+                type: object
+              logo:
+                type: string
+              session:
+                properties:
+                  applications:
+                    properties:
+                      console:
+                        properties:
+                          enabled:
+                            type: boolean
+                          openshift:
+                            properties:
+                              image:
+                                type: string
+                              version:
+                                type: string
+                            type: object
+                          vendor:
+                            type: string
+                        required:
+                        - enabled
+                        type: object
+                      docker:
+                        properties:
+                          enabled:
+                            type: boolean
+                          memory:
+                            type: string
+                          storage:
+                            type: string
+                        required:
+                        - enabled
+                        type: object
+                      editor:
+                        properties:
+                          enabled:
+                            type: boolean
+                        required:
+                        - enabled
+                        type: object
+                      registry:
+                        properties:
+                          enabled:
+                            type: boolean
+                          memory:
+                            type: string
+                          storage:
+                            type: string
+                        required:
+                        - enabled
+                        type: object
+                      slides:
+                        properties:
+                          enabled:
+                            type: boolean
+                        required:
+                        - enabled
+                        type: object
+                      terminal:
+                        properties:
+                          enabled:
+                            type: boolean
+                          layout:
+                            type: string
+                        required:
+                        - enabled
+                        type: object
+                      webdav:
+                        properties:
+                          enabled:
+                            type: boolean
+                        required:
+                        - enabled
+                        type: object
+                      workshop:
+                        properties:
+                          enabled:
+                            type: boolean
+                        required:
+                        - enabled
+                        type: object
+                    type: object
+                  budget:
+                    type: string
+                  dashboards:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        url:
+                          type: string
+                      required:
+                      - name
+                      - url
+                      type: object
+                    type: array
+                  env:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  ingresses:
+                    items:
+                      properties:
+                        headers:
+                          items:
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
+                            required:
+                            - name
+                            type: object
+                          type: array
+                        host:
+                          type: string
+                        name:
+                          type: string
+                        port:
+                          type: integer
+                        protocol:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  namespaces:
+                    properties:
+                      budget:
+                        type: string
+                      limits:
+                        properties:
+                          default:
+                            properties:
+                              cpu:
+                                type: string
+                              memory:
+                                type: string
+                            type: object
+                          defaultRequest:
+                            properties:
+                              cpu:
+                                type: string
+                              memory:
+                                type: string
+                            type: object
+                          max:
+                            properties:
+                              cpu:
+                                type: string
+                              memory:
+                                type: string
+                            type: object
+                          min:
+                            properties:
+                              cpu:
+                                type: string
+                              memory:
+                                type: string
+                            type: object
+                        type: object
+                      role:
+                        type: string
+                      secondary:
+                        items:
+                          properties:
+                            budget:
+                              type: string
+                            limits:
+                              properties:
+                                default:
+                                  properties:
+                                    cpu:
+                                      type: string
+                                    memory:
+                                      type: string
+                                  type: object
+                                defaultRequest:
+                                  properties:
+                                    cpu:
+                                      type: string
+                                    memory:
+                                      type: string
+                                  type: object
+                                max:
+                                  properties:
+                                    cpu:
+                                      type: string
+                                    memory:
+                                      type: string
+                                  type: object
+                                min:
+                                  properties:
+                                    cpu:
+                                      type: string
+                                    memory:
+                                      type: string
+                                  type: object
+                              type: object
+                            name:
+                              type: string
+                            role:
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        type: array
+                    type: object
+                  objects:
+                    items:
+                      type: object
+                    type: array
+                  patches:
+                    type: object
+                  resources:
+                    properties:
+                      memory:
+                        type: string
+                      storage:
+                        type: string
+                    type: object
+                  role:
+                    type: string
+                  security:
+                    properties:
+                      policy:
+                        type: string
+                    type: object
+                type: object
+              tags:
+                items:
+                  type: string
+                type: array
+              title:
+                type: string
+              url:
+                type: string
+              vendor:
+                type: string
+            required:
+            - title
+            - description
+            type: object
+          status:
+            type: object
+        type: object
+    versions:
+    - name: v1alpha1
+      served: false
+      storage: false
+    - name: v1alpha2
+      served: true
+      storage: true
+- apiVersion: apiextensions.k8s.io/v1beta1
+  kind: CustomResourceDefinition
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apiextensions.k8s.io/v1beta1","kind":"CustomResourceDefinition","metadata":{"annotations":{},"name":"workshopsessions.training.eduk8s.io"},"spec":{"additionalPrinterColumns":[{"JSONPath":".status.eduk8s.url","description":"The URL to access the workshop.","name":"URL","priority":0,"type":"string"},{"JSONPath":".spec.session.username","description":"The username to access the workshop.","name":"Username","priority":0,"type":"string"},{"JSONPath":".spec.session.password","description":"The password to access the workshop.","name":"Password","priority":0,"type":"string"}],"group":"training.eduk8s.io","names":{"categories":["eduk8s","eduk8s-training"],"kind":"WorkshopSession","plural":"workshopsessions","singular":"workshopsession"},"scope":"Cluster","validation":{"openAPIV3Schema":{"properties":{"spec":{"properties":{"analytics":{"properties":{"google":{"properties":{"trackingId":{"type":"string"}},"type":"object"}},"type":"object"},"environment":{"properties":{"name":{"type":"string"}},"required":["name"],"type":"object"},"request":{"properties":{"apiVersion":{"type":"string"},"kind":{"type":"string"},"name":{"type":"string"},"namespace":{"type":"string"},"uid":{"type":"string"}},"type":"object"},"session":{"properties":{"env":{"items":{"properties":{"name":{"type":"string"},"value":{"type":"string"}},"required":["name"],"type":"object"},"type":"array"},"id":{"type":"string"},"ingress":{"properties":{"class":{"type":"string"},"domain":{"type":"string"},"secret":{"type":"string"}},"type":"object"},"password":{"type":"string"},"username":{"type":"string"}},"required":["id"],"type":"object"},"system":{"properties":{"profile":{"type":"string"}},"type":"object"}},"required":["environment"],"type":"object"},"status":{"properties":{"eduk8s":{"properties":{"url":{"type":"string"}},"type":"object"}},"type":"object"}},"type":"object"}},"versions":[{"name":"v1alpha1","served":true,"storage":true}]}}
+    name: workshopsessions.training.eduk8s.io
+  spec:
+    additionalPrinterColumns:
+    - JSONPath: .status.eduk8s.url
+      description: The URL to access the workshop.
+      name: URL
+      priority: 0
+      type: string
+    - JSONPath: .spec.session.username
+      description: The username to access the workshop.
+      name: Username
+      priority: 0
+      type: string
+    - JSONPath: .spec.session.password
+      description: The password to access the workshop.
+      name: Password
+      priority: 0
+      type: string
+    group: training.eduk8s.io
+    names:
+      categories:
+      - eduk8s
+      - eduk8s-training
+      kind: WorkshopSession
+      plural: workshopsessions
+      singular: workshopsession
+    scope: Cluster
+    validation:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              analytics:
+                properties:
+                  google:
+                    properties:
+                      trackingId:
+                        type: string
+                    type: object
+                type: object
+              environment:
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+                type: object
+              request:
+                properties:
+                  apiVersion:
+                    type: string
+                  kind:
+                    type: string
+                  name:
+                    type: string
+                  namespace:
+                    type: string
+                  uid:
+                    type: string
+                type: object
+              session:
+                properties:
+                  env:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  id:
+                    type: string
+                  ingress:
+                    properties:
+                      class:
+                        type: string
+                      domain:
+                        type: string
+                      secret:
+                        type: string
+                    type: object
+                  password:
+                    type: string
+                  username:
+                    type: string
+                required:
+                - id
+                type: object
+              system:
+                properties:
+                  profile:
+                    type: string
+                type: object
+            required:
+            - environment
+            type: object
+          status:
+            properties:
+              eduk8s:
+                properties:
+                  url:
+                    type: string
+                type: object
+            type: object
+        type: object
+    versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"name":"eduk8s","namespace":"eduk8s"}}
+    name: eduk8s
+    namespace: eduk8s
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eduk8s-cluster-admin"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cluster-admin"},"subjects":[{"kind":"ServiceAccount","name":"eduk8s","namespace":"eduk8s"}]}
+    name: eduk8s-cluster-admin
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: eduk8s
+    namespace: eduk8s
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"eduk8s-operator","namespace":"eduk8s"},"spec":{"replicas":1,"selector":{"matchLabels":{"deployment":"eduk8s-operator"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"labels":{"deployment":"eduk8s-operator"}},"spec":{"containers":[{"image":"quay.io/eduk8s/eduk8s-operator:201105.062844.a424871","imagePullPolicy":"IfNotPresent","name":"eduk8s"}],"serviceAccountName":"eduk8s"}}}}
+    name: eduk8s-operator
+    namespace: eduk8s
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        deployment: eduk8s-operator
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          deployment: eduk8s-operator
+      spec:
+        containers:
+        - image: quay.io/eduk8s/eduk8s-operator:201105.062844.a424871
+          imagePullPolicy: IfNotPresent
+          name: eduk8s
+          env:
+            - name: INGRESS_DOMAIN
+              value: tools.pez.aws.grogscave.net
+            - name: INGRESS_SECRET
+              value: eduk8s-cert-tls
+        serviceAccountName: eduk8s
+- apiVersion: cert-manager.io/v1alpha2
+  kind: Certificate
+  metadata:
+    name: eduk8s-cert
+    namespace: eduk8s
+  spec:
+    commonName: '*.tools.pez.aws.grogscave.net'
+    dnsNames:
+    - '*.tools.pez.aws.grogscave.net'
+    duration: 2160h0m0s
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-contour-cluster-issuer
+    keyAlgorithm: rsa
+    keyEncoding: pkcs1
+    keySize: 2048
+    organization:
+    - vmware
+    renewBefore: 360h0m0s
+    secretName: eduk8s-cert-tls
+kind: List
+metadata: {}

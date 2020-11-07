@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: concourse
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cluster-admin-sa
+  namespace: concourse
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cluster-admin-cluster-role
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cluster-admin-cluster-role-binding
+subjects:
+- kind: ServiceAccount
+  name: cluster-admin-sa
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin-cluster-role
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: concourse
+  namespace: concourse
+spec:
+  serviceAccountName: cluster-admin-sa
+  fetch:
+  - helm:
+      name: concourse
+      repository:
+        url: https://concourse-charts.storage.googleapis.com
+  template:
+  - helmTemplate:
+      valuesFrom:
+      - secretRef:
+          name: concourse-values
+  deploy:
+  - kapp: {}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: concourse-values
+  namespace: concourse
+stringData:
+  data.yml: |-
+    concourse:
+      web:
+        externalUrl: https://concourse.apps.e2e.aws.grogscave.net
+    web:
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "contour"
+          cert-manager.io/cluster-issuer: "letsencrypt-contour-cluster-issuer"
+        hosts:
+          - concourse.apps.e2e.aws.grogscave.net
+        tls:
+        - hosts:
+          - concourse.apps.e2e.aws.grogscave.net
+          secretName: concourse-cert
+      # Toleration needed for tainted node
+      #tolerations:
+      #- key: "type"
+      #  operator: "Equal"
+      #  value: "concourse"
+      #  effect: "NoSchedule"
+      #nodeSelector:
+      #  type: "concourse"
+    # Toleration needed for tainted node
+    #worker:
+    #  tolerations:
+    #  - key: "type"
+    #    operator: "Equal"
+    #    value: "concourse"
+    #    effect: "NoSchedule"
+    #  nodeSelector:
+    #    type: "concourse"

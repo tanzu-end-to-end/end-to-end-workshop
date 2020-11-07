@@ -1,0 +1,19 @@
+apiVersion: metacontroller.k8s.io/v1alpha1
+kind: DecoratorController
+metadata:
+  name: concourse-team-controller-webhook
+  namespace: concourse-team-controller
+spec:
+  resources:
+  - apiVersion: e2e.tanzu.vmware.com/v1beta1
+    resource: concourseteams
+  attachments: []
+  hooks:
+    sync:
+      webhook:
+        url: http://controller.concourse-team-controller/sync
+        timeout: 10s
+    finalize:
+      webhook:
+        url: http://controller.concourse-team-controller/sync
+        timeout: 10s

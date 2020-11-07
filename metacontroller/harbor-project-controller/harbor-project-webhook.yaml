@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controller
+  namespace: harbor-project-controller
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: controller
+  template:
+    metadata:
+      labels:
+        app: controller
+    spec:
+      containers:
+      - name: controller
+        image: python:2.7
+        command: ["python", "/hooks/sync.py"]
+        volumeMounts:
+        - name: hooks
+          mountPath: /hooks
+        env:
+          - name: HARBOR_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: controller-secrets
+                key: harbor_username
+          - name: HARBOR_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: controller-secrets
+                key: harbor_password
+      volumes:
+      - name: hooks
+        configMap:
+          name: harbor-project-controller
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: controller
+  namespace: harbor-project-controller
+spec:
+  selector:
+    app: controller
+  ports:
+  - port: 80

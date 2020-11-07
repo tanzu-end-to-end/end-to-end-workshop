@@ -1,0 +1,98 @@
+apiVersion: v1
+data:
+  sync.py: |-
+    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+    import json
+    import httplib, urllib
+    import os
+    import base64
+    import sys
+
+    class Controller(BaseHTTPRequestHandler):
+      def sync(self, object, finalizing):
+        try:
+          projectId = object['status']['projectid']
+        except KeyError:
+          projectId = None
+        if finalizing:
+          return self.do_delete_project(object, projectId)
+        else:
+          return self.do_create_project(object, projectId)
+
+      def do_create_project(self, object, projectId):
+        if not projectId:
+          print("No project id found, creating")
+          conn=httplib.HTTPSConnection('harbor.tools.pez.aws.grogscave.net')
+          userAndPass = base64.encodestring(('%s:%s' % (os.environ['HARBOR_USERNAME'], os.environ['HARBOR_PASSWORD'])).replace('\n', '')).replace('\n', '')
+          headers = { "Authorization": "Basic %s" % userAndPass, "Content-Type": "application/json", "Accept": "application/json" }
+          print("Making harbor request")
+          conn.request("POST", "/api/v2.0/projects", json.dumps({"project_name": object["spec"]["name"]}), headers)
+          r=conn.getresponse()
+          responseStatus=r.status
+          responseLocation=r.getheader("Location")
+          responseBody = r.read()
+          conn.close()
+          returnVal={}
+          print("Got back {} with location header {} and body: {}", responseStatus, responseLocation, responseBody)
+          if(responseStatus == 201):
+            returnVal={"status": {"projectid": responseLocation.rsplit('/', 1)[-1]}}
+          else:
+            returnVal={"status": {"error": responseBody}}
+          print(str.format("* Updating status for {}/{}: {}", object["metadata"]["namespace"], object["metadata"]["name"],returnVal))
+          return returnVal
+        else:
+          print("Project id found, skipping")
+          return {}
+
+      def do_delete_project(self, object, projectId):
+        if not projectId:
+          print("Project id not present in status, skipping")
+          return {"finalized": True}
+        else:
+          print("Attempting delete of project id %s" % projectId)
+
+          conn=httplib.HTTPSConnection('harbor.tools.pez.aws.grogscave.net')
+          userAndPass = base64.encodestring(('%s:%s' % (os.environ['HARBOR_USERNAME'], os.environ['HARBOR_PASSWORD'])).replace('\n', '')).replace('\n', '')
+          headers = { "Authorization": "Basic %s" % userAndPass, "Content-Type": "application/json", "Accept": "application/json" }
+          print("Making harbor request")
+          conn.request("DELETE", "/api/v2.0/projects/{}".format(projectId), headers=headers)
+          r=conn.getresponse()
+          responseStatus=r.status
+          responseBody = r.read()
+          conn.close()
+          if(responseStatus == 200):
+            print("Project deletion in progress")
+            return {"finalized": False, "resyncAfterSeconds": 2.0}
+          elif (responseStatus == 404):
+            print("Project not present, marking finalized")
+            return {"finalized": True}
+          else:
+            try:
+              status = object['status']
+            except KeyError:
+              status = {}
+            
+            print("Unhandled error when deleting {}".format(status))
+            status['error']=json.loads(responseBody if responseBody else "{}")
+            return {"finalized": False, "status": status}
+
+      def do_POST(self):
+        print("Start Post")
+        # Serve the sync() function as a JSON webhook.
+        observed = json.loads(self.rfile.read(int(self.headers.getheader("content-length"))))
+        desired = self.sync(observed["object"], observed.get("finalizing", False))
+
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        self.wfile.write(json.dumps(desired))
+        sys.stdout.flush()
+
+    HTTPServer(("", 80), Controller).serve_forever()
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: harbor-project-controller
+  namespace: harbor-project-controller
+  annotations:
+    kapp.k14s.io/versioned: ""

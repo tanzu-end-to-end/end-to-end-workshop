@@ -1,0 +1,67 @@
+apiVersion: v1
+data:
+  config.yaml: |
+    issuer: https://dex.mgmt.pez.aws.grogscave.net # Example value https://dex.mgmt.tkg-aws-lab.winterfell.live
+    frontend:
+      theme: tkg
+    web:
+      https: 0.0.0.0:5556
+      tlsCert: /etc/dex/tls/tls.crt
+      tlsKey: /etc/dex/tls/tls.key
+    expiry:
+      signingKeys: "360m"
+      idTokens: "180m"
+    logger:
+      level: "debug"
+      format: "json"
+
+    staticClients:
+    - id: apps
+      redirectURIs:
+      - 'https://gangway.apps.pez.aws.grogscave.net/callback'
+      - 'https://kubeapps.apps.pez.aws.grogscave.net/oauth2/callback'
+      name: 'apps'
+      secret: FOO_SECRET
+    - id: tools
+      redirectURIs:
+      - 'https://gangway.tools.pez.aws.grogscave.net/callback'
+      - 'https://harbor.tools.pez.aws.grogscave.net/c/oidc/callback'
+      - 'https://kubeapps.tools.pez.aws.grogscave.net/oauth2/callback'
+      name: 'tools'
+      secret: FOO_SECRET
+    connectors:
+    - type: ldap
+      id: ldap
+      name: LDAP
+      config:
+        host: openldap.ldap
+        insecureNoSSL: true
+        bindDN: "cn=readonly,dc=e2e,dc=vmware,dc=com"
+        bindPW: readonly
+        usernamePrompt: "Email"
+        userSearch:
+          baseDN: ou=People,dc=e2e,dc=vmware,dc=com
+          filter: "(objectClass=inetOrgPerson)"
+          username: mail
+          idAttr: DN
+          emailAttr: mail
+          nameAttr: cn
+        groupSearch:
+          baseDN: ou=Groups,dc=e2e,dc=vmware,dc=com
+          filter: "(objectClass=groupOfNames)"
+          userMatchers:
+          - userAttr: DN
+            groupAttr: member
+          nameAttr: cn
+    oauth2:
+      skipApprovalScreen: true
+      responseTypes: ["code", "token", "id_token"]
+    storage:
+      type: kubernetes
+      config:
+        inCluster: true
+    enablePasswordDB: false
+kind: ConfigMap
+metadata:
+  name: dex
+  namespace: tanzu-system-auth

@@ -1,0 +1,99 @@
+apiVersion: v1
+data:
+  sync.py: |-
+    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+    import json
+    import os, subprocess
+    import sys
+
+    class Controller(BaseHTTPRequestHandler):
+      def sync(self, object, finalizing):
+        try:
+          teamurl = object['status']['teamurl']
+        except KeyError:
+          teamurl = None
+        if finalizing:
+          return self.do_delete_team(object, teamurl)
+        else:
+          return self.do_create_team(object, teamurl)
+
+      def do_create_team(self, object, teamurl):
+        if not teamurl:
+          teamName = object['spec']['name']
+          print("No team URL found, creating")
+          fly = subprocess.Popen(["/fly-dir/fly", "-t", "concourse", "set-team", "-n", teamName, "--non-interactive", "--local-user", os.environ["CONCOURSE_USERNAME"].replace("\n", '')], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+          flyOutput,_ = fly.communicate()
+          returnCode = fly.wait()
+          print("Got process code {} from fly with output: {} ", returnCode, flyOutput)
+          if returnCode == 0:
+            returnVal={"status": {"teamurl": "{}/teams/{}".format(os.environ["CONCOURSE_URL"].replace("\n", ''), teamName)}}
+          else:
+            returnVal={"status": {"error": flyOutput}}
+          print(str.format("* Updating status for {}/{}: {}", object["metadata"]["namespace"], object["metadata"]["name"],returnVal))
+          return returnVal
+        else:
+          print("Team URL found, skipping")
+          return {}
+
+      def do_delete_team(self, object, teamurl):
+        teamName = object['spec']['name']
+        if not teamurl:
+          print("Team URL not present in status, skipping")
+          return {"finalized": True}
+        else:
+          print("Attempting delete of team %s" % teamName)
+
+          fly = subprocess.Popen(["/fly-dir/fly", "-t", "concourse", "destroy-team", "-n", teamName, "--non-interactive"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+          flyOutput,_ = fly.communicate()
+          returnCode = fly.wait()
+          print("Got process code {} from fly with output: {} ".format(returnCode, flyOutput))
+          if returnCode == 0:
+            print("Team deletion in progress")
+            return {"finalized": False, "resyncAfterSeconds": 2.0}
+          else:
+            if flyOutput.find("resource not found") > -1:
+              print("Team deletion successful, marking finalized.")
+              return {"finalized": True}
+            else:
+              try:
+                status = object['status']
+              except KeyError:
+                status = {}
+              
+              print("Unhandled error when deleting.  Returning error.")
+              status['error']=flyOutput
+              return {"finalized": False, "status": status}
+
+      def do_POST(self):
+        print("Start Post")
+        # Serve the sync() function as a JSON webhook.
+        observed = json.loads(self.rfile.read(int(self.headers.getheader("content-length"))))
+        desired = self.sync(observed["object"], observed.get("finalizing", False))
+
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        self.wfile.write(json.dumps(desired))
+        sys.stdout.flush()
+    
+    concourseUrl=os.environ["CONCOURSE_URL"]
+    print("Logging into {}".format(concourseUrl))
+    flyLoginCmd = subprocess.Popen(["/fly-dir/fly", "-t", "concourse", "login", "-c", os.environ["CONCOURSE_URL"].replace("\n", ''), "-u", os.environ["CONCOURSE_USERNAME"].replace("\n", ''), "-p", os.environ["CONCOURSE_PASSWORD"].replace("\n", ''), "-n", "main"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    flyLoginOutput,_ = flyLoginCmd.communicate()
+    flyLoginReturnCode = flyLoginCmd.wait()
+    print("Got process code {} from fly with output: {} ".format(flyLoginReturnCode, flyLoginOutput))
+    if flyLoginReturnCode == 0:
+      print("Zero return code from login. Starting server.")
+      sys.stdout.flush()
+      HTTPServer(("", 80), Controller).serve_forever()
+    else:
+      print("Non-zero return from login.  Ending.")
+      #sys.exit()
+    
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: concourse-team-controller
+  namespace: concourse-team-controller
+  annotations:
+    kapp.k14s.io/versioned: ""

@@ -13,7 +13,7 @@ spec:
   - James Musselwhite <jmusselwhite@vmware.com>
   - Chris DeLashmutt <cdelashmutt@vmware.com>
   content:
-    #image: quay.io/eduk8s/lab-markdown-sample:master
+    image: harbor.tools.pez.aws.grogscave.net/tanzu-e2e/eduk8s-e2e-workshop:latest
     files: github.com/tanzu-end-to-end/end-to-end-workshop/home?ref=main
   session:
     namespaces:
@@ -63,12 +63,13 @@ spec:
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: Role
       metadata:
-        name: harbor-user
+        name: e2e-user
       rules:
       - apiGroups:
         - e2e.tanzu.vmware.com
         resources:
         - harborprojects
+        - concourseteams
         verbs:
         - get
         - list
@@ -80,11 +81,11 @@ spec:
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: RoleBinding
       metadata:
-        name: harbor-user
+        name: e2e-user
       roleRef:
         apiGroup: rbac.authorization.k8s.io
         kind: Role
-        name: harbor-user
+        name: e2e-user
       subjects:
       - kind: ServiceAccount
         namespace: $(workshop_namespace)
@@ -93,6 +94,16 @@ spec:
       kind: HarborProject
       metadata:
         name: $(session_namespace)
+        annotations:
+          training.eduk8s.io/objects.crd.scope: Namespaced
+      spec:
+        name: $(session_namespace)
+    - apiVersion: e2e.tanzu.vmware.com/v1beta1
+      kind: ConcourseTeam
+      metadata:
+        name: $(session_namespace)
+        annotations:
+          training.eduk8s.io/objects.crd.scope: Namespaced
       spec:
         name: $(session_namespace)
       

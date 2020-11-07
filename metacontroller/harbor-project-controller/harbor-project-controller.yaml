@@ -1,0 +1,19 @@
+apiVersion: metacontroller.k8s.io/v1alpha1
+kind: DecoratorController
+metadata:
+  name: webhook
+  namespace: harbor-project-controller
+spec:
+  resources:
+  - apiVersion: e2e.tanzu.vmware.com/v1beta1
+    resource: harborprojects
+  attachments: []
+  hooks:
+    sync:
+      webhook:
+        url: http://controller.harbor-project-controller/sync
+        timeout: 10s
+    finalize:
+      webhook:
+        url: http://controller.harbor-project-controller/sync
+        timeout: 10s
