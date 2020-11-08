@@ -49,7 +49,7 @@ command: |-
   --data-value petclinic.image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic \
   --data-value petclinic.tbs.namespace={{ session_namespace }} \
   --data-value petclinic.wavefront.applicationName=petclinic-{{ session_namespace }} \
-  --data-value petclinic.wavefront.deployEventName=petclinic-{{ session_namespace }}-deploy | kubectl apply -n concourse-{{ session_namespace }}
+  --data-value petclinic.wavefront.deployEventName=petclinic-{{ session_namespace }}-deploy | kubectl apply -f- -n concourse-{{ session_namespace }}
 ```
 
 Now, set your pipeline.
