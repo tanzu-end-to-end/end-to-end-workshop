@@ -37,9 +37,24 @@ Next, you have a Concourse team created for you.  Let's login with the `fly` com
 command: fly -t concourse login -c https://concourse.{{ ingress_domain }} -u test -p test -n={{ session_namespace }}
 session: 1
 ```
+Now we need to create some secrets for your Concourse pipeline.
+```terminal:execute
+command: |-
+  ytt -f pipeline/secrets.yaml -f pipeline/values.yaml \
+  --data-values commonSecrets.harborDomain=harbor.{{ ingress_domain }} \
+  --data-values commonSecrets.kubeconfigBuildServer=$(yq r ~/.kube/config -j) \
+  --data-values commonSecrets.kubeconfigAppServer=$(yq r ~/.kube/config -j) \
+  --data-values commonSecrets.concourseHelperImage=harbor.{{ ingress_domain }}/concourse/concourse-helper \
+  --data-values petclinic.host=petclinic-{{ session_namespace }}.{{ ingress_domain }} \
+  --data-values petclinic.image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic \
+  --data-values petclinic.tbs.namespace={{ session_namespace }} \
+  --data-values petclinic.wavefront.applicationName=petclinic-{{ session_namespace }} \
+  --data-values petclinic.wavefront.deployEventName=petclinic-{{ session_namespace }}-deploy | kubectl apply -n concourse-{{ session_namespace }}
+```
+
 Now, set your pipeline.
 ```terminal:execute
-command: fly -t concourse set-pipeline -c pipeline/spring-petclinic.yaml -p spring-petclinic -v harborDomain=harbor.{{ ingress_domain }} -v harborUser=admin -v harborUser=Harbor12345 -v kubeconfigBuildServer=$(yq r ~/.kube/config -j) -v kubeconfigAppServer=$(yq r ~/.kube/config -j) -v concourseHelperImage=harbor.{{ ingress_domain }}/concourse/concourse-helper -v host=petclinic-{{ session_namespace }}.{{ ingress_domain }} -v image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic -v tbsNamespace={{ session_namespace }} -v wavefrontApplicationName=petclinic-{{ session_namespace }} -v wavefrontUri=https://vmware.wavefront.com -v wavefrontApiToken=48b7b6a9-74ef-41f5-8002-f18dec9f82e2 -v wavefrontDeployEventName=petclinic-{{ session_namespace }}-deploy -v codeRepo=https://github.com/cdelashmutt-pivotal/spring-petclinic -v configRepo=https://github.com/tanzu-end-to-end/spring-petclinic-config
+command: fly -t concourse set-pipeline -c pipeline/spring-petclinic.yaml -p spring-petclinic
 session: 1
 ```
 

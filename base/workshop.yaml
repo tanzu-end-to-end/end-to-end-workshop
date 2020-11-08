@@ -18,6 +18,10 @@ spec:
   session:
     namespaces:
       budget: x-large
+      secondary:
+        - name: concourse-$(session_namespace)
+          role: admin
+          budget: small
     applications:
       terminal:
         enabled: true

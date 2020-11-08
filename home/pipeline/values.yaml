@@ -1,0 +1,24 @@
+#@data/values
+---
+petclinic:
+  host: 
+  image:
+  configRepo: https://github.com/tanzu-end-to-end/spring-petclinic-config
+  codeRepo: https://github.com/cdelashmutt-pivotal/spring-petclinic
+  wavefront:
+    applicationName: 
+    uri: https://vmware.wavefront.com
+    apiToken: 48b7b6a9-74ef-41f5-8002-f18dec9f82e2
+    deployEventName: 
+  tbs:
+    namespace:
+commonSecrets:
+  harborDomain: 
+  harborUser: admin
+  harborPassword: Harbor12345
+  kubeconfigBuildServer:
+  kubeconfigAppServer:
+  concourseHelperImage: 
+  concourseUri: 
+  concourseUser: test
+  concoursePassword: test
