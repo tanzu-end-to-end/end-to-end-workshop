@@ -17,7 +17,7 @@ spec:
     files: github.com/tanzu-end-to-end/end-to-end-workshop/home?ref=main
   session:
     namespaces:
-      budget: custom
+      budget: x-large
     applications:
       terminal:
         enabled: true
@@ -28,37 +28,6 @@ spec:
       editor:
         enabled: true
     objects:
-    - apiVersion: v1
-      kind: LimitRange
-      metadata:
-        name: resource-limits
-      spec:
-        limits:
-        - type: Pod
-          max:
-            cpu: "2"
-            memory: 2Gi
-          min:
-            cpu: 50m
-            memory: 32Mi
-        - type: Container
-          default:
-            cpu: 1000m
-            memory: 1Gi
-          defaultRequest:
-            cpu: 1000m
-            memory: 1Gi
-          max:
-            cpu: "1"
-            memory: 1Gi
-          min:
-            cpu: 50m
-            memory: 32Mi
-        - type: PersistentVolumeClaim
-          max:
-            storage: 8Gi
-          min:
-            storage: 1Gi
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: Role
       metadata:

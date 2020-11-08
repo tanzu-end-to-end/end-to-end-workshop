@@ -46,7 +46,7 @@ session: 1
 ```
 Now, set your pipeline.
 ```terminal:execute
-command: fly -t concourse set-pipeline -c pipeline/spring-petclinic.yaml -p spring-petclinic -n
+command: fly -t concourse set-pipeline -c pipeline/spring-petclinic.yaml -p spring-petclinic -v harborDomain=harbor.{{ ingress_domain }} -v harborUser=admin -v harborUser=Harbor12345 -v kubeconfigBuildServer=$(yq r ~/.kube/config -j) -v kubeconfigAppServer=$(yq r ~/.kube/config -j) -v concourseHelperImage=harbor.{{ ingress_domain }}/concourse/concourse-helper -v host=petclinic-{{ session_namespace }}.{{ ingress_domain }} -v image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic -v tbsNamespace={{ session_namespace }} -v wavefrontApplicationName=petclinic-{{ session_namespace }} -v wavefrontUri=https://vmware.wavefront.com -v wavefrontApiToken=48b7b6a9-74ef-41f5-8002-f18dec9f82e2 -v wavefrontDeployEventName=petclinic-{{ session_namespace }}-deploy -v codeRepo=https://github.com/cdelashmutt-pivotal/spring-petclinic -v configRepo=https://github.com/tanzu-end-to-end/spring-petclinic-config
 session: 1
 ```
 
