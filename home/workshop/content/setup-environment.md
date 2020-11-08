@@ -20,22 +20,15 @@ url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }
 
 Within the resulting screen, change the "Name" of the service we're going to deploy to "petclinic-db".  Replace all the content in the "YAML" section with the following content.
 ```workshop:copy
-db:
-  name: petclinic
-  password: petclinic
-  user: petclinic
-master:
-  resources:
-    requests:
-      cpu: 250m
-      memory: 768Gi
-    limits:
-      cpu: 250m
-      memory: 768Gi
-replication:
-  enabled: false
-root:
-  password: petclinic
+text: |-
+  db:
+    name: petclinic
+    password: petclinic
+    user: petclinic
+  replication:
+    enabled: false
+  root:
+    password: petclinic
 ```
 At the bottom of the page, click the "Deploy V6.14.11" button.  The database may take a minute or two to become ready.  
 
