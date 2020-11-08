@@ -42,8 +42,8 @@ Now we need to create some secrets for your Concourse pipeline.
 command: |-
   ytt -f pipeline/secrets.yaml -f pipeline/values.yaml \
   --data-value commonSecrets.harborDomain=harbor.{{ ingress_domain }} \
-  --data-value commonSecrets.kubeconfigBuildServer=$(yq r ~/.kube/config -j) \
-  --data-value commonSecrets.kubeconfigAppServer=$(yq r ~/.kube/config -j) \
+  --data-value commonSecrets.kubeconfigBuildServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
+  --data-value commonSecrets.kubeconfigAppServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
   --data-value commonSecrets.concourseHelperImage=harbor.{{ ingress_domain }}/concourse/concourse-helper \
   --data-value petclinic.host=petclinic-{{ session_namespace }}.{{ ingress_domain }} \
   --data-value petclinic.image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic \
@@ -58,10 +58,17 @@ command: fly -t concourse set-pipeline -c pipeline/spring-petclinic.yaml -p spri
 session: 1
 ```
 
+The pipeline starts off paused, so let's unpause it!
+```terminal:execute
+command: fly -t concourse unpause-pipeline -p spring-petclinic
+session: 1
+```
+
 Now, let's open a browser window to your pipeline.  Login with user "test" and password "test"
 ```dashboard:open-url
 url: https://concourse.{{ ingress_domain }}/teams/{{ session_namespace }}/pipelines/spring-petclinic
 ```
+Validate that it is picking up your code and doing the first build.  It is important to let this process complete so that it can pre-cache all your dependencies and allow your builds to execute much faster.
 
 Next, login to harbor with the user "admin" and password "Harbor12345", and navigate to your project called {{ session_namespace }}
 ```dashboard:open-url
