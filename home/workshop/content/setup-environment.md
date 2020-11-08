@@ -3,8 +3,7 @@ Welcome to the Tanzu End to End demo!  In this session, we'll be exploring some 
 We're going to be using Tanzu to deploy an application, deploy dependent services for that application, observe the metrics for that application and supporting infrastructure, and manage the cluster hosting that application.
 
 To get started, you need to clone Spring Pet Clinic to you can make some changes to it as part of the demo process.  Click the icon in the upper right of the box below to open a new browser tab so that you can fork the Spring Pet Clinic repo into your Github account.
-```dashboard:create-dashboard
-name: Github
+```dashboard:open-url
 url: https://github.com/tanzu-end-to-end/spring-petclinic/fork
 ```
 
@@ -15,8 +14,7 @@ session: 1
 ```
 
 Copy the resulting token into your clipboard, then open the following link in a new tab to start the process to deploy MySQL to your namespace. In the login screen, paste your token into the text field, and click "Login".  
-```dashboard:create-dashboard
-name: Kubeapps
+```dashboard:open-url
 url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }}/apps/new-from-global/bitnami/mysql/versions/6.14.11
 ```
 
@@ -68,15 +66,13 @@ session: 1
 ```
 
 Now, let's open a browser window to your pipeline.  Login with user "test" and password "test"
-```dashboard:create-dashboard
-name: Concourse
+```dashboard:open-url
 url: https://concourse.{{ ingress_domain }}/teams/{{ session_namespace }}/pipelines/spring-petclinic
 ```
 Validate that it is picking up your code and doing the first build.  It is important to let this process complete so that it can pre-cache all your dependencies and allow your builds to execute much faster.
 
 Next, login to harbor with the user "admin" and password "Harbor12345", and navigate to your project called {{ session_namespace }}
-```dashboard:create-dashboard
-name: Harbor
+```dashboard:open-url
 url: https://harbor.{{ ingress_domain }}
 ```
 
