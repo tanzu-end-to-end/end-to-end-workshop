@@ -10,6 +10,7 @@ spec:
       type: anonymous
   workshops:
   - name: end-to-end-workshop
-    capacity: 1
-    expires: 60m
-    orphaned: 5m
+    capacity: 3
+    reserved: 1
+    expires: 4h
+    orphaned: 2h
