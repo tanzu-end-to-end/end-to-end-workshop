@@ -41,15 +41,15 @@ Now we need to create some secrets for your Concourse pipeline.
 ```terminal:execute
 command: |-
   ytt -f pipeline/secrets.yaml -f pipeline/values.yaml \
-  --data-values commonSecrets.harborDomain=harbor.{{ ingress_domain }} \
-  --data-values commonSecrets.kubeconfigBuildServer=$(yq r ~/.kube/config -j) \
-  --data-values commonSecrets.kubeconfigAppServer=$(yq r ~/.kube/config -j) \
-  --data-values commonSecrets.concourseHelperImage=harbor.{{ ingress_domain }}/concourse/concourse-helper \
-  --data-values petclinic.host=petclinic-{{ session_namespace }}.{{ ingress_domain }} \
-  --data-values petclinic.image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic \
-  --data-values petclinic.tbs.namespace={{ session_namespace }} \
-  --data-values petclinic.wavefront.applicationName=petclinic-{{ session_namespace }} \
-  --data-values petclinic.wavefront.deployEventName=petclinic-{{ session_namespace }}-deploy | kubectl apply -n concourse-{{ session_namespace }}
+  --data-value commonSecrets.harborDomain=harbor.{{ ingress_domain }} \
+  --data-value commonSecrets.kubeconfigBuildServer=$(yq r ~/.kube/config -j) \
+  --data-value commonSecrets.kubeconfigAppServer=$(yq r ~/.kube/config -j) \
+  --data-value commonSecrets.concourseHelperImage=harbor.{{ ingress_domain }}/concourse/concourse-helper \
+  --data-value petclinic.host=petclinic-{{ session_namespace }}.{{ ingress_domain }} \
+  --data-value petclinic.image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic \
+  --data-value petclinic.tbs.namespace={{ session_namespace }} \
+  --data-value petclinic.wavefront.applicationName=petclinic-{{ session_namespace }} \
+  --data-value petclinic.wavefront.deployEventName=petclinic-{{ session_namespace }}-deploy | kubectl apply -n concourse-{{ session_namespace }}
 ```
 
 Now, set your pipeline.
