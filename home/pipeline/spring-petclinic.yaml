@@ -168,6 +168,7 @@ jobs:
               petclinic:
                 host: ((petclinic.host))
                 image: ((petclinic.image))@$DIGEST
+                namespace: ((petclinic.tbsNamespace))
                 wavefront:
                   applicationName: ((petclinic.wavefrontApplicationName))
                   uri: ((petclinic.wavefrontUri))
@@ -175,6 +176,6 @@ jobs:
               EOF
               cat config-repo/k8s/values.yml
               
-              ytt -f config-repo/k8s --ignore-unknown-comments | kapp deploy -n petclinic -a petclinic -y -f -
+              ytt -f config-repo/k8s --ignore-unknown-comments | kapp deploy -n ((petclinic.tbsNamespace)) -a petclinic -y -f -
 
 
