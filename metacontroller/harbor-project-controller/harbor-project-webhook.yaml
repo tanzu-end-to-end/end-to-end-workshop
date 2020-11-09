@@ -33,6 +33,8 @@ spec:
               secretKeyRef:
                 name: controller-secrets
                 key: harbor_password
+          - name: HARBOR_HOST
+            value: "harbor.tools.pez.aws.grogscave.net"
       volumes:
       - name: hooks
         configMap:
