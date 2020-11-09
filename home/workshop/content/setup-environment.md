@@ -65,7 +65,7 @@ command: |-
   --data-value petclinic.image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic \
   --data-value petclinic.tbs.namespace={{ session_namespace }} \
   --data-value petclinic.wavefront.applicationName=petclinic-{{ session_namespace }} \
-  --data-value petclinic.wavefront.deployEventName=petclinic-{{ session_namespace }}-deploy | kubectl apply -f- -n concourse-{{ session_namespace }}
+  --data-value petclinic.wavefront.deployEventName=petclinic-deploy | kubectl apply -f- -n concourse-{{ session_namespace }}
 ```
 
 Now, set your pipeline.
@@ -114,4 +114,13 @@ url: https://tanzupaorg.tmc.cloud.vmware.com/clusterGroups/pez-e2e
 Open a tab to Tanzu Application Catalog
 ```dashboard:open-url
 url: https://tac.bitnami.com/apps
+```
+
+Finally, launch a load generator locally to show some metrics in TO.
+```workshop:copy
+text: docker run -p 8089:8089 -v $PWD:/mnt/locust locustio/locust -f /mnt/locust/traffic-generator/locustfile.py -H http://petclinic-{{ session_namespace }}.{{ ingress_domain }}
+```
+Open a browser tab to the load generator
+```dashboard:open-url
+url: http://localhost:8089
 ```

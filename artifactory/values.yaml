@@ -1,0 +1,18 @@
+postgresql:
+  postgresqlPassword: VMware1!
+artifactory:
+  nginx:
+    enabled: false
+  ingress:
+    enabled: true
+    hosts:
+    - artifactory.tools.pez.aws.grogscave.net
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-contour-cluster-issuer
+      kubernetes.io/ingress.class: contour
+    service:
+      type: ClusterIP
+    tls:
+      - hosts:
+        - artifactory.tools.pez.aws.grogscave.net
+        secretName: artifactory-cert

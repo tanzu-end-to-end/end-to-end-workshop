@@ -47,6 +47,34 @@ jobs:
               if [[ -d $PWD/maven && ! -d $HOME/.m2 ]]; then
                 ln -s "$PWD/maven" "$HOME/.m2"
               fi
+              cat << EOF > $PWD/maven/settings.xml
+              <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+                <profiles>
+                  <profile>
+                    <id>local-artifactory</id>
+                    <repositories>
+                      <repository>
+                        <id>local-artifactory</id>
+                        <name>local-artifactory</name>
+                        <url>https://artifactory.tools.pez.aws.grogscave.net/artifactory/all</url>
+                      </repository>
+                    </repositories>
+                    <pluginRepositories>
+                      <pluginRepository>
+                      <id>local-artifactory-snaps</id>
+                      <name>local-artifactory</name>
+                      <url>https://artifactory.tools.pez.aws.grogscave.net/artifactory/all</url>
+                    </pluginRepository>
+                    </pluginRepositories>
+                  </profile>
+                </profiles>
+                <activeProfiles>
+                  <activeProfile>local-artifactory</activeProfile>
+                </activeProfiles>
+              </settings>
+              EOF
               # Added -DskipTests and -Dcheckstyle.skip to speed up task for demo purpose
               # They should not be included in a proper test pipeline
               ./mvnw package -DskipTests -Dcheckstyle.skip
