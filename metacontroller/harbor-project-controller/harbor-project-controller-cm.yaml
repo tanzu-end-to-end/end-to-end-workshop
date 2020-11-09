@@ -54,7 +54,43 @@ data:
           conn=httplib.HTTPSConnection(os.environ['HARBOR_HOST'])
           userAndPass = base64.encodestring(('%s:%s' % (os.environ['HARBOR_USERNAME'], os.environ['HARBOR_PASSWORD'])).replace('\n', '')).replace('\n', '')
           headers = { "Authorization": "Basic %s" % userAndPass, "Content-Type": "application/json", "Accept": "application/json" }
-          print("Making harbor request")
+          print("Making harbor request for repositories")
+          conn.request("GET", "/api/v2.0/projects/{}/repositories?page_size=10".format(object["spec"]["name"]), headers=headers)
+          r=conn.getresponse()
+          responseStatus=r.status
+          responseBody = r.read()
+          if responseStatus == 200:
+            responseObjs = json.loads(responseBody if responseBody else "[]")
+            print("Looping over {} repositories".format(len(responseObjs)))
+            for repository in responseObjs:
+              print("Processing item: {}".format(repository))
+              sys.stdout.flush()
+              repositoryName=repository["name"]
+              
+              if repositoryName:
+                repositoryName = repositoryName.rsplit("/")
+                if len(repositoryName) > 1:
+                  repositoryName = repositoryName[1:]
+                repositoryName = "/".join(repositoryName)
+                projectName=object["spec"]["name"]
+                print("Attempting to delete repository {} from project {}".format(repositoryName, projectName))
+                sys.stdout.flush()
+                conn.request("DELETE", "/api/v2.0/projects/{}/repositories/{}".format(projectName, urllib.quote(repositoryName, safe='')), headers=headers)
+                r=conn.getresponse()
+                responseStatus=r.status
+                responseBody = r.read()
+                if responseStatus == 200:
+                  print("Deleted repository {} from project {}".format(repositoryName, projectName))
+                  sys.stdout.flush()
+                else:
+                  try:
+                    status = object['status']
+                  except KeyError:
+                    status = {}
+                  print("Error deleting repository {} from project {}: {}".format(repositoryName, projectName, responseBody))
+                  status['error']=json.loads(responseBody if responseBody else "{}")
+                  return {"finalized": False, "status": status}
+
           conn.request("DELETE", "/api/v2.0/projects/{}".format(projectId), headers=headers)
           r=conn.getresponse()
           responseStatus=r.status
