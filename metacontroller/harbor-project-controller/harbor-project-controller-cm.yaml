@@ -26,7 +26,7 @@ data:
           userAndPass = base64.encodestring(('%s:%s' % (os.environ['HARBOR_USERNAME'], os.environ['HARBOR_PASSWORD'])).replace('\n', '')).replace('\n', '')
           headers = { "Authorization": "Basic %s" % userAndPass, "Content-Type": "application/json", "Accept": "application/json" }
           print("Making harbor request")
-          conn.request("POST", "/api/v2.0/projects", json.dumps({"project_name": object["spec"]["name"]}), headers)
+          conn.request("POST", "/api/v2.0/projects", json.dumps({"project_name": object["spec"]["name"], "metatdata": {"auto_scan": "true", "public": "true"}}), headers)
           r=conn.getresponse()
           responseStatus=r.status
           responseLocation=r.getheader("Location")

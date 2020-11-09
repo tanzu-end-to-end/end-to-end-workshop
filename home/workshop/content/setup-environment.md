@@ -6,6 +6,7 @@ To get started, you need to clone Spring Pet Clinic to you can make some changes
 ```dashboard:open-url
 url: https://github.com/tanzu-end-to-end/spring-petclinic/fork
 ```
+After forking, navigate to the `/src/main/resources/messages/messages.properties` file in your forked repo.  We want to pre-stage this tab so that you are ready to make an edit to this file to trigger a build later on.
 
 We'll be logging into KubeApps next.  To do that, we'll need to grab our user token to use to login.  Click the running person icon in the upper right of the box below to get your token.
 ```terminal:execute
@@ -32,8 +33,21 @@ text: |-
 ```
 At the bottom of the page, click the "Deploy V6.14.11" button.  The database may take a minute or two to become ready.  
 
-Now you need to create a secret for Build Ser
-Next, you have a Concourse team created for you.  Let's login with the `fly` command in the terminal.
+Now you need to create a secret for Build Service to be able to push images to harbor.
+```terminal:execute
+command: |-
+  kp secret create harbor-creds \
+    --registry harbor.{{ ingress_domain }} \
+    --registry-user admin \
+    --namespace {{ session_namespace }}
+
+Now in the resulting prompt, enter the password of `Harbor12345` or click below.
+```terminal:input
+text: Harbor12345
+session: 1
+```
+
+Next, you have a Concourse team already created for you.  Let's login with the `fly` command in the terminal.
 ```terminal:execute
 command: fly -t concourse login -c https://concourse.{{ ingress_domain }} -u test -p test -n={{ session_namespace }}
 session: 1
@@ -55,7 +69,7 @@ command: |-
 
 Now, set your pipeline.
 ```terminal:execute
-command: fly -t concourse set-pipeline -c pipeline/spring-petclinic.yaml -p spring-petclinic
+command: fly -t concourse set-pipeline -c pipeline/spring-petclinic.yaml -p spring-petclinic -n
 session: 1
 ```
 
@@ -69,11 +83,34 @@ Now, let's open a browser window to your pipeline.  Login with user "test" and p
 ```dashboard:open-url
 url: https://concourse.{{ ingress_domain }}/teams/{{ session_namespace }}/pipelines/spring-petclinic
 ```
-Validate that it is picking up your code and doing the first build.  It is important to let this process complete so that it can pre-cache all your dependencies and allow your builds to execute much faster.
+Validate that it is picking up your code and doing the first build.  It is important to let this process complete so that it can pre-cache all your dependencies and allow your builds to execute much faster.  This will take a while the first time.
 
 Next, login to harbor with the user "admin" and password "Harbor12345", and navigate to your project called {{ session_namespace }}
 ```dashboard:open-url
 url: https://harbor.{{ ingress_domain }}
 ```
 
-Need to finish the rest of setup, but this is an example.
+Open a tab to your deployed Pet Clinic instance
+```dashboard:open-url
+url: https://petclinic-{{ session_namespace }}.{{ ingress_domain }}
+```
+If you don't see the Pet Clinic interface, go back to your Concourse tab and ensure that the `continuous-delivery` job completed successfully.
+
+Open a tab to Tanzu Observability for your Pet Clinic Dashboard.  First, you will need to sign in to the following Wavefront instance.
+```dashboard:open-url
+url: https://vmware.wavefront.com/u/n1XssyygW7?t=vmware
+```
+Now, copy your app name below, and paste into the application dropdown on the TO browser tab.
+```workshop:copy
+text: petclinic-{{ session_namespace }
+```
+
+Open a tab for Tanzu Mission Control
+```dashboard:open-url
+url: https://tanzupaorg.tmc.cloud.vmware.com/clusterGroups/pez-e2e
+```
+
+Open a tab to Tanzu Application Catalog
+```dashboard:open-url
+url: https://tac.bitnami.com/apps
+```
