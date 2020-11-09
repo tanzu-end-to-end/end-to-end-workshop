@@ -40,6 +40,7 @@ command: |-
     --registry harbor.{{ ingress_domain }} \
     --registry-user admin \
     --namespace {{ session_namespace }}
+```
 
 Now in the resulting prompt, enter the password of `Harbor12345` or click below.
 ```terminal:input
