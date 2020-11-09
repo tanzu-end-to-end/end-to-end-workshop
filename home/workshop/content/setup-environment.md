@@ -102,7 +102,7 @@ url: https://vmware.wavefront.com/u/n1XssyygW7?t=vmware
 ```
 Now, copy your app name below, and paste into the application dropdown on the TO browser tab.
 ```workshop:copy
-text: petclinic-{{ session_namespace }
+text: petclinic-{{ session_namespace }}
 ```
 
 Open a tab for Tanzu Mission Control
