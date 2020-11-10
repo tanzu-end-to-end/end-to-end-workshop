@@ -9,7 +9,7 @@ And when a patch comes out for a critical issue (Heartbleed, Ghost, Shellshock, 
 Let's look at how this works with Tanzu!
 
 * Go to the Pet Clinic tab to explain this is a sample app we want to make an update to.
-* Go to the Github tab and edit the welcome message to something new, and commit it.
+* Go to the Github tab and edit the welcome message to something new, and commit it.  Maybe "Thanks!"
 * Go to the Concourse tab and show the section for update-build-service-image
 * Watch the build process and explain the high level process of Detect, and Build phases.
 * Next, go to the continuous-deployment job, and show the application deployment occuring.
