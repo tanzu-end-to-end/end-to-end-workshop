@@ -22,6 +22,11 @@ url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }
 Within the resulting screen, change the "Name" of the service we're going to deploy to "petclinic-db".  Replace all the content in the "YAML" section with the following content.
 ```workshop:copy
 text: |-
+  image:
+    registry: harbor.{{ ingress_domain }}/dockerhub
+  metrics:
+    image:
+      registry: harbor.{{ ingress_domain }}/dockerhub
   db:
     name: petclinic
     password: petclinic
