@@ -34,4 +34,7 @@ modules:
         exit_sign: Tanzu Observability
     exercises/tanzu-observability:
         name: Tanzu Observability
-    
+config:
+    vars:
+    - name: user_token
+        value: FOO
