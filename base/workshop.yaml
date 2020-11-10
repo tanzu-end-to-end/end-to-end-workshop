@@ -20,7 +20,7 @@ spec:
       budget: x-large
       limits:
         default:
-          cpu: 1
+          cpu: 1000m
           memory: 1Gi
       secondary:
         - name: concourse-$(session_namespace)
