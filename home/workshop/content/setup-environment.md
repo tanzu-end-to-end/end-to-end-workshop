@@ -131,18 +131,26 @@ Open a browser tab to the load generator
 url: http://localhost:8089
 ```
 
+Docker login
+```terminal:execute
+command: docker login harbor.{{ ingress_domain }} -u admin -p Harbor12345
+session: 1
+```
+
 Change Clusterstack
-```workshop:copy
-text: |-
+```terminal:execute
+command: |-
   kp clusterstack update demo-stack \
   --build-image harbor.{{ ingress_domain }}/tbs/build-service/build@sha256:ee37e655a4f39e2e6ffa123306db0221386032d3e6e51aac809823125b0a400e \
   --run-image harbor.{{ ingress_domain }}/tbs/build-service/run@sha256:51cebe0dd77a1b09934c4ce407fb07e3fc6f863da99cdd227123d7bfc7411efa
+session: 1
 ```
 
 Change Clusterstack Back
-```workshop:copy
-text: |-
+```terminal:execute
+command: |-
   kp clusterstack update demo-stack \
   --build-image harbor.{{ ingress_domain }}/tbs/build-service/build@sha256:97ea650641effa523611d715fa16549968252ba803f19b13b4e9d5821708aea6 \
   --run-image harbor.{{ ingress_domain }}/tbs/build-service/run@sha256:4084f6704cc27a7d93ebb050f5712c869072530576c473440e43c311c0c802f7
+session: 1
 ```
