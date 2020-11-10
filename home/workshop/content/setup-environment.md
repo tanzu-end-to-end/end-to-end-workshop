@@ -99,7 +99,7 @@ url: https://harbor.{{ ingress_domain }}
 
 Open a tab to your deployed Pet Clinic instance
 ```dashboard:open-url
-url: http://petclinic-{{ session_namespace }}.{{ ingress_domain }}
+url: https://petclinic-{{ session_namespace }}.{{ ingress_domain }}
 ```
 If you don't see the Pet Clinic interface, go back to your Concourse tab and ensure that the `continuous-delivery` job completed successfully.
 
@@ -124,7 +124,7 @@ url: https://tac.bitnami.com/apps
 
 Finally, launch a load generator locally to show some metrics in TO.
 ```workshop:copy
-text: docker run -p 8089:8089 -v $PWD:/mnt/locust locustio/locust -f /mnt/locust/traffic-generator/locustfile.py -H http://petclinic-{{ session_namespace }}.{{ ingress_domain }}
+text: docker run --rm -p 8089:8089 -v $PWD:/mnt/locust locustio/locust -f /mnt/locust/traffic-generator/locustfile.py -H http://petclinic-{{ session_namespace }}.{{ ingress_domain }}
 ```
 Open a browser tab to the load generator
 ```dashboard:open-url
@@ -139,8 +139,7 @@ session: 1
 
 Simulate Administrator updating Clusterstack
 ```terminal:execute
-command: |-
-  kp image patch spring-petclinic --cluster-builder default  
+command: kp image patch spring-petclinic --cluster-builder default  
 session: 1
 ```
 
