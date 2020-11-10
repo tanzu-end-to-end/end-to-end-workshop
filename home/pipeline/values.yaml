@@ -12,7 +12,6 @@ petclinic:
     deployEventName: 
   tbs:
     namespace:
-    builder: demo-cluster-builder
 commonSecrets:
   harborDomain: 
   harborUser: admin

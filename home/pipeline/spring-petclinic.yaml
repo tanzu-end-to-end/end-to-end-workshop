@@ -113,7 +113,7 @@ jobs:
               else
                 kp image create spring-petclinic \
                   --tag ((petclinic.image)) \
-                  --cluster-builder ((petclinic.builder)) \
+                  --cluster-builder demo-cluster-builder \
                   --namespace ((petclinic.tbsNamespace)) \
                   --wait \
                   --local-path target/spring-petclinic-2.3.0.BUILD-SNAPSHOT.jar
