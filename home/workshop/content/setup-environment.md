@@ -14,6 +14,10 @@ command: yq r ~/.kube/config 'users(name==eduk8s).user.token'
 session: 1
 ```
 
+```workshop:copy
+{{ user_token }}
+```
+
 Copy the resulting token into your clipboard, then open the following link in a new tab to start the process to deploy MySQL to your namespace. In the login screen, paste your token into the text field, and click "Login".  
 ```dashboard:open-url
 url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }}/apps/new-from-global/bitnami/mysql/versions/6.14.11
