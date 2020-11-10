@@ -16,15 +16,17 @@ Let's look at how this works with Tanzu!
 * Next, go to the Octant console in the workshop tab to show the deployment rolling out
 * Finally, refresh the Petclinic window to show the change.
 * Now, let's put on the hat of an operator who needs to roll out a change for a critical CVE.  
+
 ```terminal:execute
 command: |-
   docker login harbor.tools.pez.aws.grogscave.net -u admin -p Harbor12345
   kp image patch spring-petclinic --cluster-builder default  
 session: 1
 ```
+
 * Now, let's check the build
+
 ```terminal:execute
-command: |-
-  kp builds list spring-petclinic
+command: kp builds list spring-petclinic
 session: 1
 ```
