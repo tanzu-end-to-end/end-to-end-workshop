@@ -18,7 +18,7 @@ Now, open the following link in a new tab to start the process to deploy MySQL t
 url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }}/apps/new-from-global/bitnami/mysql/versions/6.14.11
 ```
 
-Within the resulting screen, change the "Name" of the service we're going to deploy to "petclinic-db".  Replace all the content in the "YAML" section with the following content.
+Within the resulting screen, change the **Name** of the service we're going to deploy to **petclinic-db**.  Replace all the content in the "YAML" section with the following content.
 ```workshop:copy
 text: |-
   image:
@@ -92,7 +92,7 @@ url: https://concourse.{{ ingress_domain }}/teams/{{ session_namespace }}/pipeli
 ```
 Validate that it is picking up your code and doing the first build.  It is important to let this process complete so that it can pre-cache all your dependencies and allow your builds to execute much faster.  This will take a while the first time.
 
-Next, login to harbor with the user "admin" and password "Harbor12345", and navigate to your project called {{ session_namespace }}
+Next, login to harbor with the user "admin" and password "Harbor12345", and navigate to your project called **{{ session_namespace }}**
 ```dashboard:open-url
 url: https://harbor.{{ ingress_domain }}
 ```
