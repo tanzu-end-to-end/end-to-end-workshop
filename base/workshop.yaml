@@ -35,8 +35,6 @@ spec:
         vendor: octant
       editor:
         enabled: true
-      docker:
-        enabled: true
     objects:
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: Role
