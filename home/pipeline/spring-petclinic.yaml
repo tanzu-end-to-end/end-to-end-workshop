@@ -30,7 +30,7 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: ((common-secrets.harborDomain))/dockerhub/library/adoptopenjdk
+            repository: adoptopenjdk
             tag: 11-jdk-hotspot
         inputs:
           - name: source-code
