@@ -16,3 +16,7 @@ modules:
     - exercises/tanzu-observability
 #    - exercises/tanzu-mission-control
 #    - exercises/tanzu-application-catalog
+config:
+    vars:
+    - name: user_token
+      value: FOO
