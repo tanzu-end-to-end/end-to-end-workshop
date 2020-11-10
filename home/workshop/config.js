@@ -5,15 +5,15 @@ function initialize(workshop) {
   workshop.load_workshop();
 
   exec("yq r ~/.kube/config 'users(name==eduk8s).user.token'", (error, stdout, stderr) => {
+    output = ""
     if (error) {
-        console.log(`error: ${error.message}`);
-        return;
+        output += error.message + "\n";
     }
     if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
+        output += stderr + "\n";
     }
-    workshop.data_variable('user_token', stdout);
+    output += stdout;
+    workshop.data_variable('user_token', output);
   });
 }
 
