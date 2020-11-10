@@ -18,6 +18,10 @@ spec:
   session:
     namespaces:
       budget: x-large
+      limits:
+        default:
+          cpu: 1
+          memory: 1Gi
       secondary:
         - name: concourse-$(session_namespace)
           role: admin
