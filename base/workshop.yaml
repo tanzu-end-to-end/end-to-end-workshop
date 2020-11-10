@@ -46,6 +46,7 @@ spec:
         resources:
         - builds
         - builders
+        - clusterbuilders
         - images
         - sourceresolvers
         verbs:

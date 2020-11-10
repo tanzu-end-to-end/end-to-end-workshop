@@ -137,20 +137,21 @@ command: docker login harbor.{{ ingress_domain }} -u admin -p Harbor12345
 session: 1
 ```
 
-Change Clusterstack
+Simulate changing Clusterstack
 ```terminal:execute
 command: |-
-  kp clusterstack update demo-stack \
-  --build-image harbor.{{ ingress_domain }}/tbs/build-service/build@sha256:ee37e655a4f39e2e6ffa123306db0221386032d3e6e51aac809823125b0a400e \
-  --run-image harbor.{{ ingress_domain }}/tbs/build-service/run@sha256:51cebe0dd77a1b09934c4ce407fb07e3fc6f863da99cdd227123d7bfc7411efa
-session: 1
-```
-
-Change Clusterstack Back
-```terminal:execute
-command: |-
-  kp clusterstack update demo-stack \
-  --build-image harbor.{{ ingress_domain }}/tbs/build-service/build@sha256:97ea650641effa523611d715fa16549968252ba803f19b13b4e9d5821708aea6 \
-  --run-image harbor.{{ ingress_domain }}/tbs/build-service/run@sha256:4084f6704cc27a7d93ebb050f5712c869072530576c473440e43c311c0c802f7
+  ytt -f pipeline/secrets.yaml -f pipeline/values.yaml \
+  --data-value commonSecrets.harborDomain=harbor.{{ ingress_domain }} \
+  --data-value commonSecrets.kubeconfigBuildServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
+  --data-value commonSecrets.kubeconfigAppServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
+  --data-value commonSecrets.concourseHelperImage=harbor.{{ ingress_domain }}/concourse/concourse-helper \
+  --data-value petclinic.codeRepo=https://github.com/cdelashmutt-pivotal/spring-petclinic \
+  --data-value petclinic.configRepo=https://github.com/tanzu-end-to-end/spring-petclinic-config \
+  --data-value petclinic.host=petclinic-{{ session_namespace }}.{{ ingress_domain }} \
+  --data-value petclinic.image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic \
+  --data-value petclinic.tbs.namespace={{ session_namespace }} \
+  --data-value petclinic.tbs.builder=default
+  --data-value petclinic.wavefront.applicationName=petclinic-{{ session_namespace }} \
+  --data-value petclinic.wavefront.deployEventName=petclinic-deploy | kubectl apply -f- -n concourse-{{ session_namespace }}
 session: 1
 ```
