@@ -11,6 +11,6 @@ spec:
   workshops:
   - name: end-to-end-workshop
     capacity: 20
-    reserved: 2
+    reserved: 1
     expires: 4h
     orphaned: 2h
