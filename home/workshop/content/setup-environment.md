@@ -15,7 +15,7 @@ session: 1
 ```
 
 ```workshop:copy
-{{ user_token }}
+text: {{ user_token }}
 ```
 
 Copy the resulting token into your clipboard, then open the following link in a new tab to start the process to deploy MySQL to your namespace. In the login screen, paste your token into the text field, and click "Login".  
