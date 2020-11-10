@@ -28,9 +28,9 @@ jobs:
       config:
         platform: linux
         image_resource:
-          type: docker-image
+          type: registry-image
           source:
-            repository: adoptopenjdk
+            repository: ((common-secrets.harborDomain))/dockerhub/library/adoptopenjdk
             tag: 11-jdk-hotspot
         inputs:
           - name: source-code
