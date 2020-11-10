@@ -2,35 +2,20 @@ modules:
   setup-environment:
     name: Set up environment
     exit_sign: Set up Spring Petclinic
-  exercises/01-set-up-petclinic:
-    name: Set up Spring Petclinic
-    exit_sign: Set up Concourse Pipeline
-  exercises/02-set-up-concourse-pipeline:
-    name: Set up Concourse Pipeline
-    exit_sign: Set up Tanzu Observability Dashboard
-  exercises/03-set-up-to-dashboard:
-    name: Set up Tanzu Observability Dashboard
-    exit_sign: Update TBS Stack to Remediate CVEs
-  exercises/04-tbs-stack-update:
-    name: Update TBS Stack to Remediate CVEs
-    exit_sign: Load Generation
-  exercises/05-load-generation:
-    name: Load Generation
-    exit_sign: Edit Spring Pet Clinic
-  exercises/edit-application:
-    name: Edit Spring Pet Clinic
-    exit_sign: Examine Concourse Pipeline
-  exercises/concourse-pipeline:
-    name: Examine Concourse Pipeline
-    exit_sign: Examine Harbor
-  exercises/harbor:
-    name: Examine Harbor
-    exit_sign: Examine Kubeapps
-  exercises/kubeapps:
-    name: Examine Kubeapps
-    exit_sign: Examine Octant
-  exercises/octant:
-    name: Examine Octant
-    exit_sign: Tanzu Observability
-  exercises/tanzu-observability:
-    name: Tanzu Observability
+  exercises/01-frameworks:
+    name: Frameworks and Services
+    exit_sign: Automated Container Creation
+  exercises/02-automated-container-creation:
+    name: Automated Container Creation
+    exit_sign: Registries are More than File Servers
+  exercises/03-container-registry:
+    name: Registries are More than File Servers
+    exit_sign: Service Catalog
+  exercises/04-service-catalog:
+    name: Service Catalog
+    exit_sign: Centralized Cluster Management
+  exercises/05-cluster-management:
+    name: Centralized Cluster Management
+    exit_sign: Enterprise Observability
+  exercises/06-enterprise-observability:
+    name: Enterprise Observability

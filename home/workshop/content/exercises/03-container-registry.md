@@ -1,0 +1,13 @@
+No matter how your developers are packaging up their application as a container, they need a place to store that container image so that it can be used by others.  But what if this image wasn't built by the build services we discussed before?  What if that image is a third-party component or service that your developers need to use along with their application?  Your developers want to use the latest and greatest technologies, but the people operating those applications are on the hook to make sure they don't contain critical CVEs that could compromise your applications and data.  You also want to be sure that the contents of those images haven't been altered in some way before they land on your clusters.
+
+Tanzu provides capabilities for hosting those container images that go far beyond a simple "file server."  Tanzu's image registry acts as another control point in your infrastructure that prevents images that don't meet your security standards from ever reaching your application clusters.  It shifts security concerns to a much earlier phase in the application lifecycle so that developers aren't suprised by a security scan right at the end of a development cycle that causes them a lot of redesign and rework.
+
+Let's look at Tanzu's image registry to see how this works.
+
+* Go to the Harbor tab and select the "spring-petclinic" registry.
+* Explain the two images shown that have different CVE counts.  The first one was your application using the base stack that had more CVEs in it that the patched one we got when we wore our operator hat and pushed out the new base image.  And the third container image has the same number of CVEs as the second because that one contained our code changes on top of the patched base image.
+* Click on one of the image names, and scroll down to show the CVE list for that image.
+* Open up a CVE and highlight the description.  Then hover over the "I" icon to show the links to the relevant CVE reports.
+* Now, click on the project name and go to the "configuration" tab.  Call out the automatic scanning the ability block images from being used that have a certain level of severity of CVE.
+* Call out that you can also selectivly allow certain CVEs for a time period to allow a rollout to continue if you must.
+* Call out the "content trust" setting that requires images to be signed to ensure they haven't been modified before they can be pulled.

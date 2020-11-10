@@ -143,3 +143,6 @@ command: |-
   kp image patch spring-petclinic --cluster-builder default  
 session: 1
 ```
+
+Finally, reorder your tabs this way:
+Locust, start.spring.io, Pet Clinic, GitHub, Concourse, Harbor, Kubeapps, TAC, Workshop tab on the "Console" section, TO, TMC
