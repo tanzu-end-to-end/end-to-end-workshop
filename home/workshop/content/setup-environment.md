@@ -61,6 +61,8 @@ command: |-
   --data-value commonSecrets.kubeconfigBuildServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
   --data-value commonSecrets.kubeconfigAppServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
   --data-value commonSecrets.concourseHelperImage=harbor.{{ ingress_domain }}/concourse/concourse-helper \
+  --data-value petclinic.codeRepo=https://github.com/cdelashmutt-pivotal/spring-petclinic \
+  --data-value petclinic.configRepo=https://github.com/tanzu-end-to-end/spring-petclinic-config \
   --data-value petclinic.host=petclinic-{{ session_namespace }}.{{ ingress_domain }} \
   --data-value petclinic.image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic \
   --data-value petclinic.tbs.namespace={{ session_namespace }} \
