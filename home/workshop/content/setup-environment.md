@@ -8,17 +8,12 @@ url: https://github.com/tanzu-end-to-end/spring-petclinic/fork
 ```
 After forking, navigate to the `/src/main/resources/messages/messages.properties` file in your forked repo.  We want to pre-stage this tab so that you are ready to make an edit to this file to trigger a build later on.
 
-We'll be logging into KubeApps next.  To do that, we'll need to grab our user token to use to login.  Click the running person icon in the upper right of the box below to get your token.
-```terminal:execute
-command: yq r ~/.kube/config 'users(name==eduk8s).user.token'
-session: 1
-```
-
+We'll be logging into KubeApps next.  To do that, we'll need to grab our user token to use to login.  Copy your user token below to use to login to kubeapps in the next step.
 ```workshop:copy
 text: {{ user_token }}
 ```
 
-Copy the resulting token into your clipboard, then open the following link in a new tab to start the process to deploy MySQL to your namespace. In the login screen, paste your token into the text field, and click "Login".  
+Now, open the following link in a new tab to start the process to deploy MySQL to your namespace. In the login screen, paste your token into the text field, and click "Login".  
 ```dashboard:open-url
 url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }}/apps/new-from-global/bitnami/mysql/versions/6.14.11
 ```
