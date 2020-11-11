@@ -9,5 +9,5 @@ Let's look at Tanzu's image registry to see how this works.
 * Click on one of the image names, and scroll down to show the CVE list for that image.
 * Open up a CVE and highlight the description.  Then hover over the "I" icon to show the links to the relevant CVE reports.
 * Now, click on the project name and go to the "configuration" tab.  Call out the automatic scanning the ability block images from being used that have a certain level of severity of CVE.
-* Call out that you can also selectivly allow certain CVEs for a time period to allow a rollout to continue if you must.
 * Call out the "content trust" setting that requires images to be signed to ensure they haven't been modified before they can be pulled.
+* We can also host Helm charts which is important for the next part of our discussion

@@ -131,17 +131,5 @@ Open a browser tab to the load generator
 url: http://localhost:8089
 ```
 
-Docker login
-```terminal:execute
-command: docker login harbor.{{ ingress_domain }} -u admin -p Harbor12345
-session: 1
-```
-
-Simulate Administrator updating Clusterstack
-```terminal:execute
-command: kp image patch spring-petclinic --cluster-builder default  
-session: 1
-```
-
 Finally, reorder your tabs this way:
-Locust, start.spring.io, Pet Clinic, GitHub, Concourse, Harbor, Kubeapps, TAC, Workshop tab on the "Console" section, TO, TMC
+Locust, start.spring.io, Pet Clinic, GitHub, Concourse, Harbor, Kubeapps, TAC, Workshop tab on the "Console" section, TMC, TO, TSM

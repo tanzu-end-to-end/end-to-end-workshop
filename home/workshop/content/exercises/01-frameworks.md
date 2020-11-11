@@ -10,7 +10,7 @@ url: https://start.spring.io
 
 From this interface, developers can quickly find the services they need to start their projects using the latest frameworks employing the most modern best practices for cloud native applications.
 
-> Add dependencies for Actuator, Kafka, and Reactive Web, then click the "Explore" button to show the project that would be generated.
+> Add dependencies for Actuator, Kafka, and Reactive Web, then click the "Explore" button to show the project that would be generated.  This accelerates developer productivity!
 
 VMware also invests in the popular [Steeltoe](https://steeltoe.io) project which provides a similar experience for .NET developers
 

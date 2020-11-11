@@ -19,3 +19,6 @@ modules:
     exit_sign: Enterprise Observability
   exercises/06-enterprise-observability:
     name: Enterprise Observability
+    exit_sign: Cross-Cloud Global Namespaces
+  exercises/07-global-namespaces:
+    name: Cross-Cloud Global Namespaces

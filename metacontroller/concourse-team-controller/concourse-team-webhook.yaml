@@ -35,6 +35,11 @@ spec:
       - name: controller
         image: python:2.7
         command: ["python", "/hooks/sync.py"]
+        livenessProbe:
+          exec:
+            command: ["/fly-dir/fly", "-t", "concourse", "status"]
+          initialDelaySeconds: 30
+          periodSeconds: 10
         volumeMounts:
         - name: hooks
           mountPath: /hooks

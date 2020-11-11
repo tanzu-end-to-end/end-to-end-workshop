@@ -11,11 +11,10 @@ Let's look at how this works with Tanzu!
 * Go to the Pet Clinic tab to explain this is a sample app we want to make an update to.
 * Go to the Github tab and edit the welcome message to something new, and commit it.  Maybe "Thanks!"
 * Go to the Concourse tab and show the section for update-build-service-image
-* Watch the build process and explain the high level process of Detect, and Build phases.
-* Next, go to the continuous-deployment job, and show the application deployment occuring.
-* Next, go to the Octant console in the workshop tab to show the deployment rolling out
-* Finally, refresh the Petclinic window to show the change.
-* Now, let's put on the hat of an operator who needs to roll out a change for a critical CVE.  
+* Explain the high level process of Detect, and Build phases.  The value here is that the base image is a secure base image provided by VMware, and the images are build with a consistent, curated and tested build process that brings the best practice standards for running containerized applications.
+
+
+* Now, let's put on the hat of an operator who needs to roll out a change for a critical CVE.  As a developer, you don't need to do anything to get those patches applied to your application image.  VMware delivers patches for the base image, and runtimes and operators can automatically roll those updates out.  Let's see how.
 
 ```terminal:execute
 command: |-
@@ -30,3 +29,5 @@ session: 1
 command: kp builds list spring-petclinic
 session: 1
 ```
+
+* Highlight the "reason" for build.
