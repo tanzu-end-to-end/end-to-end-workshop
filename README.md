@@ -5,14 +5,14 @@ This is a workshop for delivering an end to end experience of [VMware Tanzu](htt
 For more detailed information on how to create and deploy workshops, consult
 the documentation for eduk8s at:
 
-* https://docs.eduk8s.io
+* https://docs.edukates.io
 
 If you already have the eduk8s operator installed and configured, to deploy
 and view this workshop, run:
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/tanzu-end-to-end/end-to-end-workshop/main/resources/workshop.yaml
-kubectl apply -f https://raw.githubusercontent.com/tanzu-end-to-end/end-to-end-workshop/main/resources/training-portal.yaml
+kubectl apply -f https://raw.githubusercontent.com/tanzu-end-to-end/end-to-end-workshop/main/base/workshop.yaml
+kubectl apply -f https://raw.githubusercontent.com/tanzu-end-to-end/end-to-end-workshop/main/base/training-portal.yaml
 ```
 
 This will deploy a training portal hosting just this workshop. To get the
