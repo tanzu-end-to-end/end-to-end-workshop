@@ -40,9 +40,10 @@ command: fly -t concourse login -c https://concourse.{{ ingress_domain }} -u tes
 session: 1
 ```
 
-Now we need to create some secrets for your Concourse pipeline.  You will need to change the petclinic.codeRepo value below to your specific fork of Pet Clinic that you created earlier.
-```workshop:copy-and-edit
-text: |-
+Now we need to create some secrets for your Concourse pipeline.  You will need to paste the url for your PetClinic fork into the terminal after clicking the box below.
+```terminal:execute
+command: |-
+  read -p "Enter the Git URL of your fork of Pet Clinic: " PETCLINIC_GIT_URL;
   ytt -f pipeline/secrets.yaml -f pipeline/values.yaml \
   --data-value commonSecrets.harborDomain=harbor.{{ ingress_domain }} \
   --data-value commonSecrets.kubeconfigBuildServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
@@ -54,8 +55,9 @@ text: |-
   --data-value petclinic.image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic \
   --data-value petclinic.tbs.namespace={{ session_namespace }} \
   --data-value petclinic.wavefront.applicationName=petclinic-{{ session_namespace }} \
-  --data-value petclinic.codeRepo=https://github.com/<github-user>/spring-petclinic \
+  --data-value "petclinic.codeRepo=${PETCLINIC_GIT_URL}" \
    | kubectl apply -f- -n concourse-{{ session_namespace }}
+session: 1
 ```
 
 Now, set your pipeline.
