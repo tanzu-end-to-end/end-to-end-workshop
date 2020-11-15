@@ -43,7 +43,7 @@ session: 1
 Now we need to create some secrets for your Concourse pipeline.  You will need to paste the url for your PetClinic fork into the terminal after clicking the box below.
 ```terminal:execute
 command: |-
-  read -p "Enter the Git URL of your fork of Pet Clinic: " PETCLINIC_GIT_URL;
+  read -p "Enter the Git URL of your fork of Pet Clinic: " PETCLINIC_GIT_URL; \
   ytt -f pipeline/secrets.yaml -f pipeline/values.yaml \
   --data-value commonSecrets.harborDomain=harbor.{{ ingress_domain }} \
   --data-value commonSecrets.kubeconfigBuildServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
