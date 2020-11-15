@@ -17,7 +17,7 @@ Now, click the following link to open a new tab to Kubeapps pointing to your a D
 ```dashboard:open-url
 url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }}/apps
 ```
-You should see a MySQL Deployment called `petclinic-db`.  It may still be started when you look at it, but it should go to 1 pod active fairly quickly.
+You should see a MySQL Deployment called `petclinic-db`.  It may still be starting when you first examine it, but it should go to 1 pod active fairly quickly.
 
 Now you need to create a secret for Build Service to be able to push images to harbor.
 ```terminal:execute
