@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: iperf
+  annotations:
+    metallb.universe.tf/allow-shared-ip: iperf-key
+  managedFields:
+  name: iperf-tcp
+spec:
+  ports:
+  - port: 5201
+    protocol: TCP
+    targetPort: server-tcp
+  selector:
+    app: iperf
+    release: iperf
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: iperf
+  annotations:
+    metallb.universe.tf/allow-shared-ip: iperf-key
+  managedFields:
+  name: iperf-udp
+spec:
+  ports:
+  - port: 5001
+  protocol: UDP
+  targetPort: server-udp
+  selector:
+    app: iperf
+    release: iperf
+  type: LoadBalancer
