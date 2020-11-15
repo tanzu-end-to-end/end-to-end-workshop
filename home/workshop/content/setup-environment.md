@@ -39,21 +39,23 @@ Next, you have a Concourse team already created for you.  Let's login with the `
 command: fly -t concourse login -c https://concourse.{{ ingress_domain }} -u test -p test -n={{ session_namespace }}
 session: 1
 ```
-Now we need to create some secrets for your Concourse pipeline.
-```terminal:execute
+
+Now we need to create some secrets for your Concourse pipeline.  You will need to change the petclinic.codeRepo value below to your specific fork of Pet Clinic that you created earlier.
+```workshop:copy-and-edit
 command: |-
   ytt -f pipeline/secrets.yaml -f pipeline/values.yaml \
   --data-value commonSecrets.harborDomain=harbor.{{ ingress_domain }} \
   --data-value commonSecrets.kubeconfigBuildServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
   --data-value commonSecrets.kubeconfigAppServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
   --data-value commonSecrets.concourseHelperImage=harbor.{{ ingress_domain }}/concourse/concourse-helper \
-  --data-value petclinic.codeRepo=https://github.com/cdelashmutt-pivotal/spring-petclinic \
+  --data-value petclinic.wavefront.deployEventName=petclinic-deploy \
   --data-value petclinic.configRepo=https://github.com/tanzu-end-to-end/spring-petclinic-config \
   --data-value petclinic.host=petclinic-{{ session_namespace }}.{{ ingress_domain }} \
   --data-value petclinic.image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic \
   --data-value petclinic.tbs.namespace={{ session_namespace }} \
   --data-value petclinic.wavefront.applicationName=petclinic-{{ session_namespace }} \
-  --data-value petclinic.wavefront.deployEventName=petclinic-deploy | kubectl apply -f- -n concourse-{{ session_namespace }}
+  --data-value petclinic.codeRepo=https://github.com/<github-user>/spring-petclinic \
+   | kubectl apply -f- -n concourse-{{ session_namespace }}
 ```
 
 Now, set your pipeline.
