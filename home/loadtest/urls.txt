@@ -1,0 +1,6 @@
+$(SIEGE_HOST)/
+$(SIEGE_HOST)/owners/find
+$(SIEGE_HOST)/vets.html
+$(SIEGE_HOST)/owners?lastName=
+$(SIEGE_HOST)/owners/3
+$(SIEGE_HOST)/oups
