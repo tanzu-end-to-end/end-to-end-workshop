@@ -81,7 +81,7 @@ url: https://harbor.{{ ingress_domain }}
 
 Open a tab to your deployed Pet Clinic instance
 ```dashboard:open-url
-url: http://petclinic-{{ session_namespace }}.{{ ingress_domain }}
+url: https://petclinic-{{ session_namespace }}.{{ ingress_domain }}
 ```
 If you don't see the Pet Clinic interface, go back to your Concourse tab and ensure that the `continuous-delivery` job completed successfully.
 

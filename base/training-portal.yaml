@@ -1,7 +1,7 @@
 apiVersion: training.eduk8s.io/v1alpha1
 kind: TrainingPortal
 metadata:
-  name: end-to-end-workshop
+  name: e2e-workshop
 spec:
   portal:
     title: End to End Workshops
@@ -9,7 +9,7 @@ spec:
     registration:
       type: anonymous
   workshops:
-  - name: end-to-end-workshop
+  - name: e2e-workshop
     capacity: 10
     reserved: 1
     expires: 4h
