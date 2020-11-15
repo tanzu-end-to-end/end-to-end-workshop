@@ -13,29 +13,11 @@ We'll be logging into KubeApps next.  To do that, we'll need to grab our user to
 text: {{ user_token }}
 ```
 
-Now, open the following link in a new tab to start the process to deploy MySQL to your namespace. In the login screen, paste your token into the text field, and click "Login".  
+Now, click the following link to open a new tab to Kubeapps pointing to your a DB deployment that was created for you when you launched this environment. In the login screen, paste your token into the text field, and click "Login".  
 ```dashboard:open-url
-url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }}/apps/new-from-global/bitnami/mysql/versions/6.14.11
+url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }}/apps
 ```
-
-Within the resulting screen, change the **Name** of the service we're going to deploy to **petclinic-db**.  Replace all the content in the "YAML" section with the following content.
-```workshop:copy
-text: |-
-  image:
-    registry: harbor.{{ ingress_domain }}/dockerhub
-  metrics:
-    image:
-      registry: harbor.{{ ingress_domain }}/dockerhub
-  db:
-    name: petclinic
-    password: petclinic
-    user: petclinic
-  replication:
-    enabled: false
-  root:
-    password: petclinic
-```
-At the bottom of the page, click the "Deploy V6.14.11" button.  The database may take a minute or two to become ready.  
+You should see a MySQL Deployment called `petclinic-db`.  It may still be started when you look at it, but it should go to 1 pod active fairly quickly.
 
 Now you need to create a secret for Build Service to be able to push images to harbor.
 ```terminal:execute
@@ -122,14 +104,5 @@ Open a tab to Tanzu Application Catalog
 url: https://tac.bitnami.com/apps
 ```
 
-Finally, launch a load generator locally to show some metrics in TO.
-```workshop:copy
-text: docker run --rm -p 8089:8089 -v $PWD:/mnt/locust locustio/locust -f /mnt/locust/traffic-generator/locustfile.py -H http://petclinic-{{ session_namespace }}.{{ ingress_domain }}
-```
-Open a browser tab to the load generator
-```dashboard:open-url
-url: http://localhost:8089
-```
-
 Finally, reorder your tabs this way:
-Locust, start.spring.io, Pet Clinic, GitHub, Concourse, Harbor, Kubeapps, TAC, Workshop tab on the "Console" section, TMC, TO, TSM
+start.spring.io, Pet Clinic, GitHub, Concourse, Harbor, Kubeapps, TAC, Workshop tab on the "Console" section, TMC, TO, TSM
