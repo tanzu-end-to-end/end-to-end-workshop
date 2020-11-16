@@ -15,7 +15,7 @@ We'll be logging into KubeApps next.  To do that, we'll need to grab our user to
 text: {{ user_token }}
 ```
 
-Now, click the following link to open a new tab to Kubeapps pointing to your a DB deployment that was created for you when you launched this environment. In the login screen, paste your token into the text field, and click "Login".  
+Now, click the following link to open a new tab to Kubeapps pointing to a DB deployment that was created for you when you launched this environment. In the login screen, paste your token into the text field, and click "Login".  
 ```dashboard:open-url
 url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }}/apps
 ```
@@ -66,7 +66,13 @@ url: https://petclinic-{{ session_namespace }}.{{ ingress_domain }}
 ```
 If you don't see the Pet Clinic interface at first, go back to your Concourse tab and ensure that the `continuous-delivery` job completed successfully.
 
-# Tanzu Observability
+# SaaS Services
+For the next sections, you need to make sure to sign-in to cloud.vmware.com and select the "Tanzu PA Org" organization.  Click below to sign in.  If you can't sign in, go to https://servicedesk.eng.vmware.com/servicedesk/customer/portal/3/create/455 and select "Service" as "Other", "Requesting Team" as "MAPBU", "Request Components" as "Role Assignment" and then enter in the justification that you need access to the "Tanzu PA Org" on cloud.vmware.com.
+```dashboard:open-url
+url: https://cloud.vmware.com
+```
+
+## Tanzu Observability
 Open a tab to Tanzu Observability for your Pet Clinic Dashboard.  First, you will need to sign in to the following Wavefront instance.
 ```dashboard:open-url
 url: https://vmware.wavefront.com/u/n1XssyygW7?t=vmware
@@ -76,16 +82,22 @@ Now, copy your app name below, and paste into the application dropdown on the TO
 text: petclinic-{{ session_namespace }}
 ```
 
-# Tanzu Mission Control
+## Tanzu Mission Control
 Open a tab for Tanzu Mission Control
 ```dashboard:open-url
 url: https://tanzupaorg.tmc.cloud.vmware.com/clusterGroups/pez-e2e
 ```
 
-# Tanzu Application Catalog
+## Tanzu Application Catalog
 Open a tab to Tanzu Application Catalog
 ```dashboard:open-url
 url: https://tac.bitnami.com/apps
+```
+
+## Tanzu Service Mesh
+Open tab to Tanzu Service Mesh
+```dashboard:open-url
+url: https://prod-1.nsxservicemesh.vmware.com/
 ```
 
 # Spring and/or Steeltoe Starters
