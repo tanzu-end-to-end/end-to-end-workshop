@@ -2,12 +2,14 @@ Welcome to the Tanzu End to End demo!  In this session, we'll be exploring some 
 
 We're going to be using Tanzu to deploy an application, deploy dependent services for that application, observe the metrics for that application and supporting infrastructure, and manage the cluster hosting that application.
 
+# Fork Spring Pet Clinic
 To get started, you need to clone Spring Pet Clinic to you can make some changes to it as part of the demo process.  Click the icon in the upper right of the box below to open a new browser tab so that you can fork the Spring Pet Clinic repo into your Github account.
 ```dashboard:open-url
 url: https://github.com/tanzu-end-to-end/spring-petclinic/fork
 ```
 After forking, navigate to the `/src/main/resources/messages/messages.properties` file in your forked repo.  We want to pre-stage this tab so that you are ready to make an edit to this file to trigger a build later on.
 
+# Access KubeApps
 We'll be logging into KubeApps next.  To do that, we'll need to grab our user token to use to login.  Copy your user token below to use to login to kubeapps in the next step.
 ```workshop:copy
 text: {{ user_token }}
@@ -17,15 +19,10 @@ Now, click the following link to open a new tab to Kubeapps pointing to your a D
 ```dashboard:open-url
 url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }}/apps
 ```
-You should see a MySQL Deployment called `petclinic-db`.  It may still be starting when you first examine it, but it should go to 1 pod active fairly quickly.
+You should see a MySQL Deployment called `petclinic-db`.  It may still be starting when you first examine it, but it should go to 1 pod active fairly quickly.  Leave this view on the "Apps" tab so it is staged properly.
 
-Next, you have a Concourse team already created for you.  Let's login with the `fly` command in the terminal.
-```terminal:execute
-command: fly -t concourse login -c https://concourse.{{ ingress_domain }} -u test -p test -n={{ session_namespace }}
-session: 1
-```
-
-Now we need to create some secrets for your Concourse pipeline.  You will need to paste the url for your PetClinic fork into the terminal after clicking the box below.
+# Concourse
+When your session was created, we logged into Concourse and added your pipeline.  Since you need to point to your fork of Spring Pet Clinic, we need to create some secrets for your Concourse pipeline.  You will need to paste the url for your PetClinic fork into the terminal prompt after clicking the box below.
 ```terminal:execute
 command: |-
   read -p "Enter the Git URL of your fork of Pet Clinic: " PETCLINIC_GIT_URL; \
@@ -44,14 +41,7 @@ command: |-
    | kubectl apply -f- -n concourse-{{ session_namespace }}
 session: 1
 ```
-
-Now, set your pipeline.
-```terminal:execute
-command: fly -t concourse set-pipeline -c pipeline/spring-petclinic.yaml -p spring-petclinic -n
-session: 1
-```
-
-The pipeline starts off paused, so let's unpause it!
+The pipeline starts off paused, so let's unpause it now that we've created secrets for it.
 ```terminal:execute
 command: fly -t concourse unpause-pipeline -p spring-petclinic
 session: 1
@@ -63,17 +53,20 @@ url: https://concourse.{{ ingress_domain }}/teams/{{ session_namespace }}/pipeli
 ```
 Validate that it is picking up your code and doing the first build.  It is important to let this process complete so that it can pre-cache all your dependencies and allow your builds to execute much faster.  This will take a while the first time.
 
+# Harbor
 Next, login to harbor with the user "admin" and password "Harbor12345", and navigate to your project called **{{ session_namespace }}**
 ```dashboard:open-url
 url: https://harbor.{{ ingress_domain }}
 ```
 
+# Spring Pet Clinic App
 Open a tab to your deployed Pet Clinic instance
 ```dashboard:open-url
 url: https://petclinic-{{ session_namespace }}.{{ ingress_domain }}
 ```
-If you don't see the Pet Clinic interface, go back to your Concourse tab and ensure that the `continuous-delivery` job completed successfully.
+If you don't see the Pet Clinic interface at first, go back to your Concourse tab and ensure that the `continuous-delivery` job completed successfully.
 
+# Tanzu Observability
 Open a tab to Tanzu Observability for your Pet Clinic Dashboard.  First, you will need to sign in to the following Wavefront instance.
 ```dashboard:open-url
 url: https://vmware.wavefront.com/u/n1XssyygW7?t=vmware
@@ -83,15 +76,39 @@ Now, copy your app name below, and paste into the application dropdown on the TO
 text: petclinic-{{ session_namespace }}
 ```
 
+# Tanzu Mission Control
 Open a tab for Tanzu Mission Control
 ```dashboard:open-url
 url: https://tanzupaorg.tmc.cloud.vmware.com/clusterGroups/pez-e2e
 ```
 
+# Tanzu Application Catalog
 Open a tab to Tanzu Application Catalog
 ```dashboard:open-url
 url: https://tac.bitnami.com/apps
 ```
 
-Finally, reorder your tabs this way:
-start.spring.io, Pet Clinic, GitHub, Concourse, Harbor, Kubeapps, TAC, Workshop tab on the "Console" section, TMC, TO, TSM
+# Spring and/or Steeltoe Starters
+Click the links below to open up to the project generators for Spring and Steeltoe for .NET
+```dashboard:open-url
+url: https://start.spring.io
+```
+
+```dashboard:open-url
+url: https://start.steeltoe.io
+```
+
+
+# Tab Staging
+Reorder your tabs in this way so that your demo flow goes left to right:
+* start.spring.io and/or start.steeltoe.io
+* Pet Clinic
+* GitHub
+* Concourse
+* Harbor
+* Kubeapps
+* TAC
+* This workshop tab on the "Console" section
+* TMC
+* TO
+* TSM
