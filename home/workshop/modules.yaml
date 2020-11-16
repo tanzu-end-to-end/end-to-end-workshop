@@ -1,7 +1,7 @@
 modules:
   setup-environment:
     name: Set up environment
-    exit_sign: Set up Spring Petclinic
+    exit_sign: Frameworks and Services
   exercises/01-frameworks:
     name: Frameworks and Services
     exit_sign: Automated Container Creation
