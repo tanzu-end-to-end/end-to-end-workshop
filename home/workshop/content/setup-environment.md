@@ -19,21 +19,6 @@ url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }
 ```
 You should see a MySQL Deployment called `petclinic-db`.  It may still be starting when you first examine it, but it should go to 1 pod active fairly quickly.
 
-Now you need to create a secret for Build Service to be able to push images to harbor.
-```terminal:execute
-command: |-
-  kp secret create harbor-creds \
-    --registry harbor.{{ ingress_domain }} \
-    --registry-user admin \
-    --namespace {{ session_namespace }}
-```
-
-Now in the resulting prompt, enter the password of `Harbor12345` or click below.
-```terminal:input
-text: Harbor12345
-session: 1
-```
-
 Next, you have a Concourse team already created for you.  Let's login with the `fly` command in the terminal.
 ```terminal:execute
 command: fly -t concourse login -c https://concourse.{{ ingress_domain }} -u test -p test -n={{ session_namespace }}
