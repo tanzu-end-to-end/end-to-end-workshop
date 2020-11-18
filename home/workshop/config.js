@@ -20,12 +20,12 @@ function initialize(workshop) {
     kubectl_out = out;
   });
   
-  ls.stderr.on('data', (err) => {
+  kubectl.stderr.on('data', (err) => {
     console.error(`stderr: ${err}`);
     kubectl_err = err;
   });
   
-  ls.on('close', (code) => {
+  kubectl.on('close', (code) => {
     console.log(`child process exited with code ${code}`);
     if(code == 0) {
       workshop.data_variable('harbor_project_id', kubectl_out);
