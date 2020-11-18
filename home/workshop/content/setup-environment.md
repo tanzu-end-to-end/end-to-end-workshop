@@ -95,9 +95,9 @@ url: https://tac.bitnami.com/apps
 ```
 
 ## Tanzu Service Mesh
-Open tab to Tanzu Service Mesh
+Open tab to Tanzu Service Mesh to the `e2e-workshop-acme-gns` Global namespace by clicking the link below
 ```dashboard:open-url
-url: https://prod-1.nsxservicemesh.vmware.com/
+url: https://prod-1.nsxservicemesh.vmware.com/global-namespaces-detail/e2e-workshop-acme-gns/gns-topology
 ```
 
 # Spring and/or Steeltoe Starters
