@@ -10,7 +10,8 @@ function initialize(workshop) {
   
   workshop.data_variable('user_token', data.users[0].user.token);
 
-  kubectl = spawn('kubectl', ['get', 'harborproject', process.env['SESSION_NAMESPACE'], '-o', 'jsonpath="{.status.projectid}"']);
+  let namespace = process.env['SESSION_NAMESPACE']
+  kubectl = spawn('kubectl', ['-n', namespace, 'get', 'harborproject', namespace, '-o', 'jsonpath="{.status.projectid}"']);
 
   let kubectl_out = ""
   let kubectl_err = ""
