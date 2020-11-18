@@ -13,3 +13,5 @@ modules:
     vars:
     - name: user_token
       value: FOO
+    - name: harbor_project_id
+      value: "9999"

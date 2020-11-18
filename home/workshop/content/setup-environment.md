@@ -59,6 +59,10 @@ Next, login to harbor with the user "admin" and password "Harbor12345", and navi
 url: https://harbor.{{ ingress_domain }}
 ```
 
+```dashboard:open-url
+url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
+```
+
 # Spring Pet Clinic App
 Open a tab to your deployed Pet Clinic instance
 ```dashboard:open-url
