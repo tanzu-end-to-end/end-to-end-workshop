@@ -11,10 +11,10 @@ function initialize(workshop) {
   workshop.data_variable('user_token', data.users[0].user.token);
 
   let namespace = process.env['SESSION_NAMESPACE']
-  kubectl = spawnSync('kubectl', ['-n', namespace, 'get', 'harborproject', namespace, '-o', 'jsonpath="{.status.projectid}"']);
+  kubectl = spawnSync('kubectl', ['-n', namespace, 'get', 'harborproject', namespace, '-o', 'jsonpath="{.status.projectid}"'], {timeout: 30000, encoding: "utf8"});
 
   if(kubectl.status == 0) {
-    let project_id = kubectl.stdout.replaceAll("\"", "");
+    let project_id = kubectl.stdout;
     console.log(`Got harbor project id: ${project_id}` );
     workshop.data_variable('harbor_project_id', project_id);
   } else {
