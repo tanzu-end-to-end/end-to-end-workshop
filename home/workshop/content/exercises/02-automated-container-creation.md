@@ -14,19 +14,19 @@ Let's look at how this works with Tanzu!
 * Explain the high level process of Detect, and Build phases.  The value here is that the base image is a secure base image provided by VMware, and the images are build with a consistent, curated and tested build process that brings the best practice standards for running containerized applications.
 
 
-* Now, let's put on the hat of an operator who needs to roll out a change for a critical CVE.  As a developer, you don't need to do anything to get those patches applied to your application image.  VMware delivers patches for the base image, and runtimes and operators can automatically roll those updates out.  Let's see how.
+* Now, let's put on the hat of an operator who needs to roll out a change for a critical CVE.  As a developer, you don't need to do anything to get those patches applied to your application image.  VMware delivers patches for the base image, and runtimes and operators can automatically roll those updates out.  Let's see how.  First, let's watch the builds so we can see this update run.
+
+```terminal:execute
+command: watch kp builds list spring-petclinic
+session: 2
+```
+
+* Now let's apply updates
 
 ```terminal:execute
 command: |-
   docker login harbor.tools.pez.aws.grogscave.net -u admin -p Harbor12345
   kp image patch spring-petclinic --cluster-builder default  
-session: 1
-```
-
-* Now, let's check the build
-
-```terminal:execute
-command: kp builds list spring-petclinic
 session: 1
 ```
 
