@@ -67,7 +67,9 @@ url: https://petclinic-{{ session_namespace }}.{{ ingress_domain }}
 If you don't see the Pet Clinic interface at first, go back to your Concourse tab and ensure that the `continuous-delivery` job completed successfully.
 
 # SaaS Services
-For the next sections, you need to make sure to sign-in to cloud.vmware.com with your @vmware.com email address and select the "Tanzu End to End" organization.  Click below to sign in.  If you can't see this organization, let us know your email address in the [#tsl-end2end](https://vmware.slack.com/archives/C015J3200KU) channel in Slack and we can get you added.
+**Important**: For the next sections, it is vital that you  make sure to sign-in to cloud.vmware.com with your **@vmware.com** email address and select the **"Tanzu End to End"** organization.  Please be careful not to alter the services or configurations of the clusters in these environments as they are shared for the entire End to End Demo Environment.
+
+Click below to sign in.  If you can't see this organization, let us know your email address in the [#tsl-end2end](https://vmware.slack.com/archives/C015J3200KU) channel in Slack and we can get you added.
 ```dashboard:open-url
 url: https://cloud.vmware.com
 ```
