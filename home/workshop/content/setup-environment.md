@@ -67,7 +67,7 @@ url: https://petclinic-{{ session_namespace }}.{{ ingress_domain }}
 If you don't see the Pet Clinic interface at first, go back to your Concourse tab and ensure that the `continuous-delivery` job completed successfully.
 
 # SaaS Services
-For the next sections, you need to make sure to sign-in to cloud.vmware.com and select the "Tanzu PA Org" organization.  Click below to sign in.  If you can't sign in, go to https://servicedesk.eng.vmware.com/servicedesk/customer/portal/3/create/455 and select "Service" as "Other", "Requesting Team" as "MAPBU", "Request Components" as "Role Assignment" and then enter in the justification that you need access to the "Tanzu PA Org" on cloud.vmware.com.
+For the next sections, you need to make sure to sign-in to cloud.vmware.com with your @vmware.com email address and select the "Tanzu End to End" organization.  Click below to sign in.  If you can't see this organization, let us know your email address in the [#tsl-end2end](https://vmware.slack.com/archives/C015J3200KU) channel in Slack and we can get you added.
 ```dashboard:open-url
 url: https://cloud.vmware.com
 ```
@@ -85,7 +85,7 @@ text: petclinic-{{ session_namespace }}
 ## Tanzu Mission Control
 Open a tab for Tanzu Mission Control
 ```dashboard:open-url
-url: https://tanzupaorg.tmc.cloud.vmware.com/clusterGroups/pez-e2e
+url: https://tanzuendtoend.tmc.cloud.vmware.com/clusterGroups/end-to-end
 ```
 
 ## Tanzu Application Catalog
@@ -95,9 +95,9 @@ url: https://tac.bitnami.com/apps
 ```
 
 ## Tanzu Service Mesh
-Open tab to Tanzu Service Mesh to the `e2e-workshop-acme-gns` Global namespace by clicking the link below
+Open tab to Tanzu Service Mesh to the `e2e-demo` Global namespace by clicking the link below
 ```dashboard:open-url
-url: https://prod-1.nsxservicemesh.vmware.com/global-namespaces-detail/e2e-workshop-acme-gns/gns-topology
+url: https://prod-2.nsxservicemesh.vmware.com/global-namespaces-detail/e2e-demo/gns-topology
 ```
 
 # Spring and/or Steeltoe Starters
