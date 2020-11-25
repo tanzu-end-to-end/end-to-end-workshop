@@ -6,8 +6,8 @@ Let's look at Tanzu's image registry to see how this works.
 
 * Go to the Harbor tab and select the "spring-petclinic" registry.
 * Explain the two images shown that have different CVE counts.  The first one was your application using the base stack that had more CVEs in it that the patched one we got when we wore our operator hat and pushed out the new base image.  And the third container image has the same number of CVEs as the second because that one contained our code changes on top of the patched base image.
-* Click on one of the image names, and scroll down to show the CVE list for that image.
+* Click on one of the image names (the `sha256:....` link), and scroll down to show the CVE list for that image.
 * Open up a CVE and highlight the description.  Then hover over the "I" icon to show the links to the relevant CVE reports.
-* Now, click on the project name and go to the "configuration" tab.  Call out the automatic scanning the ability block images from being used that have a certain level of severity of CVE.
-* Call out the "content trust" setting that requires images to be signed to ensure they haven't been modified before they can be pulled.
-* We can also host Helm charts which is important for the next part of our discussion
+* Now, scroll back up to the top of the page, click on the project name (e2e-workshop-...) and go to the "configuration" tab.  Call out the automatic scanning option and how that works with the "Prevent vulnerable images from running" function.  This feature allows blocking images from being pulled that have a certain level of severity of CVE.
+* Call out the "Enable Content Trust" setting that requires images to be signed to ensure they haven't been modified before they can be pulled.
+* Highlight the "Helm Charts" tab to mention that Harbor also hosts Helm charts which is important for the next part of our discussion.

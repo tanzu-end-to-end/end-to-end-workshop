@@ -5,7 +5,7 @@ Tanzu provides a catalog for services that you can offer to your developers so t
 Let's take a look at those capabilties.
 
 * First, go to the Kubeapps tab.  Show the deployed mysql DB that you created during setup.
-* Next, click on the catalog of services available.  Highlight any that might be relevant for your customer.
-* Search for mysql, and click it, then click deploy.
-* Scroll down about 1/3rd of the values, and look for the security context section.  Call out the fact that some images take the easy way out and assume they can run privileged, but VMware ensures best practices like running as a non-priveleged user are the default.
-* Now switch over to the TAC tab.  Click Add New applications, and show how you can create a custom catalog.
+* Next, click on the "Catalog" tab at the top of the page to show the list of services available to deploy.  Highlight any that might be relevant for your customer.
+* Type "mysql" into the search box, and click the MySQL tile that shows up, then click "Deploy".
+* Scroll down a little more than 1/3rd of the way down in the YAML, and look for the "securityContext" section.  Call out the fact that some images take the easy way out and assume they can run privileged, but VMware ensures best practices like running as a non-priveleged user are the default.
+* Now switch over to the TAC tab.  Click Add New applications, and show how you can create a custom catalog.  This allows platform operators to curate the list of services that a developer could choose from which helps orient them to the services you prefer them to use.

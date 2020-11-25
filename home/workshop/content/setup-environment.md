@@ -54,7 +54,7 @@ url: https://concourse.{{ ingress_domain }}/teams/{{ session_namespace }}/pipeli
 Validate that it is picking up your code and doing the first build.  It is important to let this process complete so that it can pre-cache all your dependencies and allow your builds to execute much faster.  This will take a while the first time.
 
 # Harbor
-Next, click the link below and login to Harbor with the user "admin" and password "Harbor12345".
+Next, click the link below and login to Harbor with the user "admin" and password "Harbor12345".  If you login and aren't redirected to your project, then simply close the Harbor tab that was opened, and reopen it with the link below.
 ```dashboard:open-url
 url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
 ```
@@ -64,7 +64,7 @@ Open a tab to your deployed Pet Clinic instance
 ```dashboard:open-url
 url: https://petclinic-{{ session_namespace }}.{{ ingress_domain }}
 ```
-If you don't see the Pet Clinic interface at first, go back to your Concourse tab and ensure that the `continuous-delivery` job completed successfully.
+If you don't see the Pet Clinic interface at first, go back to your Concourse tab and ensure that the `continuous-delivery` job completed successfully.  The first build can take a few minutes to complete and deploy.
 
 # SaaS Services
 **Important**: For the next sections, it is vital that you  make sure to sign-in to cloud.vmware.com with your **@vmware.com** email address and select the **"Tanzu End to End"** organization.  Please be careful not to alter the services or configurations of the clusters in these environments as they are shared for the entire End to End Demo Environment.
@@ -79,7 +79,9 @@ Open a tab to Tanzu Observability for your Pet Clinic Dashboard.  First, you wil
 ```dashboard:open-url
 url: https://vmware.wavefront.com/u/n1XssyygW7?t=vmware
 ```
-Now, copy your app name below, and paste into the application dropdown on the TO browser tab.
+If you are having trouble accessing this instance, make sure you have the Wavefront-sandbox app added to your Workspace One account.  You can access that app at https://myvmware.workspaceair.com/catalog-portal/ui#/apps/details/WORKSPACE-d689139a-9b94-4b6f-aa23-915763e9b149-Web-Saml20, and then try to click the link above.
+
+Now, copy your app name below, and paste into the application dropdown on the TO browser tab.  It may take a minute for metrics to flow in where you can actually select that application name, so if you can't see your app in the list try to refresh the page the page after a minute or two.
 ```workshop:copy
 text: petclinic-{{ session_namespace }}
 ```
@@ -91,13 +93,13 @@ url: https://tanzuendtoend.tmc.cloud.vmware.com/clusterGroups/end-to-end
 ```
 
 ## Tanzu Application Catalog
-Open a tab to Tanzu Application Catalog
+Open a tab to Tanzu Application Catalog.  Make sure to select the "Tanzu End to End" org if you are prompted.
 ```dashboard:open-url
 url: https://tac.bitnami.com/apps
 ```
 
 ## Tanzu Service Mesh
-Open tab to Tanzu Service Mesh to the `e2e-demo` Global namespace by clicking the link below
+Open tab to Tanzu Service Mesh to the `e2e-demo` Global namespace by clicking the link below.  If you don't see the graph for the Global Namespace showing the `e2e-eks` and `e2e-tsm1` clusters, make sure to select the "Tanzu End to End" org, close the tab, and then reopen it again with the link below.
 ```dashboard:open-url
 url: https://prod-2.nsxservicemesh.vmware.com/global-namespaces-detail/e2e-demo/gns-topology
 ```
@@ -119,7 +121,9 @@ Reorder your tabs in this way so that your demo flow goes left to right:
 * Pet Clinic
 * GitHub
 * Concourse
+  * Make sure to go back to the pipeline overview to be staged on your "continuous-integration" and "continuous-delivery" jobs.
 * Harbor
+  * Make sure to refresh the list of repositories after your app is deployed so that you are staged showing the "spring-petclinic" and "spring-petclinic-source" repositories.
 * Kubeapps
 * TAC
 * This workshop tab on the "Console" section
