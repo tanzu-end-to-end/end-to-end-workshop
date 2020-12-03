@@ -7,8 +7,8 @@ USER root
 RUN curl -L -o /usr/local/bin/tmc $(curl -s https://tanzupaorg.tmc.cloud.vmware.com/v1alpha/system/binaries | jq -r 'getpath(["versions",.latestVersion]).linuxX64') && \
   chmod 755 /usr/local/bin/tmc
 # Policy Tools
-RUN curl -L -o /usr/local/bin/opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 
-RUN chmod 755 /usr/local/bin/opa
+RUN curl -L -o /usr/local/bin/opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 && \
+  chmod 755 /usr/local/bin/opa
 # Velero
 RUN VELERO_DOWNLOAD_URL=$(curl -s https://api.github.com/repos/vmware-tanzu/velero/releases/latest | jq -r '.assets[] | select ( .name | contains("linux-amd64") ) .browser_download_url') && \
   curl -fL --output /tmp/velero.tar.gz ${VELERO_DOWNLOAD_URL} && \
@@ -22,8 +22,6 @@ RUN curl -fL --output /tmp/tac.tar.gz https://downloads.bitnami.com/tac/tac-cli_
 # TODO :  Change the logic to identify the latest anbd download  or move to pivnet 
 RUN curl -L -o /usr/local/bin/kp  https://github.com/vmware-tanzu/kpack-cli/releases/download/v0.1.3/kp-linux-0.1.3  && \
   chmod 755 /usr/local/bin/kp
-# COPY kp-linux-0.1.1 /usr/local/bin/kp
-RUN chmod 755 /usr/local/bin/kp
 RUN curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.14.2/pack-v0.14.2-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack
 RUN curl -sSL "https://github.com/concourse/concourse/releases/download/v6.7.1/fly-6.7.1-linux-amd64.tgz" |sudo tar -C /usr/local/bin/ --no-same-owner -xzv fly
 USER 1001
