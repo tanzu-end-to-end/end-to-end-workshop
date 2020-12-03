@@ -1,0 +1,10 @@
+#@data/values
+---
+concourse:
+  host: concourse.<INGRESS-DOMAIN>
+  username: test
+  password: <PASSWORD>
+harbor:
+  host: harbor.<INGRESS-DOMAIN>
+  username: admin
+  password: <PASSWORD>

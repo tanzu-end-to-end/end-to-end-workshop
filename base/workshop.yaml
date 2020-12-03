@@ -1,3 +1,5 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: training.eduk8s.io/v1alpha2
 kind: Workshop
 metadata:
@@ -13,7 +15,7 @@ spec:
   - James Musselwhite <jmusselwhite@vmware.com>
   - Chris DeLashmutt <cdelashmutt@vmware.com>
   content:
-    image: harbor.tools.pez.aws.grogscave.net/tanzu-e2e/eduk8s-e2e-workshop:latest
+    image: #@ "harbor.{}/tanzu-e2e/eduk8s-e2e-workshop:latest".format(data.values.ingress.domain)
     files: github.com/tanzu-end-to-end/end-to-end-workshop/home?ref=main
   session:
     namespaces:
@@ -75,9 +77,11 @@ spec:
       rules:
       - apiGroups:
         - e2e.tanzu.vmware.com
+        - projectcontour.io
         resources:
         - harborprojects
         - concourseteams
+        - httpproxies
         verbs:
         - get
         - list

@@ -1,3 +1,5 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: v1
 items:
 - apiVersion: v1
@@ -1152,7 +1154,7 @@ items:
           name: eduk8s
           env:
             - name: INGRESS_DOMAIN
-              value: tools.pez.aws.grogscave.net
+              value: #@ data.values.ingress.domain
             - name: INGRESS_SECRET
               value: eduk8s-cert-tls
         serviceAccountName: eduk8s
@@ -1162,9 +1164,9 @@ items:
     name: eduk8s-cert
     namespace: eduk8s
   spec:
-    commonName: '*.tools.pez.aws.grogscave.net'
+    commonName: #@ "*.{}".format(data.values.ingress.domain)
     dnsNames:
-    - '*.tools.pez.aws.grogscave.net'
+    - #@ "*.{}".format(data.values.ingress.domain)
     duration: 2160h0m0s
     issuerRef:
       kind: ClusterIssuer
