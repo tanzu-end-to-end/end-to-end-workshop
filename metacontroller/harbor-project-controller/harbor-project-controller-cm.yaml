@@ -22,7 +22,7 @@ data:
       def do_create_project(self, object, projectId):
         if not projectId:
           print("No project id found, creating")
-          conn=httplib.HTTPSConnection(os.environ['HARBOR_HOST'])
+          conn=httplib.HTTPSConnection(os.environ['HARBOR_HOST']).replace('\n', ''))
           userAndPass = base64.encodestring(('%s:%s' % (os.environ['HARBOR_USERNAME'], os.environ['HARBOR_PASSWORD'])).replace('\n', '')).replace('\n', '')
           headers = { "Authorization": "Basic %s" % userAndPass, "Content-Type": "application/json", "Accept": "application/json" }
           print("Making harbor request")
@@ -51,7 +51,7 @@ data:
         else:
           print("Attempting delete of project id %s" % projectId)
 
-          conn=httplib.HTTPSConnection(os.environ['HARBOR_HOST'])
+          conn=httplib.HTTPSConnection(os.environ['HARBOR_HOST']).replace('\n', ''))
           userAndPass = base64.encodestring(('%s:%s' % (os.environ['HARBOR_USERNAME'], os.environ['HARBOR_PASSWORD'])).replace('\n', '')).replace('\n', '')
           headers = { "Authorization": "Basic %s" % userAndPass, "Content-Type": "application/json", "Accept": "application/json" }
           print("Making harbor request for repositories")

@@ -1,10 +1,16 @@
 #@data/values
 ---
 concourse:
-  host: concourse.<INGRESS-DOMAIN>
+  url: https://concourse.<INGRESS-DOMAIN>
   username: test
   password: <PASSWORD>
 harbor:
   host: harbor.<INGRESS-DOMAIN>
   username: admin
   password: <PASSWORD>
+ingress:
+  domain: <INGRESS-DOMAIN>
+# If you are forking the repo to customize the workshop, or are deploying a non-main branch, update the values below
+git:
+  account: tanzu-end-to-end
+  branch: main
