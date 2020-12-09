@@ -8,7 +8,7 @@ You can currently access a hosted version of the E2E workshop here: https://via.
 
 To install the E2E workshop in your own environment, the following prereqs must be in place in your Kubernetes cluster:
 
-####Educates
+###Educates
 Install the educates operator, per these instructions: https://docs.edukates.io/en/latest/getting-started/installing-operator.html
 
 ####Ingress
