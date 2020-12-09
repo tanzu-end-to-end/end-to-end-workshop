@@ -8,13 +8,13 @@ You can currently access a hosted version of the E2E workshop here: https://via.
 
 To install the E2E workshop in your own environment, the following prereqs must be in place in your Kubernetes cluster:
 
-###Educates
+**Educates**
 Install the educates operator, per these instructions: https://docs.edukates.io/en/latest/getting-started/installing-operator.html
 
-####Ingress
+**Ingress**
 Set up ingress, with a wildcard DNS domain, that terminates with a signed cert. Contour and LetsEncrypt are great tools for this.
 
-####Harbor
+**Harbor**
 Install Harbor into your cluster with Helm. 
 
 ```
@@ -33,7 +33,7 @@ helm install harbor harbor/harbor -n harbor \
   --set notary.enabled=false --set externalURL="https://harbor.<your ingress domain>"
 ```
 
-####Concourse
+**Concourse**
 
 Install Concourse into your cluster with Helm. Customize the [values.yaml](https://raw.githubusercontent.com/concourse/concourse-chart/master/values.yaml) file so that your ingress route is **concourse.<your-ingress-domain>**, and set the user/password for your main team.
 
