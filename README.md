@@ -59,11 +59,11 @@ kubectl create namespace kubeapps
 helm install kubeapps --namespace kubeapps bitnami/kubeapps
 ```
 
-Create an Ingress or HttpProxy with the DNS name **kubeapps.(your ingress domain) that resolves the **kubeapps** service in the kubeapps namespace. Follow the [instructions](https://github.com/kubeapps/kubeapps/blob/master/docs/user/getting-started.md#step-2-create-a-demo-credential-with-which-to-access-kubeapps-and-kubernetes) for creating a KubeApps access token.
+Create an Ingress or HttpProxy with the DNS name **kubeapps.(your-ingress-domain)** that resolves the **kubeapps** service in the kubeapps namespace. Follow the [instructions](https://github.com/kubeapps/kubeapps/blob/master/docs/user/getting-started.md#step-2-create-a-demo-credential-with-which-to-access-kubeapps-and-kubernetes) for creating a KubeApps access token.
 
 ## Install Workshop
 
-Check out the workshop repo (or your fork locally). Create a public project called **tanzu-e2e** in your Harbor instance. Using the Dockerfile in the root of this repo, build a Docker image with the tag **harbor.(your ingress domain)/tanzu-e2e/eduk8s-e2e-workshop**. Push it to your Harbor repo.
+Check out the workshop repo (or your fork locally). Create a public project called **tanzu-e2e** in your Harbor instance. Using the Dockerfile in the root of this repo, build a Docker image with the tag **harbor.(your-ingress-domain)/tanzu-e2e/eduk8s-e2e-workshop**. Push it to your Harbor repo.
 
 Make a copy of **values-example.yaml** and call it values.yaml. Customize this file with the appropriate values for your install of ingress, concourse, and harbor. Make sure you have *ytt* and *kapp* installed on your lcoal machine.
 
