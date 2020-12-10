@@ -9,12 +9,15 @@ You can currently access a hosted version of the E2E workshop here: https://via.
 To install the E2E workshop in your own environment, the following prereqs must be in place in your Kubernetes cluster:
 
 **Educates**
+
 Install the educates operator, per these instructions: https://docs.edukates.io/en/latest/getting-started/installing-operator.html
 
 **Ingress**
+
 Set up ingress, with a wildcard DNS domain, that terminates with a signed cert. Contour and LetsEncrypt are great tools for this.
 
 **Harbor**
+
 Install Harbor into your cluster with Helm. 
 
 ```
@@ -35,7 +38,7 @@ helm install harbor harbor/harbor -n harbor \
 
 **Concourse**
 
-Install Concourse into your cluster with Helm. Customize the [values.yaml](https://raw.githubusercontent.com/concourse/concourse-chart/master/values.yaml) file so that your ingress route is **concourse.<your-ingress-domain>**, and set the user/password for your main team.
+Install Concourse into your cluster with Helm. Customize the [values.yaml](https://raw.githubusercontent.com/concourse/concourse-chart/master/values.yaml) file so that your ingress route is **concourse.(your-ingress-domain)**, and set the user/password for your main team.
 
 ```
 helm repo add concourse https://concourse-charts.storage.googleapis.com/
@@ -45,9 +48,22 @@ kubectl create namespace concourse
 helm install concourse -f concourse-values.yaml concourse/concourse -n concourse
 ```
 
+**Kubeapps**
+
+Install Kubeapps into your cluster with Helm.
+
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami
+kubectl create namespace kubeapps
+
+helm install kubeapps --namespace kubeapps bitnami/kubeapps
+```
+
+Create an Ingress or HttpProxy with the DNS name **kubeapps.(your ingress domain) that resolves the **kubeapps** service in the kubeapps namespace. Follow the [instructions](https://github.com/kubeapps/kubeapps/blob/master/docs/user/getting-started.md#step-2-create-a-demo-credential-with-which-to-access-kubeapps-and-kubernetes) for creating a KubeApps access token.
+
 ## Install Workshop
 
-Check out the workshop repo (or your fork locally). Create a public project called **tanzu-e2e** in your Harbor instance. Using the Dockerfile in the root of this repo, build a Docker image with the tag **harbor.<your ingress domain>/tanzu-e2e/eduk8s-e2e-workshop**. Push it to your Harbor repo.
+Check out the workshop repo (or your fork locally). Create a public project called **tanzu-e2e** in your Harbor instance. Using the Dockerfile in the root of this repo, build a Docker image with the tag **harbor.(your ingress domain)/tanzu-e2e/eduk8s-e2e-workshop**. Push it to your Harbor repo.
 
 Make a copy of **values-example.yaml** and call it values.yaml. Customize this file with the appropriate values for your install of ingress, concourse, and harbor. Make sure you have *ytt* and *kapp* installed on your lcoal machine.
 
