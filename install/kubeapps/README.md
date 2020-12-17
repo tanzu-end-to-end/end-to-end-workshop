@@ -5,5 +5,6 @@ Ensure that you have prepared a values.yaml file, by customizing the values-exam
 From this directory in the repo, execute:
 
 ```
-./install-concourse.sh /path/to/my/values.yaml
+kubectl create namespace kubeapps
+./install-kubeapps.sh /path/to/my/values.yaml
 ```

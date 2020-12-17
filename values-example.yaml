@@ -5,7 +5,6 @@ concourse:
   username: test
   password: <PASSWORD>
 harbor:
-  host: harbor.<INGRESS-DOMAIN>
   username: admin
   password: <PASSWORD>
   diskSize: 50Gi # Size of the PersistentVolumeClaim for storing images
