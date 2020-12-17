@@ -8,8 +8,11 @@ harbor:
   host: harbor.<INGRESS-DOMAIN>
   username: admin
   password: <PASSWORD>
+  diskSize: 50Gi # Size of the PersistentVolumeClaim for storing images
 ingress:
   domain: <INGRESS-DOMAIN>
+  base64_cert: # Enter the base64-encoded text of your wildcard domain cert. e.g. LS0tLS1CRUdJTiBDRVJ.....
+  base64_key: # Enter the base64-encoded text of your wildcard domain cert's private key. e.g. LS0tLS1CRUdJTiBQUkl.....
 # If you are forking the repo to customize the workshop, or are deploying a non-main branch, update the values below
 git:
   account: tanzu-end-to-end
