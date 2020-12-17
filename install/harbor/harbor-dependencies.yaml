@@ -1,0 +1,24 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: harbor
+  name: contour-tls
+type: kubernetes.io/tls
+data:
+  tls.crt: #@ data.values.ingress.base64_cert
+  tls.key: #@ data.values.ingress.base64_key
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: harbor
+  name: harbor-registry-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: #@ data.values.harbor.diskSize

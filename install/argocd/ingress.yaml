@@ -1,0 +1,53 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: argocd
+  name: contour-tls
+type: kubernetes.io/tls
+data:
+  tls.crt: #@ data.values.ingress.base64_cert
+  tls.key: #@ data.values.ingress.base64_key
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  namespace: argocd
+  name: argocd-server-http
+  annotations:
+    kubernetes.io/ingress.class: contour
+spec:
+  rules:
+  - host: #@ "argocd.{}".format(data.values.ingress.domain)
+    http:
+      paths:
+      - backend:
+          serviceName: argocd-server
+          servicePort: http
+  tls:
+  - hosts:
+    - #@ "argocd.{}".format(data.values.ingress.domain)
+    secretName: contour-tls
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  namespace: argocd
+  name: argocd-server-cli
+  annotations:
+    kubernetes.io/ingress.class: contour
+spec:
+  rules:
+  - host: #@ "argocd-cli.{}".format(data.values.ingress.domain)
+    http: 
+      paths:
+      - backend:
+          serviceName: argocd-server
+          servicePort: https
+  tls:
+  - hosts:
+    - #@ "argocd-cli.{}".format(data.values.ingress.domain)
+    secretName: contour-tls

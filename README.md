@@ -16,25 +16,13 @@ Install the educates operator, per these instructions: https://docs.edukates.io/
 
 Set up ingress, with a wildcard DNS domain, that terminates with a signed cert. Contour and LetsEncrypt are great tools for this.
 
+**Environment Values File**
+
+Use the **values-example.yaml** file in the root of this repo as a template, and create a copy called **values.yaml** that has been customized for your environment. You will enter values such as your ingress domain, and the Base64 encoding of your signed cert, which will be used as inputs to install the other products in this workshop.
+
 **Harbor**
 
-Install Harbor into your cluster with Helm. 
-
-```
-helm repo add harbor https://helm.goharbor.io
-helm repo update
-kubectl create namespace harbor
-
-[Create a PVC called harbor-registry-pvc for storing your images.
-Create a secret called ingress-tls that contains your signed wildcard domain certificate]
-
-helm install harbor harbor/harbor -n harbor \
-  --set expose.tls.certSource=secret \
-  --set expose.tls.secret.secretName=ingress-tls \
-  --set expose.ingress.hosts.core=<your ingress domain> \
-  --set persistence.persistentVolumeClaim.registry.existingClaim=harbor-registry-pvc \
-  --set notary.enabled=false --set externalURL="https://harbor.<your ingress domain>"
-```
+Follow the docs for [Installing Harbor](install/harbor/README.md)
 
 **Concourse**
 
@@ -60,6 +48,10 @@ helm install kubeapps --namespace kubeapps bitnami/kubeapps
 ```
 
 Create an Ingress or HttpProxy with the DNS name **kubeapps.(your-ingress-domain)** that resolves the **kubeapps** service in the kubeapps namespace. Follow the [instructions](https://github.com/kubeapps/kubeapps/blob/master/docs/user/getting-started.md#step-2-create-a-demo-credential-with-which-to-access-kubeapps-and-kubernetes) for creating a KubeApps access token.
+
+**ArgoCD**
+
+Follow the docs for [Installing Argocd](install/argocd/README.md)
 
 ## Install Workshop
 
