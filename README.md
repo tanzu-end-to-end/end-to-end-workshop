@@ -26,28 +26,11 @@ Follow the docs for [Installing Harbor](install/harbor/README.md)
 
 **Concourse**
 
-Install Concourse into your cluster with Helm. Customize the [values.yaml](https://raw.githubusercontent.com/concourse/concourse-chart/master/values.yaml) file so that your ingress route is **concourse.(your-ingress-domain)**, and set the user/password for your main team.
-
-```
-helm repo add concourse https://concourse-charts.storage.googleapis.com/
-helm repo update
-kubectl create namespace concourse
-
-helm install concourse -f concourse-values.yaml concourse/concourse -n concourse
-```
+Follow the docs for [Installing Concourse](install/concourse/README.md)
 
 **Kubeapps**
 
-Install Kubeapps into your cluster with Helm.
-
-```
-helm repo add bitnami https://charts.bitnami.com/bitnami
-kubectl create namespace kubeapps
-
-helm install kubeapps --namespace kubeapps bitnami/kubeapps
-```
-
-Create an Ingress or HttpProxy with the DNS name **kubeapps.(your-ingress-domain)** that resolves the **kubeapps** service in the kubeapps namespace. Follow the [instructions](https://github.com/kubeapps/kubeapps/blob/master/docs/user/getting-started.md#step-2-create-a-demo-credential-with-which-to-access-kubeapps-and-kubernetes) for creating a KubeApps access token.
+Follow the docs for [Installing Kubeapps](install/kubeapps/README.md)
 
 **ArgoCD**
 
