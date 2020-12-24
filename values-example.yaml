@@ -1,7 +1,6 @@
 #@data/values
 ---
 concourse:
-  url: https://concourse.<INGRESS-DOMAIN>
   username: test
   password: <PASSWORD>
 harbor:
