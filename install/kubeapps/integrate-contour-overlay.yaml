@@ -1,0 +1,17 @@
+#@ load("@ytt:overlay", "overlay")
+#@ load("@ytt:data", "data")
+
+#@ def resource(kind, name):
+kind: #@ kind
+metadata:
+  name: #@ name
+#@ end
+
+#@overlay/match by=overlay.subset(resource("Ingress","kubeapps"))
+---
+spec:
+  tls:
+    #@overlay/match by=overlay.all
+    - secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
+
+

@@ -8,17 +8,17 @@ You can currently access a hosted version of the E2E workshop here: https://via.
 
 To install the E2E workshop in your own environment, the following prereqs must be in place in your Kubernetes cluster:
 
-**Educates**
-
-Install the educates operator, per these instructions: https://docs.edukates.io/en/latest/getting-started/installing-operator.html
-
-**Ingress**
-
-Set up ingress, with a wildcard DNS domain, that terminates with a signed cert. Contour and LetsEncrypt are great tools for this.
-
 **Environment Values File**
 
 Follow the docs for [Customizing the Environment Values File](install/values/README.md)
+
+**Contour**
+
+Set up Contour, with a wildcard DNS domain, that terminates with a signed cert. LetsEncrypt is a great tool for generating the cert. Follow the docs for [Configuring TLS Certificate Delegation](install/certificate/README.md)
+
+**Educates**
+
+Install the educates operator, per these instructions: https://docs.edukates.io/en/latest/getting-started/installing-operator.html
 
 **Harbor**
 

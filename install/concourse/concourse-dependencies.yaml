@@ -1,14 +1,4 @@
 #@ load("@ytt:data", "data")
----
-apiVersion: v1
-kind: Secret
-metadata:
-  namespace: concourse
-  name: contour-tls
-type: kubernetes.io/tls
-data:
-  tls.crt: #@ data.values.ingress.base64_cert
-  tls.key: #@ data.values.ingress.base64_key
 
 #@ if data.values.psp.cluster_role:
 ---

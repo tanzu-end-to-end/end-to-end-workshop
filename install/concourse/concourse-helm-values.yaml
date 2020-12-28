@@ -11,7 +11,7 @@ web:
     enabled: true
     hosts: #@ ["concourse.{}".format(data.values.ingress.domain)]
     tls:
-    - secretName: contour-tls
+    - secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
       hosts: #@ ["concourse.{}".format(data.values.ingress.domain)]
 secrets:
   localUsers: #@ "{}:{}".format(data.values.concourse.username,data.values.concourse.password)
