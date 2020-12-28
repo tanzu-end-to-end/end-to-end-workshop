@@ -2,14 +2,14 @@
 ---
 ingress:
   domain: <INGRESS-DOMAIN>
-  base64_cert:
-  base64_key:
+  contour_tls_namespace: projectcontour
+  contour_tls_secret: contour-tls
 concourse:
   username: test
   password: <PASSWORD>
 harbor:
   username: admin
-  password: <PASSWORD>
+  password: Harbor12345
   diskSize: 50Gi
 psp:
   cluster_role:

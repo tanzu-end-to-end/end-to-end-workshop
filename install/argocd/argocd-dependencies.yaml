@@ -1,16 +1,5 @@
 #@ load("@ytt:data", "data")
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  namespace: argocd
-  name: contour-tls
-type: kubernetes.io/tls
-data:
-  tls.crt: #@ data.values.ingress.base64_cert
-  tls.key: #@ data.values.ingress.base64_key
-
----
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -29,7 +18,7 @@ spec:
   tls:
     - hosts:
         - #@ "argocd.{}".format(data.values.ingress.domain)
-      secretName: contour-tls
+      secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
 
 ---
 apiVersion: networking.k8s.io/v1beta1
@@ -50,7 +39,7 @@ spec:
   tls:
     - hosts:
         - #@ "argocd-cli.{}".format(data.values.ingress.domain)
-      secretName: contour-tls
+      secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
 
 #@ if data.values.psp.cluster_role:
 ---

@@ -2,6 +2,12 @@
 
 Make a copy of the [values-example.yaml](../../values-example.yaml) file, and customize it for the cluster you will be installing the e2e workshop into. You will use this values file as an input to all subsequent install processes.
 
+**ingress.domain**<br>
+This is the DNS name for the wildcard domain for which you have configured a signed certificate for Ingress.
+**ingress.contour_tls_namespace**<br>
+**ingress.contour_tls_secret**<br>
+Using `kubectl create secret tls`, create a Kubernetes secret that contains the public cert and the private key for your signed certificate. Set these values to the namespace and the name of your created secret.
+
 **concourse.username**<br>
 **concourse.password**<br>
 Set these values to the login credentials for your Concourse server. This user will be a member of the main team.

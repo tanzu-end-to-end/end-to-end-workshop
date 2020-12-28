@@ -4,7 +4,7 @@ expose:
   tls:
     certSource: secret
     secret:
-      secretName: "contour-tls"
+      secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
   ingress:
     hosts:
       core: #@ "harbor.{}".format(data.values.ingress.domain)
