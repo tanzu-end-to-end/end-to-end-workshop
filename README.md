@@ -18,7 +18,7 @@ Set up ingress, with a wildcard DNS domain, that terminates with a signed cert. 
 
 **Environment Values File**
 
-Use the **values-example.yaml** file in the root of this repo as a template, and create a copy called **values.yaml** that has been customized for your environment. You will enter values such as your ingress domain, and the Base64 encoding of your signed cert, which will be used as inputs to install the other products in this workshop.
+Follow the docs for [Customizing the Environment Values File](install/values/README.md)
 
 **Harbor**
 

@@ -9,3 +9,20 @@ type: kubernetes.io/tls
 data:
   tls.crt: #@ data.values.ingress.base64_cert
   tls.key: #@ data.values.ingress.base64_key
+
+#@ if data.values.psp.cluster_role:
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: concourse
+  name: psp-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: #@ data.values.psp.cluster_role
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: system:authenticated
+#@ end
