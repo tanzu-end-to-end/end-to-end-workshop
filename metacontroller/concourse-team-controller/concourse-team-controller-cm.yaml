@@ -92,7 +92,6 @@ data:
     
 kind: ConfigMap
 metadata:
-  creationTimestamp: null
   name: concourse-team-controller
   namespace: concourse-team-controller
   annotations:
