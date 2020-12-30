@@ -18,6 +18,9 @@ spec:
     image: #@ "harbor.{}/tanzu-e2e/eduk8s-e2e-workshop:latest".format(data.values.ingress.domain)
     files: #@ "github.com/{}/end-to-end-workshop/home?ref={}".format(data.values.git.account,data.values.git.branch)
   session:
+    env:
+      - name: MESSAGE
+        value: Hello
     namespaces:
       budget: x-large
       limits:
