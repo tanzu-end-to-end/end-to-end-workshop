@@ -47,7 +47,7 @@ command: fly -t concourse unpause-pipeline -p spring-petclinic
 session: 1
 ```
 
-Now, let's open a browser window to your pipeline.  Login with user "test" and password "test"
+Now, let's open a browser window to your pipeline.  Login with user "{{ ENV_CONCOURSE_USERNAME }}" and password "{{ ENV_CONCOURSE_PASSWORD }}"
 ```dashboard:open-url
 url: https://concourse.{{ ingress_domain }}/teams/{{ session_namespace }}/pipelines/spring-petclinic
 ```
