@@ -16,3 +16,4 @@ persistence:
 notary:
   enabled: false
 externalURL: #@ "https://harbor.{}".format(data.values.ingress.domain)
+harborAdminPassword: #@ data.values.harbor.adminPassword

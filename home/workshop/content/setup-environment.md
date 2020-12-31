@@ -54,7 +54,7 @@ url: https://concourse.{{ ingress_domain }}/teams/{{ session_namespace }}/pipeli
 Validate that it is picking up your code and doing the first build.  It is important to let this process complete so that it can pre-cache all your dependencies and allow your builds to execute much faster.  This will take a while the first time.
 
 # Harbor
-Next, click the link below and login to Harbor with the user "admin" and password "Harbor12345".  If you login and aren't redirected to your project, then simply close the Harbor tab that was opened, and reopen it with the link below.
+Next, click the link below and login to Harbor with the user "admin" and password "{{ ENV_HARBOR_PASSWORD }}".  If you login and aren't redirected to your project, then simply close the Harbor tab that was opened, and reopen it with the link below.
 ```dashboard:open-url
 url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
 ```

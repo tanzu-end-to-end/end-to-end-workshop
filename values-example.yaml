@@ -8,8 +8,7 @@ concourse:
   username: test
   password: <PASSWORD>
 harbor:
-  username: admin
-  password: Harbor12345
+  adminPassword: Harbor12345
   diskSize: 50Gi
 registry:
   dockerhub: docker.io
