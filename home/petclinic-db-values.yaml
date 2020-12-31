@@ -1,8 +1,8 @@
 image:
-  registry: harbor.${INGRESS_DOMAIN}/dockerhub
+  registry: $MYSQL_REGISTRY
 metrics:
   image:
-    registry: harbor.${INGRESS_DOMAIN}/dockerhub
+    registry: $MYSQL_REGISTRY
 db:
   name: petclinic
   password: petclinic
