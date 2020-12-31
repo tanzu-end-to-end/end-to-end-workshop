@@ -12,11 +12,13 @@ Using `kubectl create secret tls`, create a Kubernetes secret that contains the 
 **concourse.password**<br>
 Set these values to the login credentials for your Concourse server. This user will be a member of the main team.
 
-**harbor.username**<br>
-**harbor.password**<br>
-Set these values to the login credentials for your Harbor environment. This will be the admin user.<br>
+**harbor.adminPassword**<br>
+Set to the password for the **admin** user in your Harbor environment. <br>
 **harbor.diskSize**<br>
 Set to the size of the PersistentVolumeClaim for the volume that will store your Harbor images.
+
+**registry.dockerhub**
+The workshop will pull DockerHub images for some containers like MySQL. If you are concerned about hitting DockerHub rate limits in a high usage environment, you can change the value of this variable from docker.io to a registry in which you have mirrored the images.
 
 **psp.cluster_role**<br>
 Edukates must run on a cluster where the PodSecurityPolicy admission controller is enabled. If your cluster is already configured so that authenticated users will be able to deploy software into new namespaces, you can leave this blank. Otherwise, set the value to the ClusterRole should be assigned to installers when deploying new software. As you run each installer, all authenticated users in the new namespace will be bound to the ClusterRole, and get the permissions it needs to do things like run pods.

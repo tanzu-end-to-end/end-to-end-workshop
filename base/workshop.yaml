@@ -21,6 +21,12 @@ spec:
     env:
       - name: MYSQL_REGISTRY
         value: #@ data.values.registry.dockerhub
+      - name: HARBOR_PASSWORD
+        value: #@ data.values.harbor.adminPassword
+      - name: CONCOURSE_USERNAME
+        value: #@ data.values.concourse.username
+      - name: CONCOURSE_PASSWORD
+        value: #@ data.values.concourse.password
     namespaces:
       budget: x-large
       limits:

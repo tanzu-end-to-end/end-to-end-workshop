@@ -8,5 +8,3 @@ From this directory in the repo, execute:
 kubectl create namespace harbor
 ./install-harbor.sh /path/to/my/values.yaml
 ```
-
-If you wish to change the default password for Harbor, log in after the install is complete, and use the "Change Password" dropdown. Be sure that the password in your **values.yaml** file matches the new password that you set.
