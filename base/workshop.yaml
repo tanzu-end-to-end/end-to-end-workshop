@@ -19,8 +19,8 @@ spec:
     files: #@ "github.com/{}/end-to-end-workshop/home?ref={}".format(data.values.git.account,data.values.git.branch)
   session:
     env:
-      - name: MESSAGE
-        value: Hello
+      - name: MYSQL_REGISTRY
+        value: #@ data.values.registry.dockerhub
     namespaces:
       budget: x-large
       limits:

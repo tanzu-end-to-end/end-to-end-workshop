@@ -11,6 +11,8 @@ harbor:
   username: admin
   password: Harbor12345
   diskSize: 50Gi
+registry:
+  dockerhub: docker.io
 psp:
   cluster_role:
 git:
