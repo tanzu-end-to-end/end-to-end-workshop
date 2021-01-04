@@ -28,6 +28,10 @@ Follow the docs for [Installing Harbor](install/harbor/README.md)
 
 Follow the docs for [Installing Concourse](install/concourse/README.md)
 
+**Tanzu Build Service**
+
+Install Tanzu Build Service per the [Documentation](https://docs.pivotal.io/build-service/1-0/installing.html)
+
 **Kubeapps**
 
 Follow the docs for [Installing Kubeapps](install/kubeapps/README.md)
