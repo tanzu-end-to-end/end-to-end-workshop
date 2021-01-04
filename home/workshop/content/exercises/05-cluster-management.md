@@ -9,7 +9,7 @@ Let's put on our cluster operator and app operater's hat for a moment and explor
 * Go to TMC browser tab.  Show the cluster group and how it contains clusters from different providers.
 * Click on the "Policies" section and select the "Assignment" subsection.  Call out that TMC allows you to apply policies vertically from the entire organization down to individual clusters.  We can also apply policies horizontally at an application namespace level spanning multiple clusters.  
 * Show the "Access" tab and mention it provides central access control and rights management for your clusters or namespaces.  
-* Click on the "Image Registry" tab.  Call out how you can ensure that clusters only pull containers from your trusted registries.
+* Click on the "Image Registry" tab and select "Workspaces".  Call out how you can ensure that clusters only pull containers from your trusted registries.
 * Mention network policies but skip clicking on it unless your customer has a specific interest there
 * Click on the "Security" tab.  Click "Create a security policy" and note that we provide templates that already contain best practices out of the box.  
 * Mention quota controls to prevent someone from hogging the cluster, but skip clicking it unless your customer has a specific interest.
