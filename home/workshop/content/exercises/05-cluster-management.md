@@ -1,10 +1,10 @@
 So now we have our application, and our database service deployed to one cluster.  But the landing zone for your applications isn't likely to just be one cluster.  You have multiple datacenters, and increasingly one more of those datacenters is in the public cloud.  Your applications are going to land on clusters that are provided for you by another provider, or are managed for you as a service in the public cloud.  Are all those clusters set up and secured according to best practices and meeting your standards?
 
-Tanzu includes a supported, standards compliant Kubernetes distribution that can run across both public and private clouds and is closely aligned with the open source, upstream Kubernetes.  Tanzu makes it simple for your administrators to deploy and manage Kubernetes everywhere.  And we even offer an integrated Tanzu Kubernetes distribution into the core of vSphere, so that your administrators have the aboslute best Kubernetes experience possible on your VMware infrastructure.
+Tanzu includes a supported, standards compliant Kubernetes distribution that can run across both public and private clouds and is closely aligned with the open source, upstream Kubernetes.  Tanzu makes it simple for your administrators to deploy and manage Kubernetes everywhere.  And we even offer an integrated Tanzu Kubernetes distribution into the core of vSphere, so that your administrators have the absolute best Kubernetes experience possible on your VMware infrastructure.
 
 But the value of Tanzu isn't linked strictly to our own Kubernetes distribution.  Tanzu gives you the tools ensure that all of your clusters, VMware provided or not, have the stricted security and compliance policies defined, are protected from catastrophes, and are standards compliant.
 
-Let's put on our cluster operator and app operater's hat for a moment and explore
+Let's put on our cluster operator and app operator’s hat for a moment and explore
 
 * Go to TMC browser tab.  Show the cluster group and how it contains clusters from different providers.
 * Click on the "Policies" section and select the "Assignment" subsection.  Call out that TMC allows you to apply policies vertically from the entire organization down to individual clusters.  We can also apply policies horizontally at an application namespace level spanning multiple clusters.  
