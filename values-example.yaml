@@ -1,0 +1,19 @@
+#@data/values
+---
+ingress:
+  domain: <INGRESS-DOMAIN>
+  contour_tls_namespace: projectcontour
+  contour_tls_secret: contour-tls
+concourse:
+  username: test
+  password: <PASSWORD>
+harbor:
+  adminPassword: Harbor12345
+  diskSize: 50Gi
+registry:
+  dockerhub: docker.io
+psp:
+  cluster_role:
+git:
+  account: tanzu-end-to-end
+  branch: main

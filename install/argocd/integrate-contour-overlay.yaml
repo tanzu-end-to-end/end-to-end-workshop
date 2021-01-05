@@ -1,0 +1,25 @@
+#@ load("@ytt:overlay", "overlay")
+
+#@ def resource(kind, name):
+kind: #@ kind
+metadata:
+  name: #@ name
+#@ end
+
+#@overlay/match by=overlay.subset(resource("Deployment","argocd-server"))
+---
+spec:
+  template:
+    spec:
+      containers:
+      #@overlay/match by=overlay.all
+      - command:
+        #@overlay/append
+        - --insecure
+
+#@overlay/match by=overlay.subset(resource("Service","argocd-server"))
+---
+metadata:
+  #@overlay/match missing_ok=True
+  annotations:
+    projectcontour.io/upstream-protocol.h2c: "https,443"

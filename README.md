@@ -2,25 +2,51 @@
 
 This is a workshop for delivering an end to end experience of [VMware Tanzu](https://tanzu.vmware.com) solutions.
 
-For more detailed information on how to create and deploy workshops, consult
-the documentation for eduk8s at:
+You can currently access a hosted version of the E2E workshop here: https://via.vmware.com/tanzu-e2e-demo
 
-* https://docs.eduk8s.io
+## Prerequisites
 
-If you already have the eduk8s operator installed and configured, to deploy
-and view this workshop, run:
+To install the E2E workshop in your own environment, the following prereqs must be in place in your Kubernetes cluster:
 
+**Environment Values File**
+
+Follow the docs for [Customizing the Environment Values File](install/values/README.md). Ensure that you have the carvel tools **ytt** and **kapp** installed on your local machine.
+
+**Contour**
+
+Set up Contour, with a wildcard DNS domain, that terminates with a signed cert. LetsEncrypt is a great tool for generating the cert. Follow the docs for [Configuring TLS Certificate Delegation](install/certificate/README.md)
+
+**Educates**
+
+Install the educates operator, per these instructions: https://docs.edukates.io/en/latest/getting-started/installing-operator.html
+
+**Harbor**
+
+Follow the docs for [Installing Harbor](install/harbor/README.md)
+
+**Concourse**
+
+Follow the docs for [Installing Concourse](install/concourse/README.md)
+
+**Tanzu Build Service**
+
+Install Tanzu Build Service per the [Documentation](https://docs.pivotal.io/build-service/1-0/installing.html)
+
+**Kubeapps**
+
+Follow the docs for [Installing Kubeapps](install/kubeapps/README.md)
+
+**ArgoCD**
+
+Follow the docs for [Installing Argocd](install/argocd/README.md)
+
+## Workshop
+
+Finally, follow the docs for [Installing the Workshop](install/workshop/README.md)
+
+The workshop will take a couple of minutes to start. Run:
 ```
-kubectl apply -f https://raw.githubusercontent.com/tanzu-end-to-end/end-to-end-workshop/main/resources/workshop.yaml
-kubectl apply -f https://raw.githubusercontent.com/tanzu-end-to-end/end-to-end-workshop/main/resources/training-portal.yaml
+kubectl get eduk8s-training
 ```
-
-This will deploy a training portal hosting just this workshop. To get the
-URL for accessing the training portal run:
-
-```
-kubectl get trainingportal/end-to-end-workshop
-```
-
-The training portal is configured to allow anonymous access. For your own
+to get the TrainingPortal URL that will be used to access the workshop. The training portal is configured to allow anonymous access. For your own
 workshop content you should consider removing anonymous access.

@@ -1,3 +1,5 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,7 +19,7 @@ spec:
     spec:
       containers:
       - name: controller
-        image: python:2.7
+        image: #@ "{}/library/python:2.7".format(data.values.registry.dockerhub)
         command: ["python", "/hooks/sync.py"]
         volumeMounts:
         - name: hooks
@@ -34,7 +36,10 @@ spec:
                 name: controller-secrets
                 key: harbor_password
           - name: HARBOR_HOST
-            value: "harbor.tools.pez.aws.grogscave.net"
+            valueFrom:
+              secretKeyRef:
+                name: controller-secrets
+                key: harbor_host
       volumes:
       - name: hooks
         configMap:

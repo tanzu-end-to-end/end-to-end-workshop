@@ -1,0 +1,19 @@
+#@ load("@ytt:data", "data")
+
+expose:
+  tls:
+    certSource: secret
+    secret:
+      secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
+  ingress:
+    hosts:
+      core: #@ "harbor.{}".format(data.values.ingress.domain)
+persistence:
+  resourcePolicy: ""
+  persistentVolumeClaim:
+    registry:
+      existingClaim: "harbor-registry-pvc"
+notary:
+  enabled: false
+externalURL: #@ "https://harbor.{}".format(data.values.ingress.domain)
+harborAdminPassword: #@ data.values.harbor.adminPassword

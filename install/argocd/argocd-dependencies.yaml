@@ -1,0 +1,59 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  namespace: argocd
+  name: argocd-server-http
+  annotations:
+    kubernetes.io/ingress.class: contour
+spec:
+  rules:
+    - host: #@ "argocd.{}".format(data.values.ingress.domain)
+      http:
+        paths:
+          - backend:
+              serviceName: argocd-server
+              servicePort: http
+  tls:
+    - hosts:
+        - #@ "argocd.{}".format(data.values.ingress.domain)
+      secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  namespace: argocd
+  name: argocd-server-cli
+  annotations:
+    kubernetes.io/ingress.class: contour
+spec:
+  rules:
+    - host: #@ "argocd-cli.{}".format(data.values.ingress.domain)
+      http:
+        paths:
+          - backend:
+              serviceName: argocd-server
+              servicePort: https
+  tls:
+    - hosts:
+        - #@ "argocd-cli.{}".format(data.values.ingress.domain)
+      secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
+
+#@ if data.values.psp.cluster_role:
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: argocd
+  name: psp-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: #@ data.values.psp.cluster_role
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: system:authenticated
+#@ end

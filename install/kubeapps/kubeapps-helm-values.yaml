@@ -1,0 +1,9 @@
+#@ load("@ytt:data", "data")
+
+ingress:
+  enabled: true
+  hostname: #@ "kubeapps.{}".format(data.values.ingress.domain)
+  tls: true
+postgresql:
+  replication:
+    enabled: false

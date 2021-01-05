@@ -1,4 +1,0 @@
-#@data/values
----
-concourse:
-  host: concourse.tools.e2e.aws.grogscave.net
