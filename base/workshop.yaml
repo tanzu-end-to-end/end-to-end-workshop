@@ -12,8 +12,8 @@ spec:
   duration: 30m
   url: https://github.com/tanzu-end-to-end/end-to-end-workshop
   authors:
-  - James Musselwhite <jmusselwhite@vmware.com>
   - Chris DeLashmutt <cdelashmutt@vmware.com>
+  - Anand Rao <raoan@vmware.com>
   content:
     image: #@ "harbor.{}/tanzu-e2e/eduk8s-e2e-workshop:latest".format(data.values.ingress.domain)
     files: #@ "github.com/{}/end-to-end-workshop/home?ref={}".format(data.values.git.account,data.values.git.branch)
