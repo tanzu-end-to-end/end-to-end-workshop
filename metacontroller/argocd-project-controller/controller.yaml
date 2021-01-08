@@ -1,0 +1,19 @@
+apiVersion: metacontroller.k8s.io/v1alpha1
+kind: DecoratorController
+metadata:
+  name: argocd-project-controller-webhook
+  namespace: argocd-project-controller
+spec:
+  resources:
+  - apiVersion: e2e.tanzu.vmware.com/v1beta1
+    resource: argocdprojects
+  attachments: []
+  hooks:
+    sync:
+      webhook:
+        url: http://controller.argocd-project-controller/sync
+        timeout: 10s
+    finalize:
+      webhook:
+        url: http://controller.argocd-project-controller/sync
+        timeout: 10s
