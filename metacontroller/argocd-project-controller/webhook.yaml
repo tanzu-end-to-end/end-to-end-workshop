@@ -59,7 +59,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: controller-secrets
-              key: argocd_url
+              key: argocd_host
       volumes:
       - name: hooks
         configMap:
