@@ -12,6 +12,14 @@ argocd:
 harbor:
   adminPassword: Harbor12345
   diskSize: 50Gi
+  #! Optionally, you could provide an s3 section instead of diskSize to use S3 to back Harbor
+  #!   s3:
+  #!     region: us-east-1
+  #!     regionendpoint: http://freenas #! Not needed for AWS S3
+  #!     access-key-id: access-key
+  #!     secret-access-key: secret-key
+  #!     bucket: bucket-name
+  #!     secure: false #! set to true for HTTPS endpoints/AWS S3
 registry:
   dockerhub: docker.io
 psp:
