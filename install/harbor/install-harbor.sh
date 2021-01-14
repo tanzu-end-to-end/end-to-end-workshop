@@ -1,8 +1,13 @@
 set -x
 
-helm repo add harbor https://helm.goharbor.io
-helm repo update
+if [[ "$(helm repo list)" == *"harbor"* ]]; then
+  echo "Skipping repo add and update"
+else
+  helm repo add harbor https://helm.goharbor.io
+  helm repo update
+fi
 
-ytt -f harbor-helm-values.yaml -f $1 | helm template harbor/harbor --name-template harbor -f- > chart.yaml
-
-ytt -f harbor-dependencies.yaml -f $1 -f chart.yaml -f integrate-contour-overlay.yaml --file-mark 'chart.yaml:type=yaml-plain' | kapp deploy -a harbor -n harbor -f- --diff-changes --yes
+ytt -f harbor-helm-values.yaml -f ../../values/values.yaml \
+  | helm template harbor/harbor --name-template harbor -f- \
+  | ytt -f- -f harbor-dependencies.yaml -f ../../values/values.yaml --ignore-unknown-comments \
+  | kapp deploy -a harbor -n harbor -f- --diff-changes --yes
