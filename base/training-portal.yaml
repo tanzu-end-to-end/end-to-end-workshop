@@ -1,7 +1,11 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: training.eduk8s.io/v1alpha1
 kind: TrainingPortal
 metadata:
   name: e2e-workshop
+  annotations:
+    kapp.k14s.io/update-strategy: always-replace
 spec:
   portal:
     title: End to End Workshops
@@ -11,6 +15,6 @@ spec:
   workshops:
   - name: e2e-workshop
     capacity: 20
-    reserved: 1
+    reserved: #@ 1 if not hasattr(data.values, "workshop") else data.values.workshop.reserved
     expires: 4h
     orphaned: 2h
