@@ -16,6 +16,7 @@ spec:
   authors:
   - Chris DeLashmutt <cdelashmutt@vmware.com>
   - Anand Rao <raoan@vmware.com>
+  - Corby Page <pcorby@vmware.com>
   content:
     image: #@ "harbor.{}/tanzu-e2e/eduk8s-e2e-workshop:latest".format(data.values.ingress.domain)
     files: #@ "github.com/{}/end-to-end-workshop/home?ref={}".format(data.values.git.account,data.values.git.branch)
@@ -63,6 +64,11 @@ spec:
         vendor: octant
       editor:
         enabled: true
+    dashboards:
+      - name: Harbor
+        url: "$(ingress_protocol)://harbor.$(ingress_domain)"
+      - name: ArgoCD
+        url: "$(ingress_protocol)://argocd.$(ingress_domain)"
     objects:
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRoleBinding
