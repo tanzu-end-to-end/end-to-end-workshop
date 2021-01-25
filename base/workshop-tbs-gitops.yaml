@@ -64,11 +64,6 @@ spec:
         vendor: octant
       editor:
         enabled: true
-    dashboards:
-      - name: Spring Initializr
-        url: "https://start.spring.io"
-      - name: Steeltoe Initializr
-        url: "https://start.steeltoe.io"
     objects:
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRoleBinding
