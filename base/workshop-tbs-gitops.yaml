@@ -65,12 +65,10 @@ spec:
       editor:
         enabled: true
     dashboards:
-      - name: Harbor
-        url: "$(ingress_protocol)://harbor.$(ingress_domain)/harbor/projects/$(harbor_project_id)/repositories"
-      - name: KubeApps
-        url: "$(ingress_protocol)://kubeapps.$(ingress_domain)/#/c/default/ns/$(session_namespace)/apps"
       - name: Spring Initializr
         url: "https://start.spring.io"
+      - name: Steeltoe Initializr
+        url: "https://start.steeltoe.io"
     objects:
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRoleBinding

@@ -15,11 +15,17 @@ We'll be logging into KubeApps next.  To do that, we'll need to grab our user to
 text: {{ user_token }}
 ```
 
-Now click on the KubeApps tab on the right side of this screen. In the login screen, paste your token into the text field, and click "Login". 
+Now, click the following link to open a new tab to Kubeapps pointing to a DB deployment that was created for you when you launched this environment. In the login screen, paste your token into the text field, and click "Login".  
+```dashboard:open-url
+url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }}/apps
+```
 You should see a MySQL Deployment called `petclinic-db`.  It may still be starting when you first examine it, but it should go to 1 pod active fairly quickly.  Leave this view on the "Apps" tab so it is staged properly.
 
 # Harbor
-Next, click on the Harbor tab on the right side of this screen. Login to Harbor with the user "admin" and password "{{ ENV_HARBOR_PASSWORD }}". 
+Next, click the link below and login to Harbor with the user "admin" and password "{{ ENV_HARBOR_PASSWORD }}".  If you login and aren't redirected to your project, then simply close the Harbor tab that was opened, and reopen it with the link below.
+```dashboard:open-url
+url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
+```
 
 # SaaS Services
 **Important**: For the next sections, it is vital that you  make sure to sign-in to cloud.vmware.com with your **@vmware.com** email address and select the **"Tanzu End to End"** organization.  Please be careful not to alter the services or configurations of the clusters in these environments as they are shared for the entire End to End Demo Environment.
@@ -59,29 +65,13 @@ Open tab to Tanzu Service Mesh to the `e2e-demo` Global namespace by clicking th
 url: https://prod-2.nsxservicemesh.vmware.com/global-namespaces-detail/e2e-demo/gns-topology
 ```
 
-# Spring and/or Steeltoe Starters
-Click the links below to open up to the project generators for Spring and Steeltoe for .NET
-```dashboard:open-url
-url: https://start.spring.io
-```
-
-```dashboard:open-url
-url: https://start.steeltoe.io
-```
-
-
 # Tab Staging
 Reorder your tabs in this way so that your demo flow goes left to right:
-* start.spring.io and/or start.steeltoe.io
-* Pet Clinic
 * GitHub
-* Concourse
-  * Make sure to go back to the pipeline overview to be staged on your "continuous-integration" and "continuous-delivery" jobs.
 * Harbor
-  * Make sure to refresh the list of repositories after your app is deployed so that you are staged showing the "spring-petclinic" and "spring-petclinic-source" repositories.
 * Kubeapps
 * TAC
-* This workshop tab on the "Console" section
+* This workshop
 * TMC
 * TO
 * TSM
