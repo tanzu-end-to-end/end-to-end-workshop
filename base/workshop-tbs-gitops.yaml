@@ -3,11 +3,11 @@
 apiVersion: training.eduk8s.io/v1alpha2
 kind: Workshop
 metadata:
-  name: e2e-workshop
+  name: e2e-tbs-workshop
   annotations:
     kapp.k14s.io/update-strategy: always-replace
 spec:
-  title: End to End Workshop with Concourse
+  title: End to End Workshop with Tanzu Build Service and GitOps
   description: A workshop exploring the end to end experience of VMware Tanzu
   vendor: tanzu.vmware.com
   difficulty: beginner
@@ -111,7 +111,7 @@ spec:
       spec:
         name: $(session_namespace)
     - apiVersion: e2e.tanzu.vmware.com/v1beta1
-      kind: ConcourseTeam
+      kind: ArgoCDProject
       metadata:
         name: $(session_namespace)
         annotations:
