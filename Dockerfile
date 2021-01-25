@@ -20,7 +20,11 @@ RUN curl -fL --output /tmp/tac.tar.gz https://downloads.bitnami.com/tac/tac-cli_
   rm /tmp/tac.tar.gz
 # TBS
 # TODO :  Change the logic to identify the latest anbd download  or move to pivnet 
+<<<<<<< HEAD
 RUN curl -L -o /usr/local/bin/kp https://github.com/vmware-tanzu/kpack-cli/releases/download/v0.2.0/kp-linux-0.2.0 && \
+=======
+RUN curl -L -o /usr/local/bin/kp https://github.com/vmware-tanzu/kpack-cli/releases/download/v0.1.4/kp-linux-0.1.4 && \
+>>>>>>> 4ee167a (Support for multiple workshops)
   chmod 755 /usr/local/bin/kp
 RUN curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.14.2/pack-v0.14.2-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack
 # Concourse

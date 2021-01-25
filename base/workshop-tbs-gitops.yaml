@@ -60,6 +60,11 @@ spec:
         vendor: octant
       editor:
         enabled: true
+    dashboards:
+      - name: Harbor
+        url: "$(ingress_protocol)://harbor.$(ingress_domain)"
+      - name: ArgoCD
+        url: "$(ingress_protocol)://argocd.$(ingress_domain)"
     objects:
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRoleBinding
