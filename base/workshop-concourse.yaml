@@ -7,7 +7,7 @@ metadata:
   annotations:
     kapp.k14s.io/update-strategy: always-replace
 spec:
-  title: End to End Workshop
+  title: End to End Workshop with Concourse
   description: A workshop exploring the end to end experience of VMware Tanzu
   vendor: tanzu.vmware.com
   difficulty: beginner
@@ -34,6 +34,8 @@ spec:
         verbs: [ list, watch, get ]
   session:
     env:
+      - name: WORKSHOP_FILE
+        value: workshop-concourse.yaml
       - name: MYSQL_REGISTRY
         value: #@ data.values.registry.dockerhub
       - name: HARBOR_PASSWORD
@@ -110,6 +112,14 @@ spec:
         name: $(session_namespace)
     - apiVersion: e2e.tanzu.vmware.com/v1beta1
       kind: ConcourseTeam
+      metadata:
+        name: $(session_namespace)
+        annotations:
+          training.eduk8s.io/objects.crd.scope: Namespaced
+      spec:
+        name: $(session_namespace)
+    - apiVersion: e2e.tanzu.vmware.com/v1beta1
+      kind: ArgoCDProject
       metadata:
         name: $(session_namespace)
         annotations:

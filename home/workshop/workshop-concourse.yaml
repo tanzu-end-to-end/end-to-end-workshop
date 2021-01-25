@@ -1,0 +1,17 @@
+name: End to End Workshop with Concourse
+
+modules:
+    activate:
+    - setup-environment
+    - exercises/01-frameworks
+    - exercises/02-automated-container-creation
+    - exercises/03-container-registry
+    - exercises/04-service-catalog
+    - exercises/05-cluster-management
+    - exercises/06-enterprise-observability
+    - exercises/07-global-namespaces
+    vars:
+    - name: user_token
+      value: FOO
+    - name: harbor_project_id
+      value: "9999"
