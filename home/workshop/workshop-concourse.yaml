@@ -2,7 +2,7 @@ name: End to End Workshop with Concourse
 
 modules:
     activate:
-    - setup-environment
+    - concourse-setup
     - exercises/01-frameworks
     - exercises/02-automated-container-creation
     - exercises/03-container-registry

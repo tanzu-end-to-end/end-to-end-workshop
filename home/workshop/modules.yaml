@@ -1,5 +1,8 @@
 modules:
-  setup-environment:
+  concourse-setup:
+    name: Set up environment
+    exit_sign: Frameworks and Services
+  tbs-gitops-setup:
     name: Set up environment
     exit_sign: Frameworks and Services
   exercises/01-frameworks:
