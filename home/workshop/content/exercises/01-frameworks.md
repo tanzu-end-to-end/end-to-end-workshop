@@ -5,7 +5,7 @@ Tanzu provides benefits directly to developers as they are developing or moderni
 And for new applications, or for modernizing existing applications with Spring Boot, the best place to start is https://start.spring.io.
 
 ```dashboard:create-dashboard
-name: Spring Initializr
+name: Spring
 url: https://start.spring.io/
 ```
 
@@ -16,7 +16,7 @@ From this interface, developers can quickly find the services they need to start
 VMware also invests in the popular [Steeltoe](https://steeltoe.io) project which provides a similar experience for .NET developers
 
 ```dashboard:create-dashboard
-name: Steeltoe Initializr
+name: Steeltoe
 url: https://start.steeltoe.io/
 ```
 
