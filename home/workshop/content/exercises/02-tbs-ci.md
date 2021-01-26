@@ -23,3 +23,5 @@ session: 2
 ```
 
 Tanzu Build Service recognizes the source code as Java, and employs a Java Buildpack to compile the source and create a custom container image that runs the application. The container image will include VMware's best practices for container design, including up-to-date runtime depdendencies, Java performance optimization, and security hardening for the container runtime. The application developer does not need to be a containerization expert to produce a secure, performant image.
+
+Tanzu Build Service is an important tool for Day 2 Operations as well. Your cluster operators can update the buildpacks, or the base OS image used in your containers, and TBS will automatically trigger a rebuild of all affected containers in your environment. This means no involvement from the individual developers is needed to keep your container runtimes patched and secure.
