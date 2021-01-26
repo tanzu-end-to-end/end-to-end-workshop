@@ -8,7 +8,10 @@ modules:
   exercises/01-frameworks:
     name: Frameworks and Services
     exit_sign: Automated Container Creation
-  exercises/02-automated-container-creation:
+  exercises/02-concourse-ci:
+    name: Automated Container Creation
+    exit_sign: Registries are More than File Servers
+  exercises/02-tbs-ci:
     name: Automated Container Creation
     exit_sign: Registries are More than File Servers
   exercises/03-container-registry:

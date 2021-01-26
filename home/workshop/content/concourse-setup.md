@@ -104,17 +104,6 @@ Open tab to Tanzu Service Mesh to the `e2e-demo` Global namespace by clicking th
 url: https://prod-2.nsxservicemesh.vmware.com/global-namespaces-detail/e2e-demo/gns-topology
 ```
 
-# Spring and/or Steeltoe Starters
-Click the links below to open up to the project generators for Spring and Steeltoe for .NET
-```dashboard:open-url
-url: https://start.spring.io
-```
-
-```dashboard:open-url
-url: https://start.steeltoe.io
-```
-
-
 # Tab Staging
 Reorder your tabs in this way so that your demo flow goes left to right:
 * start.spring.io and/or start.steeltoe.io
