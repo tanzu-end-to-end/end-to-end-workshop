@@ -16,7 +16,7 @@ modules:
     exit_sign: Registries are More than File Servers
   exercises/03-container-registry:
     name: Registries are More than File Servers
-    exit_sign: Service Catalog
+    exit_sign: Continuous Delivery
   exercises/gitops-cd:
     name: Continuous Delivery
     exit_sign: Service Catalog
