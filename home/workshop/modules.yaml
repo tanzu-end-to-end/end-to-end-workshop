@@ -1,15 +1,24 @@
 modules:
-  setup-environment:
+  concourse-setup:
+    name: Set up environment
+    exit_sign: Frameworks and Services
+  tbs-gitops-setup:
     name: Set up environment
     exit_sign: Frameworks and Services
   exercises/01-frameworks:
     name: Frameworks and Services
     exit_sign: Automated Container Creation
-  exercises/02-automated-container-creation:
+  exercises/02-concourse-ci:
+    name: Automated Container Creation
+    exit_sign: Registries are More than File Servers
+  exercises/02-tbs-ci:
     name: Automated Container Creation
     exit_sign: Registries are More than File Servers
   exercises/03-container-registry:
     name: Registries are More than File Servers
+    exit_sign: Next
+  exercises/gitops-cd:
+    name: Continuous Delivery
     exit_sign: Service Catalog
   exercises/04-service-catalog:
     name: Service Catalog

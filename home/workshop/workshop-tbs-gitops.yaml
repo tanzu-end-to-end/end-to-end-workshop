@@ -1,11 +1,12 @@
-name: End to End Workshop
+name: End to End Workshop with Tanzu Build Service and Gitops
 
 modules:
     activate:
-    - setup-environment
+    - tbs-gitops-setup
     - exercises/01-frameworks
-    - exercises/02-automated-container-creation
+    - exercises/02-tbs-ci
     - exercises/03-container-registry
+    - exercises/gitops-cd
     - exercises/04-service-catalog
     - exercises/05-cluster-management
     - exercises/06-enterprise-observability

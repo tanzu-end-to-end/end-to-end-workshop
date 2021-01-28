@@ -2,7 +2,11 @@ No matter how your developers are packaging up their application as a container,
 
 Tanzu provides capabilities for hosting those container images that go far beyond a simple "file server."  Tanzu's image registry acts as another control point in your infrastructure that prevents images that don't meet your security standards from ever reaching your application clusters.  It shifts security concerns to a much earlier phase in the application lifecycle so that developers aren't suprised by a security scan right at the end of a development cycle that causes them a lot of redesign and rework.
 
-Let's look at Tanzu's image registry to see how this works.
+Let's look at Tanzu's image registry to see how this works. Click below to navigate to your project page in Harbor. If prompted to log in, use the username "admin" and the password "{{ ENV_HARBOR_PASSWORD }}"
+```dashboard:create-dashboard
+name: Harbor
+url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
+```
 
 * Go to the Harbor tab and select the "spring-petclinic" registry.
 * Explain the two images shown that have different CVE counts.  The first one was your application using the base stack that had more CVEs in it that the patched one we got when we wore our operator hat and pushed out the new base image.  And the third container image has the same number of CVEs as the second because that one contained our code changes on top of the patched base image.

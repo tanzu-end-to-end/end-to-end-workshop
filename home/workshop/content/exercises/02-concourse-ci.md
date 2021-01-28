@@ -1,4 +1,4 @@
-Your develoers are now using the best frameworks and practices in developing their application code, but now they need to package that code up for delivery so that it can be run.  
+Your developers are now using the best frameworks and practices in developing their application code, but now they need to package that code up for delivery so that it can be run.  
 
 Increasingly, the most popular way to do that is via containers.  But your developers don't want to build an entire container from scratch, so they search around the internet for the best option.  At last count, there were almost **25,000** container images on Docker Hub that mention the word "Java" in them.  So which one is the right on for your developers to use?  And who is responsible for keeping that image updated with the latest security patches?
 
