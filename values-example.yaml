@@ -20,6 +20,8 @@ harbor:
   #!     secret-access-key: secret-key
   #!     bucket: bucket-name
   #!     secure: false #! set to true for HTTPS endpoints/AWS S3
+gitea:
+  adminPassword: <PASSWORD>
 registry:
   dockerhub: docker.io
 psp:

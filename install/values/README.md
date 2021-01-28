@@ -13,9 +13,12 @@ Using `kubectl create secret tls`, create a Kubernetes secret that contains the 
 Set these values to the login credentials for your Concourse server. This user will be a member of the main team.
 
 **harbor.adminPassword**<br>
-Set to the password for the **admin** user in your Harbor environment. <br>
+Set to the password you choose for the **admin** user in your Harbor server. <br>
 **harbor.diskSize**<br>
 Set to the size of the PersistentVolumeClaim for the volume that will store your Harbor images.
+
+**gitea.adminPassword**<br>
+Set to the password you choose for the **gitea_admin** user in your Gitea server. <br>
 
 **registry.dockerhub**
 The workshop will pull DockerHub images for some containers like MySQL. If you are concerned about hitting DockerHub rate limits in a high usage environment, you can change the value of this variable from docker.io to a registry in which you have mirrored the images.

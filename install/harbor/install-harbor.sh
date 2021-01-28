@@ -7,7 +7,7 @@ else
   helm repo update
 fi
 
-ytt -f harbor-helm-values.yaml -f ../../values/values.yaml \
+ytt -f harbor-helm-values.yaml -f $1 \
   | helm template harbor/harbor --name-template harbor -f- \
-  | ytt -f- -f harbor-dependencies.yaml -f ../../values/values.yaml --ignore-unknown-comments \
+  | ytt -f- -f harbor-dependencies.yaml -f $1 --ignore-unknown-comments \
   | kapp deploy -a harbor -n harbor -f- --diff-changes --yes
