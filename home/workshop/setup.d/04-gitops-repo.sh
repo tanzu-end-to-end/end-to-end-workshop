@@ -1,8 +1,6 @@
 #!/bin/bash
 set -x
 
-pwd
-
 if [ $WORKSHOP_FILE == "workshop-tbs-gitops.yaml" ]
 then
   cd spring-webdb-config

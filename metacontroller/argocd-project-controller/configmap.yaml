@@ -29,7 +29,7 @@ data:
             returnVal={"status": {"projectid": projectName}}
           else:
             returnVal={"status": {"error": argocdCLIOutput}}
-            argocdCLI = subprocess.Popen(["/argocd/argocd", "proj", "create", projectName, "-d", "https://kubernetes.default.svc,default", "-s", "*"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            argocdCLI = subprocess.Popen(["/argocd/argocd", "proj", "create", projectName, "-d", "https://kubernetes.default.svc,*", "-s", "*"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             argocdCLIOutput,_ = argocdCLI.communicate()
             returnCode = argocdCLI.wait()
             if returnCode != 0:
