@@ -20,7 +20,7 @@ data:
       def do_create_project(self, object, projectid):
         if not projectid:
           projectName = object['spec']['name']
-          print("No project id found, creating")
+          print("No project id found, creating project %s" % projectName)
           argocdCLI = subprocess.Popen(["/argocd/argocd", "proj", "get", projectName], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
           argocdCLIOutput,_ = argocdCLI.communicate()
           returnCode = argocdCLI.wait()
