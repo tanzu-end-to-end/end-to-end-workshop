@@ -20,8 +20,8 @@ data:
       def do_create_project(self, object, projectid):
         if not projectid:
           projectName = object['spec']['name']
-          print("No project id found, creating project %s" % projectName)
-          argocdCLI = subprocess.Popen(["/argocd/argocd", "proj", "get", projectName], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+          print("No project id found, creating project")
+          argocdCLI = subprocess.Popen(["/argocd/argocd", "app", "get", projectName], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
           argocdCLIOutput,_ = argocdCLI.communicate()
           returnCode = argocdCLI.wait()
           print("Got process code {} from argocdCLI with output: {} ", returnCode, argocdCLIOutput)
@@ -29,7 +29,7 @@ data:
             returnVal={"status": {"projectid": projectName}}
           else:
             returnVal={"status": {"error": argocdCLIOutput}}
-            argocdCLI = subprocess.Popen(["/argocd/argocd", "proj", "create", projectName, "-d", "https://kubernetes.default.svc,*", "-s", "*"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            argocdCLI = subprocess.Popen(["/argocd/argocd", "app", "create", projectName, "-d", "https://kubernetes.default.svc,*", "-s", "*"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             argocdCLIOutput,_ = argocdCLI.communicate()
             returnCode = argocdCLI.wait()
             if returnCode != 0:
