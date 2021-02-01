@@ -1,0 +1,7 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: webdb
+spec:
+  virtualhost:
+    fqdn: webdb-staging.services.tkg.corby.cc

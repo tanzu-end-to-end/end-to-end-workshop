@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webdb
+  labels:
+    app: webdb
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      name: webdb
+      labels:
+        app: webdb
+    spec:
+      containers:
+        - name: webdb
+          image: harbor.contour.e2e.corby.cc/tanzu-e2e/spring-webdb
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: webdb-config
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: webdb

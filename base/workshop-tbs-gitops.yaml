@@ -43,6 +43,8 @@ spec:
         value: #@ data.values.harbor.adminPassword
       - name: ARGOCD_PASSWORD
         value: #@ data.values.argocd.adminPassword
+      - name: GITEA_PASSWORD
+        value: #@ data.values.gitea.adminPassword
     namespaces:
       budget: x-large
       limits:

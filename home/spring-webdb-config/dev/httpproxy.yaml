@@ -1,0 +1,9 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: webdb
+spec:
+  virtualhost:
+    fqdn: #@ "webdb-{}.{}".format(data.values.session,data.values.ingress.domain)
