@@ -6,7 +6,8 @@ if [ $WORKSHOP_FILE == "workshop-tbs-gitops.yaml" ]
 then
   export YTT_session=${SESSION_NAMESPACE}
   export YTT_ingress__domain=${INGRESS_DOMAIN}
-  ytt -f spring-webdb-config/dev/httpproxy.yaml -f values.yaml --data-values-env YTT | tee spring-webdb-config/dev/httpproxy.yaml
+  ytt -f spring-webdb-config/dev/httpproxy.yaml -f values.yaml --data-values-env YTT | tee httpproxy.yaml
+  mv httpproxy.yaml spring-webdb-config/dev/httpproxy.yaml
 
   cd spring-webdb-config
   git init
