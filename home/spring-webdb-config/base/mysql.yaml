@@ -27,7 +27,7 @@ data:
   mysql-root-password: "c2Vuc29ycw=="
   mysql-password: "c2Vuc29ycw=="
 ---
-# Source: mysql/templates/master-argocd-controller-cm.yaml
+# Source: mysql/templates/master-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
