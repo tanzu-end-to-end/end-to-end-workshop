@@ -29,7 +29,7 @@ data:
             returnVal={"status": {"projectid": projectName}}
           else:
             returnVal={"status": {"error": argocdCLIOutput}}
-            argocdCLI = subprocess.Popen(["/argocd/argocd", "app", "create", projectName, "--repo", "https://github.com/cpage-pivotal/spring-webdb-config", "--path", "dev", "--dest-server", "https://kubernetes.default.svc,*", "--dest-namespace", projectName], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            argocdCLI = subprocess.Popen(["/argocd/argocd", "app", "create", projectName, "--repo", "https://github.com/cpage-pivotal/spring-webdb-config", "--path", "dev", "--dest-server", "https://kubernetes.default.svc", "--dest-namespace", projectName], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             argocdCLIOutput,_ = argocdCLI.communicate()
             returnCode = argocdCLI.wait()
             if returnCode != 0:
