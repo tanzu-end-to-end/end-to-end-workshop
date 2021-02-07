@@ -24,5 +24,5 @@ then
   argocd login argocd-cli.${INGRESS_DOMAIN} --username admin --password $ARGOCD_PASSWORD
 #  argocd app get dev-${SESSION_NAMESPACE} && argocd app delete dev-${SESSION_NAMESPACE}
 #  argocd app create dev-${SESSION_NAMESPACE} --repo https://gitea.${INGRESS_DOMAIN}/gitea_admin/$REPO_NAME --dest-namespace ${SESSION_NAMESPACE} --dest-server https://kubernetes.default.svc --path dev --project ${SESSION_NAMESPACE}
-  argocd app set ${SESSION_NAMESPACE} --repo https://github.com/cpage-pivotal/spring-webdb-config
+  argocd app set ${SESSION_NAMESPACE} --repo https://gitea.contour.e2e.corby.cc/gitea_admin/$REPO_NAME
 fi

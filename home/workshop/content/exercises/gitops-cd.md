@@ -8,7 +8,7 @@ url: https://argocd.{{ ingress_domain }}/applications/{{ session_namespace }}
 
 Press Sync on the ArgoCD console to begin deployment of the application. It will take about a minute for the application and database components to deploy the first time. Once the components are deployed, we can access the application here:
 
-```dashboard:create-dashboard
+```dashboard:open-url
 name: Application
 url: https://webdb-{{ session_namespace }}.{{ ingress_domain }}
 ```
