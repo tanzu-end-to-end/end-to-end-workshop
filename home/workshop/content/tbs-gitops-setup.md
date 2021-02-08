@@ -2,28 +2,24 @@ Welcome to the Tanzu End to End demo!  In this session, we'll be exploring the c
 
 We're going to be using Tanzu to deploy an application, deploy dependent services for that application, observe the metrics for that application and supporting infrastructure, and manage the cluster hosting that application.
 
-# Fork the Application Configuration Repo
-To get started, you need to clone the GitOps configuration repo, so you can make some changes to it as part of the demo process.  Click the icon in the upper right of the box below to open a new browser tab so that you can fork the Spring Pet Clinic repo into your Github account.
-```dashboard:open-url
-url: https://github.com/cpage-pivotal/spring-webdb-config/fork
-```
-After forking, navigate to the `/dev/configmap.yaml` file in your forked repo.  We want to pre-stage this tab so that you are ready to make an edit to this file to stage a deployment change.
-
-# Access KubeApps
-We'll be logging into KubeApps next.  To do that, we'll need to grab our user token to use to login.  Copy your user token below to use to login to kubeapps in the next step.
-```workshop:copy
-text: {{ user_token }}
-```
-
-Now, click the following link to open a new tab to Kubeapps pointing to a DB deployment that was created for you when you launched this environment. In the login screen, paste your token into the text field, and click "Login".  
-```dashboard:open-url
-url: https://kubeapps.{{ ingress_domain }}/#/c/default/ns/{{ session_namespace }}/apps
-```
-You should see a MySQL Deployment called `petclinic-db`.  It may still be starting when you first examine it, but it should go to 1 pod active fairly quickly.  Leave this view on the "Apps" tab so it is staged properly.
-
 # Harbor
+
+Sign into the Harbor Web UI with the username "admin" and password "{{ ENV_HARBOR_PASSWORD }}".
+
+```dashboard:create-dashboard
+name: Harbor
+url: https://harbor.{{ ingress_domain }}/sign-in
+```
+
 Next, click the link below and login to Harbor with the user "admin" and password "{{ ENV_HARBOR_PASSWORD }}".  If you login and aren't redirected to your project, then simply close the Harbor tab that was opened, and reopen it with the link below.
-```dashboard:open-url
+```dashboard:reload-dashboard
+name: Harbor
+url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
+```
+
+Try this
+```dashboard:create-dashboard
+name: Harbor
 url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
 ```
 
