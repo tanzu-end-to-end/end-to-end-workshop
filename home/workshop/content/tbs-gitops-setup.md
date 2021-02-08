@@ -8,7 +8,7 @@ Sign into the Harbor Web UI with the username "admin" and password "{{ ENV_HARBO
 
 ```dashboard:create-dashboard
 name: Harbor
-url: https://harbor.{{ ingress_domain }}/sign-in
+url: https://harbor.{{ ingress_domain }}/sign-in?redirect_url=%2Fharbor%2Fprojects
 ```
 
 Next, click the link below and login to Harbor with the user "admin" and password "{{ ENV_HARBOR_PASSWORD }}".  If you login and aren't redirected to your project, then simply close the Harbor tab that was opened, and reopen it with the link below.
