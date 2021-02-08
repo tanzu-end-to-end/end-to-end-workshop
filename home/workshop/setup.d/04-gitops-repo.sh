@@ -9,7 +9,7 @@ then
   ytt -f spring-webdb-config/dev/httpproxy.yaml -f values.yaml --data-values-env YTT | tee httpproxy.yaml
   mv httpproxy.yaml spring-webdb-config/dev/httpproxy.yaml
   ytt -f spring-webdb-config/base/deployment.yaml -f values.yaml --data-values-env YTT | tee httpproxy.yaml
-  mv httpproxy.yaml spring-webdb-config/dev/httpproxy.yaml
+  mv deployment.yaml spring-webdb-config/base/deployment.yaml
 
   cd spring-webdb-config
   git init
