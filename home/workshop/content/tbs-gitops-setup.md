@@ -2,27 +2,6 @@ Welcome to the Tanzu End to End demo!  In this session, we'll be exploring the c
 
 We're going to be using Tanzu to deploy an application, deploy dependent services for that application, observe the metrics for that application and supporting infrastructure, and manage the cluster hosting that application.
 
-# Harbor
-
-Sign into the Harbor Web UI with the username "admin" and password "{{ ENV_HARBOR_PASSWORD }}".
-
-```dashboard:create-dashboard
-name: Harbor
-url: https://harbor.{{ ingress_domain }}/sign-in?redirect_url=%2Fharbor%2Fprojects
-```
-
-Next, click the link below and login to Harbor with the user "admin" and password "{{ ENV_HARBOR_PASSWORD }}".  If you login and aren't redirected to your project, then simply close the Harbor tab that was opened, and reopen it with the link below.
-```dashboard:reload-dashboard
-name: Harbor
-url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
-```
-
-Try this
-```dashboard:create-dashboard
-name: Harbor
-url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
-```
-
 # SaaS Services
 **Important**: For the next sections, it is vital that you  make sure to sign-in to cloud.vmware.com with your **@vmware.com** email address and select the **"Tanzu End to End"** organization.  Please be careful not to alter the services or configurations of the clusters in these environments as they are shared for the entire End to End Demo Environment.
 
@@ -63,11 +42,8 @@ url: https://prod-2.nsxservicemesh.vmware.com/global-namespaces-detail/e2e-demo/
 
 # Tab Staging
 Reorder your tabs in this way so that your demo flow goes left to right:
-* GitHub
-* Harbor
-* Kubeapps
-* TAC
 * This workshop
+* TAC
 * TMC
 * TO
 * TSM
