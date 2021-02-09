@@ -1,3 +1,5 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,7 +17,7 @@ spec:
     spec:
       containers:
         - name: webdb
-          image: harbor.contour.e2e.corby.cc/tanzu-e2e/spring-webdb
+          image: #@ "harbor.{}/{}/spring-webdb".format(data.values.ingress.domain,data.values.session)
           imagePullPolicy: Always
           envFrom:
             - configMapRef:

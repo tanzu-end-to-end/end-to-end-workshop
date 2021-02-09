@@ -12,3 +12,23 @@ Press Sync on the ArgoCD console to begin deployment of the application. It will
 name: Application
 url: https://webdb-{{ session_namespace }}.{{ ingress_domain }}
 ```
+
+Make a configuration change to the ConfigMap associated with your deployment, and save it:
+
+```editor:open-file
+file: ~/spring-webdb-config/dev/configmap.yaml
+```
+
+Commit your change, and push it to your GitOps repo:
+
+```terminal:execute
+command: git -C ~/spring-webdb-config commit -a -m "Application Configuration Change"
+session: 1
+```
+
+```terminal:execute
+command: git -C ~/spring-webdb-config push -u origin main
+session: 1
+```
+
+Now, go back to the ArgoCD console and sync again. Your changes will be deployed, and when your application is available, you can refresh the application Web UI to view your changes.
