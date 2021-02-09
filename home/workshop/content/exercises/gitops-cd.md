@@ -22,12 +22,12 @@ file: ~/spring-webdb-config/dev/configmap.yaml
 Commit your change, and push it to your GitOps repo:
 
 ```terminal:execute
-command: git commit -a -m "Application Configuration Change"
+command: git -C ~/spring-webdb-config commit -a -m "Application Configuration Change"
 session: 1
 ```
 
 ```terminal:execute
-command: git push -u origin main
+command: git -C ~/spring-webdb-config push -u origin main
 session: 1
 ```
 
