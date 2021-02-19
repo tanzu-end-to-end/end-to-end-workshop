@@ -11,7 +11,7 @@ resources:
   type: pivnet
   source:
     endpoint: https://network.pivotal.io/
-    api_token: ((end-to-end-demo.pivnet-token))
+    api_token: ((end-to-end-demo-amer.pivnet-token))
     product_slug: build-service
     sort_by: semver
 
@@ -38,15 +38,15 @@ jobs:
         - -c
         - |
           mkdir -p ~/.kube
-          echo "((end-to-end-demo.amer-kubeconfig))" | base64 -d > ~/.kube/config
-          docker login registry.pivotal.io -u ((end-to-end-demo.registry-pivotal-io-username)) -p ((end-to-end-demo.registry-pivotal-io-password))
-          docker login ((end-to-end-demo.demo-harbor-hostname)) -u ((end-to-end-demo.harbor-username)) -p ((end-to-end-demo.harbor-password))
-          IMAGE_REPOSITORY="((end-to-end-demo.demo-harbor-hostname))/tbs/build-service"
+          echo "((end-to-end-demo-amer.cluster-kube-config))" | base64 -d > ~/.kube/config
+          docker login registry.pivotal.io -u ((end-to-end-demo-amer.registry-pivotal-io-username)) -p ((end-to-end-demo-amer.registry-pivotal-io-password))
+          docker login ((end-to-end-demo-amer.demo-harbor-hostname)) -u ((end-to-end-demo-amer.harbor-username)) -p ((end-to-end-demo-amer.harbor-password))
+          IMAGE_REPOSITORY="((end-to-end-demo-amer.demo-harbor-hostname))/tbs/build-service"
           kbld relocate -f tbs/images.lock --lock-output tbs/images-relocated.lock --repository $IMAGE_REPOSITORY
           ytt -f tbs/values.yaml \
             -f tbs/manifests/ \
             -v docker_repository="$IMAGE_REPOSITORY" \
-            -v docker_username="((end-to-end-demo.harbor-username))" \
-            -v docker_password="((end-to-end-demo.harbor-password))" \
+            -v docker_username="((end-to-end-demo-amer.harbor-username))" \
+            -v docker_password="((end-to-end-demo-amer.harbor-password))" \
             | kbld -f tbs/images-relocated.lock -f- \
             | kapp deploy -a tanzu-build-service -f- -y -c
