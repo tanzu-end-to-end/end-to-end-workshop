@@ -27,10 +27,16 @@ jobs:
   public: true
   plan:
   - get: tbs
+    trigger: true
     resource: tbs
     params:
       globs: ["build-service-*.tar"]
       unpack: true
+  - get: tbs-dependencies
+    trigger: true
+    resource: tbs-dependencies
+    params:
+      globs: ["descriptor-*.yaml"]
   - task: install-tbs
     config:
       platform: linux
@@ -62,6 +68,7 @@ jobs:
   plan:
   - get: tbs-dependencies
     trigger: true
+    passed: [update-tbs]
     resource: tbs-dependencies
     params:
       globs: ["descriptor-*.yaml"]
