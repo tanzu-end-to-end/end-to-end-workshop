@@ -32,6 +32,19 @@ Follow the docs for [Installing Concourse](install/concourse/README.md)
 
 Install Tanzu Build Service per the [Documentation](https://docs.pivotal.io/build-service/1-0/installing.html)
 
+After the installation add an updated clusterstack to be able to show the TBS update functionality in the demo:
+1. Open the [TBS Dependencies Tanzu Network page](https://network.pivotal.io/products/tbs-dependencies) in your browser and select an outdated release from the dropdown, e.g. 100.0.18
+2. Download the descriptor-*.yaml and full-order-*yaml
+3. Open the descriptor-*.yaml and relocate(pull, retag, push) the build and run image defined for the stack with the name 'full' to your Harbor registry (harbor.<your-ingress-domain>/build-service/build-service/run, harbor.<your-ingress-domain>/build-service/build-service/build)
+4. Create the cluster stack: 
+	```
+	kp clusterstack create demo-stack --build-image harbor.<your-ingress-domain>/build-service/build-service/build@sha256:<sha256-of-the-relocated-build-container-image> --run-image harbor.<your-ingress-domain>/build-service/build-service/run@sha256:<sha256-of-the-relocated-run-container-image>
+	```
+5. Create the cluster builder:
+	```
+	kp clusterbuilder create demo-cluster-builder --order <path-to-your-order-file> --stack demo-stack --store default
+	```
+
 **Kubeapps**
 
 Follow the docs for [Installing Kubeapps](install/kubeapps/README.md)
