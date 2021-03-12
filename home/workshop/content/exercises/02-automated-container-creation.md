@@ -25,7 +25,6 @@ session: 2
 
 ```terminal:execute
 command: |-
-  docker login harbor.tools.pez.aws.grogscave.net -u admin -p Harbor12345
   kp image patch spring-petclinic --cluster-builder default  
 session: 1
 ```
