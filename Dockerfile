@@ -23,5 +23,5 @@ RUN curl -fL --output /tmp/tac.tar.gz https://downloads.bitnami.com/tac/tac-cli_
 RUN curl -L -o /usr/local/bin/kp https://github.com/vmware-tanzu/kpack-cli/releases/download/v0.2.0/kp-linux-0.2.0 && \
   chmod 755 /usr/local/bin/kp
 RUN curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.14.2/pack-v0.14.2-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack
-RUN curl -sSL "https://github.com/concourse/concourse/releases/download/v6.7.1/fly-6.7.1-linux-amd64.tgz" |sudo tar -C /usr/local/bin/ --no-same-owner -xzv fly
+RUN curl -sSL "https://github.com/concourse/concourse/releases/download/v6.7.4/fly-6.7.4-linux-amd64.tgz" |sudo tar -C /usr/local/bin/ --no-same-owner -xzv fly
 USER 1001
