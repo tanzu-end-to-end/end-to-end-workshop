@@ -2,13 +2,13 @@
 ---
 ingress:
   domain: <INGRESS-DOMAIN>
-  contour_tls_namespace: projectcontour
-  contour_tls_secret: contour-tls
+  contour_tls_namespace: eduk8s
+  contour_tls_secret: eduk8s-cert-tls
 concourse:
   username: test
-  password: <PASSWORD>
+  password: test
 argocd:
-  adminPassword: <PASSWORD>
+  adminPassword:  <PASSWORD>  See how to get the auto generated password here: https://github.com/argoproj/argo-cd/blob/master/docs/getting_started.md#4-login-using-the-cli
 harbor:
   adminPassword: Harbor12345
   diskSize: 50Gi
