@@ -16,3 +16,5 @@ configMapGenerator:
       - #@ "spring.application.name=webdb-{}".format(data.values.session)
       - management.metrics.export.wavefront.api-token=48b7b6a9-74ef-41f5-8002-f18dec9f82e2
       - management.metrics.export.wavefront.uri=https://vmware.wavefront.com
+      - wavefront.application.name=webdb-e2e-workshop-w02-s001
+      - wavefront.application.service=webdb

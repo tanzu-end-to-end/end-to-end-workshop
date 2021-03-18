@@ -17,11 +17,6 @@ url: https://vmware.wavefront.com/u/GVQsHYwxZC?t=vmware
 ```
 If you are having trouble accessing this instance, make sure you have the Wavefront-sandbox app added to your Workspace One account.  You can access that app at https://myvmware.workspaceair.com/catalog-portal/ui#/apps/details/WORKSPACE-d689139a-9b94-4b6f-aa23-915763e9b149-Web-Saml20, and then try to click the link above.
 
-Now, copy your app name below, and paste into the application dropdown on the TO browser tab.  It may take a minute for metrics to flow in where you can actually select that application name, so if you can't see your app in the list try to refresh the page the page after a minute or two.
-```workshop:copy
-text: petclinic-{{ session_namespace }}
-```
-
 ## Tanzu Mission Control
 Open a tab for Tanzu Mission Control
 ```dashboard:open-url

@@ -9,7 +9,7 @@ modules:
     - exercises/gitops-cd
     - exercises/04-service-catalog
     - exercises/05-cluster-management
-    - exercises/06-enterprise-observability
+    - exercises/06-webdb-observability
     - exercises/07-global-namespaces
     vars:
     - name: user_token
