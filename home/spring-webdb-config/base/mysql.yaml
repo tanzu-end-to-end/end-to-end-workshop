@@ -130,7 +130,7 @@ spec:
       serviceAccountName: sensordb-mysql
       containers:
         - name: mysql
-          image: docker.io/bitnami/mysql:8.0.22-debian-10-r0
+          image: gcr.io/sys-2b0109it/demo/bitnami/mysql:8.0.23
           imagePullPolicy: "IfNotPresent"
           env:
             - name: BITNAMI_DEBUG
