@@ -1,5 +1,11 @@
 #@ load("@ytt:data", "data")
 
+image:
+  repository: #@ "{}/gitea/gitea".format(data.values.registry.dockerhub)
+
+global:
+  imageRegistry: #@ data.values.registry.dockerhub
+
 service:
   http:
     clusterIP:
