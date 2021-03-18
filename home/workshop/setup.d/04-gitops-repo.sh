@@ -22,9 +22,9 @@ then
   git commit -a -m "Initial Commit"
 
   export REPO_NAME=$SESSION_NAMESPACE-$RANDOM
-  git remote add origin https://gitea_admin:$GITEA_PASSWORD@gitea.contour.e2e.corby.cc/gitea_admin/$REPO_NAME.git
+  git remote add origin https://gitea_admin:$GITEA_PASSWORD@gitea.${INGRESS_DOMAIN}/gitea_admin/$REPO_NAME.git
   git push -u origin main
 
   argocd login argocd-cli.${INGRESS_DOMAIN} --username admin --password $ARGOCD_PASSWORD
-  argocd app set ${SESSION_NAMESPACE} --repo https://gitea.contour.e2e.corby.cc/gitea_admin/$REPO_NAME
+  argocd app set ${SESSION_NAMESPACE} --repo https://gitea.${INGRESS_DOMAIN}/gitea_admin/$REPO_NAME
 fi
