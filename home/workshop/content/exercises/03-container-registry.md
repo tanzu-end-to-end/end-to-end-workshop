@@ -6,7 +6,7 @@ Let's look at Tanzu's image registry to see how this works. Sign into the Harbor
 
 ```dashboard:create-dashboard
 name: Harbor
-url: https://harbor.{{ ingress_domain }}/sign-in?redirect_url=%2Fharbor%2Fprojects
+url: https://harbor.{{ ingress_domain }}/sign-in
 ```
 
 Next, click the link below to navigate to your project page in Harbor.
@@ -16,10 +16,10 @@ name: Harbor
 url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
 ```
 
-* Go to the Harbor tab and select the "spring-petclinic" registry.
-* Explain the two images shown that have different CVE counts.  The first one was your application using the base stack that had more CVEs in it that the patched one we got when we wore our operator hat and pushed out the new base image.  And the third container image has the same number of CVEs as the second because that one contained our code changes on top of the patched base image.
-* Click on one of the image names (the `sha256:....` link), and scroll down to show the CVE list for that image.
-* Open up a CVE and highlight the description.  Then hover over the "I" icon to show the links to the relevant CVE reports.
-* Now, scroll back up to the top of the page, click on the project name (e2e-workshop-...) and go to the "configuration" tab.  Call out the automatic scanning option and how that works with the "Prevent vulnerable images from running" function.  This feature allows blocking images from being pulled that have a certain level of severity of CVE.
+* Go to the Harbor tab and select the "spring-webdb" artifact.
+* Hover over the "X Total" count in the Vulnerabilities column to see an overview of the security scan results. Explain how using Tanzu Build Service means developers are not responsible for keeping the software in their container image patched and secured. Buildpacks are consistently updated to ensure your application containers are protected from vulenrabilities.
+* Click on the `sha256:....` link, and scroll down to show the CVE list for that image.
+* Open up a CVE and highlight the description.  Then click on the "I" icon to show the links to the relevant CVE reports.
+* Now, scroll back up to the top of the page, click on the project name (e2e-workshop-...) and go to the "configuration" tab in the top-level menu.  Call out the "Automatically scan images on push" checkbox and how that works with the "Prevent vulnerable images from running" function.  This feature allows blocking images from being pulled that have a certain level of severity of CVE.
 * Call out the "Enable Content Trust" setting that requires images to be signed to ensure they haven't been modified before they can be pulled.
-* Highlight the "Helm Charts" tab to mention that Harbor also hosts Helm charts which is important for the next part of our discussion.
+* Highlight the "Helm Charts" top-level to mention that Harbor also hosts Helm charts, which is important for the TAC discussion.
