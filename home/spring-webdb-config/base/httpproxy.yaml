@@ -1,3 +1,5 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
@@ -6,7 +8,7 @@ spec:
   virtualhost:
     fqdn: default.example.com
     tls:
-      secretName: projectcontour/contour-tls
+      secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
   routes:
     - services:
         - name: webdb

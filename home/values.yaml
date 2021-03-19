@@ -3,3 +3,5 @@
 session:
 ingress:
   domain:
+  contour_tls_namespace:
+  contour_tls_secret:
