@@ -1,0 +1,145 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: training.eduk8s.io/v1alpha2
+kind: Workshop
+metadata:
+  name: e2e-workshop
+  annotations:
+    kapp.k14s.io/update-strategy: always-replace
+spec:
+  title: End to End Workshop with Concourse
+  description: A workshop exploring the end to end experience of VMware Tanzu
+  vendor: tanzu.vmware.com
+  difficulty: beginner
+  duration: 30m
+  url: https://github.com/tanzu-end-to-end/end-to-end-workshop
+  authors:
+  - Chris DeLashmutt <cdelashmutt@vmware.com>
+  - Anand Rao <raoan@vmware.com>
+  content:
+    image: #@ "harbor.{}/tanzu-e2e/eduk8s-e2e-workshop:latest".format(data.values.ingress.domain)
+    files: #@ "github.com/{}/end-to-end-workshop/home?ref={}".format(data.values.git.account,data.values.git.branch)
+  environment:
+    objects:
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRole
+      metadata:
+        name: $(workshop_namespace)-cluster-user
+      rules:
+      - apiGroups: ["apiextensions.k8s.io"]
+        resources: ["customresourcedefinitions"]
+        verbs: [ list, watch, get ]
+      - apiGroups: [""]
+        resources: ["persistentvolumes"]
+        verbs: [ list, watch, get ]
+  session:
+    env:
+      - name: WORKSHOP_FILE
+        value: workshop-concourse.yaml
+      - name: MYSQL_REGISTRY
+        value: #@ data.values.registry.dockerhub
+      - name: HARBOR_PASSWORD
+        value: #@ data.values.harbor.adminPassword
+      - name: CONCOURSE_USERNAME
+        value: #@ data.values.concourse.username
+      - name: CONCOURSE_PASSWORD
+        value: #@ data.values.concourse.password
+    namespaces:
+      budget: x-large
+      limits:
+        default:
+          cpu: 1000m
+          memory: 1Gi
+      secondary:
+        - name: concourse-$(session_namespace)
+          role: admin
+          budget: small
+    applications:
+      terminal:
+        enabled: true
+        layout: split
+      console:
+        enabled: true
+        vendor: octant
+      editor:
+        enabled: true
+    objects:
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: $(session_namespace)-cluster-user
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: $(workshop_namespace)-cluster-user
+      subjects:
+      - kind: ServiceAccount
+        namespace: $(workshop_namespace)
+        name: $(service_account)
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: Role
+      metadata:
+        name: e2e-user
+      rules:
+      - apiGroups: [ e2e.tanzu.vmware.com, projectcontour.io ]
+        resources: [ "*" ]
+        verbs: [ get, list, watch, create, delete, patch, update ]
+      - apiGroups: [ kpack.io ]
+        resources: [ "*" ]
+        verbs: [ get, list, watch, create, delete, patch, update ]
+      - apiGroups: [ "*" ]
+        resources: [ "*" ]
+        verbs: [ get, list, watch ]
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      metadata:
+        name: e2e-user
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: Role
+        name: e2e-user
+      subjects:
+      - kind: ServiceAccount
+        namespace: $(workshop_namespace)
+        name: $(service_account)
+    - apiVersion: e2e.tanzu.vmware.com/v1beta1
+      kind: HarborProject
+      metadata:
+        name: $(session_namespace)
+        annotations:
+          training.eduk8s.io/objects.crd.scope: Namespaced
+      spec:
+        name: $(session_namespace)
+    - apiVersion: e2e.tanzu.vmware.com/v1beta1
+      kind: ConcourseTeam
+      metadata:
+        name: $(session_namespace)
+        annotations:
+          training.eduk8s.io/objects.crd.scope: Namespaced
+      spec:
+        name: $(session_namespace)
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      metadata:
+        name: concourse-web
+        namespace: concourse-$(session_namespace)
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: Role
+        name: concourse-web
+      subjects:
+      - kind: ServiceAccount
+        namespace: concourse
+        name: concourse-web
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: Role
+      metadata:
+        name: concourse-web
+        namespace: concourse-$(session_namespace)
+      rules:
+        - apiGroups: [""]
+          resources: ["secrets"]
+          verbs: ["get"]
+      
+  logo: "data:image/png;base64,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"
+

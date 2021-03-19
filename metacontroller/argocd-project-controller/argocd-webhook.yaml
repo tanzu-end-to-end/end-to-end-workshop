@@ -1,0 +1,79 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controller
+  namespace: argocd-project-controller
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: controller
+  template:
+    metadata:
+      labels:
+        app: controller
+    spec:
+      initContainers:
+      - name: grab-argocd-cli
+        image: python:2.7
+        volumeMounts:
+        - name: argocd-cmd
+          mountPath: /argocd
+        command: 
+        - sh
+        - -c
+        - |
+          VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+          curl -sSL -o /argocd/argocd https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-linux-amd64 
+          chmod +x /argocd/argocd
+      containers:
+      - name: controller
+        image: #@ "{}/library/python:2.7".format(data.values.registry.dockerhub)
+        command: ["python", "/hooks/sync.py"]
+#        livenessProbe:
+#          exec:
+#            command: ["/argocd/argo", "-t", "concourse", "status"]
+#          initialDelaySeconds: 30
+#          periodSeconds: 10
+        volumeMounts:
+        - name: hooks
+          mountPath: /hooks
+        - name: argocd-cmd
+          mountPath: /argocd
+        env:
+        - name: ARGOCD_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: controller-secrets
+              key: argocd_username
+        - name: ARGOCD_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: controller-secrets
+              key: argocd_password
+        - name: ARGOCD_HOST
+          valueFrom:
+            secretKeyRef:
+              name: controller-secrets
+              key: argocd_host
+      volumes:
+      - name: hooks
+        configMap:
+          name: argocd-project-controller
+      - name: argocd-cmd
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: controller
+  namespace: argocd-project-controller
+spec:
+  selector:
+    app: controller
+  ports:
+  - port: 80

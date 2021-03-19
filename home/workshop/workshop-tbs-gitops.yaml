@@ -1,0 +1,18 @@
+name: End to End Workshop with Tanzu Build Service and Gitops
+
+modules:
+    activate:
+    - tbs-gitops-setup
+    - exercises/01-frameworks
+    - exercises/02-tbs-ci
+    - exercises/03-container-registry
+    - exercises/gitops-cd
+    - exercises/04-service-catalog
+    - exercises/05-cluster-management
+    - exercises/06-webdb-observability
+    - exercises/07-global-namespaces
+    vars:
+    - name: user_token
+      value: FOO
+    - name: harbor_project_id
+      value: "9999"

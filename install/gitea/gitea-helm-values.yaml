@@ -1,0 +1,26 @@
+#@ load("@ytt:data", "data")
+
+image:
+  repository: #@ "{}/gitea/gitea".format(data.values.registry.dockerhub)
+
+global:
+  imageRegistry: #@ data.values.registry.dockerhub
+
+service:
+  http:
+    clusterIP:
+ingress:
+  enabled: true
+  hosts: #@ ["gitea.{}".format(data.values.ingress.domain)]
+  tls:
+    - secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
+      hosts: #@ ["gitea.{}".format(data.values.ingress.domain)]
+gitea:
+  admin:
+    password: #@ data.values.gitea.adminPassword
+  config:
+    repository:
+      DEFAULT_PUSH_CREATE_PRIVATE: false
+      ENABLE_PUSH_CREATE_USER: true
+      DEFAULT_PRIVATE: public
+      DEFAULT_BRANCH: main

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webdb-config
+data:
+  web.tempHeader: Temperature
+  web.pressureHeader: Pressure
+  web.bannerTextColor: "#B76B5B"
+  web.bannerText: Sensor Database

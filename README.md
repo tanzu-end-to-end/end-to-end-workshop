@@ -53,6 +53,10 @@ Follow the docs for [Installing Kubeapps](install/kubeapps/README.md)
 
 Follow the docs for [Installing Argocd](install/argocd/README.md)
 
+**Gitea**
+
+Follow the docs for [Installing Gitea](install/gitea/README.md)
+
 ## Workshop
 
 Finally, follow the docs for [Installing the Workshop](install/workshop/README.md)

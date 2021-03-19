@@ -1,4 +1,5 @@
 #@ load("@ytt:data", "data")
+#@ if hasattr(data.values.harbor, "diskSize"):
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -11,6 +12,7 @@ spec:
   resources:
     requests:
       storage: #@ data.values.harbor.diskSize
+#@ end
 
 #@ if data.values.psp.cluster_role:
 ---

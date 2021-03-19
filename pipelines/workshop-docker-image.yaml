@@ -1,0 +1,52 @@
+---
+resource_types:
+- name: registry-image
+  type: docker-image
+  source:
+    repository: harbor-repo.vmware.com/dockerhub-proxy-cache/concourse/registry-image-resource
+    tag: 1.1.0-alpine
+
+resources:
+- name: workshop-image
+  type: registry-image
+  source:
+    repository: harbor-repo.vmware.com/tsl-end2end/e2e-workshop/eduk8s-e2e-workshop
+    username: ((end-to-end-shared.registry-user))
+    password: ((end-to-end-shared.registry-password))
+    tag: latest
+- name: project-dockerfile
+  type: git
+  source:
+    initial_version: 0.0.3
+    uri: https://github.com/tanzu-end-to-end/end-to-end-workshop
+    branch: main
+    username: ((end-to-end-shared.git-user))
+    password: ((end-to-end-shared.git-api-token))
+    paths:
+    - Dockerfile
+
+jobs:
+- name: build-image
+  public: true
+  plan:
+  - get: project-dockerfile
+    trigger: true
+  - task: build
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: vito/oci-build-task
+      inputs:
+      - name: project-dockerfile
+        path: .
+      outputs:
+      - name: image
+      run:
+        path: build
+  - put: workshop-image
+    params: 
+      image: image/image.tar
+      bump_aliases: true
