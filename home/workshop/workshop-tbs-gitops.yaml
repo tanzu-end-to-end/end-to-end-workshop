@@ -6,8 +6,8 @@ modules:
     - exercises/01-frameworks
     - exercises/02-tbs-ci
     - exercises/03-container-registry
+    - exercises/04-tbs-tac
     - exercises/gitops-cd
-    - exercises/04-service-catalog
     - exercises/05-cluster-management
     - exercises/06-webdb-observability
     - exercises/07-global-namespaces

@@ -16,12 +16,15 @@ modules:
     exit_sign: Registries are More than File Servers
   exercises/03-container-registry:
     name: Registries are More than File Servers
-    exit_sign: Next
-  exercises/gitops-cd:
-    name: Continuous Delivery
     exit_sign: Service Catalog
   exercises/04-service-catalog:
     name: Service Catalog
+    exit_sign: Centralized Cluster Management
+  exercises/04-tbs-tac:
+    name: Service Catalog
+    exit_sign: Continuous Delivery
+  exercises/gitops-cd:
+    name: Continuous Delivery
     exit_sign: Centralized Cluster Management
   exercises/05-cluster-management:
     name: Centralized Cluster Management
