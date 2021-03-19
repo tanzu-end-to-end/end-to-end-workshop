@@ -124,19 +124,7 @@ jobs:
                     --cluster-builder demo-cluster-builder \
                     --namespace ((petclinic.tbsNamespace)) \
                     --local-path target/spring-petclinic-2.3.0.BUILD-SNAPSHOT.jar \
-                    --dry-run-with-image-upload --output yaml > image.yaml
-                  ytt -f- -f image.yaml <<EOF | kubectl apply -f
-                  #@ load("@ytt:overlay", "overlay")
-                  #@overlay/match by=overlay.subset({"metadata":{"name":"spring-petclinic"}})
-                  ---
-                  spec:
-                    #@overlay/match missing_ok=True
-                    notary:
-                      v1:
-                        url: "harbor.tools.pez.aws.grogscave.net/((petclinic.tbsNamespace)/spring-webdb"
-                        secretRef:
-                          name: "signing"
-                  EOF
+                    --dry-run-with-image-upload --output yaml | ytt -f sign.yaml -f - | kubectl apply -f -
                 fi
               fi
 
