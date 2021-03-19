@@ -137,6 +137,8 @@ jobs:
                     --namespace ((petclinic.tbsNamespace)) \
                     --local-path target/spring-petclinic-2.3.0.BUILD-SNAPSHOT.jar \
                     --dry-run-with-image-upload --output yaml | ytt -f sign.yaml -f- | kubectl apply -f-
+                  sleep 5
+                  kp build logs spring-petclinic
                 fi
               fi
 
