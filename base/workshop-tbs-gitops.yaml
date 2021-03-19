@@ -45,6 +45,10 @@ spec:
         value: #@ data.values.argocd.adminPassword
       - name: GITEA_PASSWORD
         value: #@ data.values.gitea.adminPassword
+      - name: CONTOUR_TLS_NAMESPACE
+        value: #@ data.values.ingress.contour_tls_namespace
+      - name: CONTOUR_TLS_SECRET
+        value: #@ data.values.ingress.contour_tls_secret
     namespaces:
       budget: x-large
       limits:
