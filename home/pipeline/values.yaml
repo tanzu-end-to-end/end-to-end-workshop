@@ -12,8 +12,10 @@ petclinic:
     deployEventName: 
   tbs:
     namespace:
+  signingSecret: 
 commonSecrets:
   harborDomain: 
+  notaryUrl: https://notary.tools.pez.aws.grogscave.net
   harborUser: admin
   harborPassword: Harbor12345
   kubeconfigBuildServer:
