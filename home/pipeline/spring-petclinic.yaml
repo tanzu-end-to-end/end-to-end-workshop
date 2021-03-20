@@ -109,7 +109,7 @@ jobs:
                 kp image patch spring-petclinic \
                   --namespace ((petclinic.tbsNamespace)) \
                   --wait \
-                  --local-path target/spring-petclinic-2.3.0.BUILD-SNAPSHOT.jar
+                  --local-path target/spring-petclinic-*.jar
               else
                 if [ 'x((petclinic.signingSecret))' == 'x' ]; then
                   kp image create spring-petclinic \
@@ -117,7 +117,7 @@ jobs:
                     --cluster-builder demo-cluster-builder \
                     --namespace ((petclinic.tbsNamespace)) \
                     --wait \
-                    --local-path target/spring-petclinic-2.3.0.BUILD-SNAPSHOT.jar
+                    --local-path target/spring-petclinic-*.jar
                 else
                   cat <<EOF > sign.yaml
               #@ load("@ytt:overlay", "overlay")
@@ -135,7 +135,7 @@ jobs:
                     --tag ((petclinic.image)) \
                     --cluster-builder demo-cluster-builder \
                     --namespace ((petclinic.tbsNamespace)) \
-                    --local-path target/spring-petclinic-2.3.0.BUILD-SNAPSHOT.jar \
+                    --local-path target/spring-petclinic-*.jar \
                     --dry-run-with-image-upload --output yaml | ytt -f sign.yaml -f- | kubectl apply -f-
                   sleep 5
                   kp build logs spring-petclinic
