@@ -12,7 +12,7 @@ petclinic:
     deployEventName: 
   tbs:
     namespace:
-  signingSecret: 
+  signingSecret: ""
 commonSecrets:
   harborDomain: 
   notaryUrl: https://notary.tools.pez.aws.grogscave.net
