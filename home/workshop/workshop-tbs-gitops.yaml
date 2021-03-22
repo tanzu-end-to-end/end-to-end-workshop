@@ -8,6 +8,7 @@ modules:
     - exercises/03-container-registry
     - exercises/04-tbs-tac
     - exercises/gitops-cd
+    - exercises/gitops-config
     - exercises/05-cluster-management
     - exercises/06-webdb-observability
     - exercises/07-global-namespaces
