@@ -8,10 +8,10 @@ And when a patch comes out for a critical issue (Heartbleed, Ghost, Shellshock, 
 
 Let's look at how this works with Tanzu!
 
-With Tanzu Build Service, we will create an **image**. This is a mapping of the Git source repo for an application artifact to a container image in our Harbor registry. It is important to note that the source repo does not contain Dockerfiles, Kubernetes manifests, or anything else that requires knowledge of the specific container runtime environment that the application will run in. All of that information will be generated, in an automated and consistent way, during the Tanzu CI/CD process.
+With Tanzu Build Service, we will create an **image**. This is a mapping of the Git source repo (or the artifact image) for an application artifact to a container image in our Harbor registry. It is important to note that the artifact provided by the developers does not contain Dockerfiles, Kubernetes manifests, or anything else that requires knowledge of the specific container runtime environment that the application will run in. All of that information will be generated, in an automated and consistent way, during the Tanzu CI/CD process.
 
 ```terminal:execute
-command: kp image create spring-webdb-{{ session_namespace }} --tag harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-webdb --local-path spring-webdb.jar
+command: kp image create spring-webdb-{{ session_namespace }} --tag harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-webdb --local-path ~/spring-webdb.jar
 session: 1
 ```
 

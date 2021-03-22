@@ -25,6 +25,9 @@ modules:
     exit_sign: Continuous Delivery
   exercises/gitops-cd:
     name: Continuous Delivery
+    exit_sign: Deployment Iteration
+  exercises/gitops-config:
+    name: Deployment Iteration
     exit_sign: Centralized Cluster Management
   exercises/05-cluster-management:
     name: Centralized Cluster Management

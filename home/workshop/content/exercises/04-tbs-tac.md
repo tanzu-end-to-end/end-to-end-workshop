@@ -9,3 +9,5 @@ Let's take a look at those capabilties.
 * Explain that each container image in TAC is built from source by VMware, secured by CVE scanners and antivirus scanners, and run through automated functional tests to ensure the container is working. Talk about how the customer has a choice of operating systems to use as the base image for a container, or they can supply their own golden base image.
 * Click on the Details link to the right of the MySQL Container Image. Show how the customer has access to the security and validation reports that were run when the container was built.
 * Optionally, return to the TAC homepage, and click on the "Add New Applications" button to show how customers can add their own customized artifact to the Catalog.
+
+The developer that created the spring-webdb application needs a relational database backend, so we'll be using a containerized deployment of MySQL from the Tanzu Application Catalog!
