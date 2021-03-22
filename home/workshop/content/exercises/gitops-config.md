@@ -9,8 +9,9 @@ session: 1
 
 Let's make a change to the ConfigMap in this deployment, which will produce a visible change in the application. Try updating the **web.bannerText** message, and change the **web.bannerTextColor** from DarkCyan to an HTML color you find pleasing. Like Salmon!
 
-```editor:open-file
-file: ~/spring-webdb-config/dev/configmap.yaml
+```terminal:execute
+command: nano ~/spring-webdb-config/dev/configmap.yaml
+session: 1
 ```
 
 When you have made the change, press Control-X to save and exit. Commit your change, and push it to your GitOps repo:
