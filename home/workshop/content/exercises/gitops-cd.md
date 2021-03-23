@@ -21,7 +21,7 @@ The deployment for our Spring application uses the container image that was gene
 
 Press Sync on the ArgoCD console (and then press Synchronize on the callout dialog) to begin deployment of the application. ArgoCD will begin syncing the **declared** state of the deployment in the Git Repo to the **running** state of the cluster. In the UI, you will see the Kubernetes resources from the GitOps repo begin to come online in the cluster.
 
-It will take about 90 seconds for the MySQL database to deploy from scratch, and for the Spring application to successfully connect. In the watch you set, wait until the **sensordb-mysql-master-0** pod show **1/1** containers healthy.
+It will take about 90 seconds for the MySQL database to deploy from scratch, and for the Spring application to successfully connect. In the watch you set, wait until the **sensordb-mysql-master-0** pod show **1/1** containers ready.
 
 Once the components are deployed, we can access the application here:
 
