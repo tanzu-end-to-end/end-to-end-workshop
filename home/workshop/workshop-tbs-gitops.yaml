@@ -11,7 +11,7 @@ modules:
     - exercises/gitops-config
     - exercises/05-cluster-management
     - exercises/06-webdb-observability
-    - exercises/07-global-namespaces
+    - exercises/07-tbs-tsm
     vars:
     - name: user_token
       value: FOO

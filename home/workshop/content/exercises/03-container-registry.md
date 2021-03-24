@@ -6,7 +6,7 @@ Let's look at Tanzu's image registry to see how this works. Sign into the Harbor
 
 ```dashboard:create-dashboard
 name: Harbor
-url: https://harbor.{{ ingress_domain }}/sign-in
+url: https://harbor.{{ ingress_domain }}/sign-in?redirect_url=%2Fharbor%2Fprojects%2F{{ harbor_project_id }}%2Frepositories
 ```
 
 Next, click the link below to navigate to your project page in Harbor.
