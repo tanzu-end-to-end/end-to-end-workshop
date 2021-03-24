@@ -1,6 +1,7 @@
 #!/bin/bash
 set -x
 
+
 if [ $WORKSHOP_FILE == "workshop-tbs-gitops.yaml" ]
 then
   START_TIME=$(date +%s000)
