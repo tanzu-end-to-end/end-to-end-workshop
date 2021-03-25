@@ -2,14 +2,7 @@ No matter how your developers are packaging up their application as a container,
 
 Tanzu provides capabilities for hosting those container images that go far beyond a simple "file server."  Tanzu's image registry acts as another control point in your infrastructure that prevents images that don't meet your security standards from ever reaching your application clusters.  It shifts security concerns to a much earlier phase in the application lifecycle so that developers aren't surprised by a security scan right at the end of a development cycle that causes them a lot of redesign and rework.
 
-Let's look at Tanzu's image registry to see how this works. Sign into the Harbor Web UI with the username "admin" and password "{{ ENV_HARBOR_PASSWORD }}".
-
-```dashboard:create-dashboard
-name: Harbor
-url: https://harbor.{{ ingress_domain }}/sign-in?redirect_url=%2Fharbor%2Fprojects%2F{{ harbor_project_id }}%2Frepositories
-```
-
-Next, click the link below to navigate to your project page in Harbor.
+Let's look at Tanzu's image registry to see how this works. Click the link below to navigate to your project page in Harbor.
 
 ```dashboard:reload-dashboard
 name: Harbor
