@@ -1,8 +1,7 @@
 #!/bin/bash
 set -x
 
-
-if [ $WORKSHOP_FILE == "workshop-tbs-gitops.yaml" ]
+if [ $WORKSHOP_FILE == "not yet implemented" ]
 then
   START_TIME=$(date +%s000)
   END_TIME=$(date +%s000)

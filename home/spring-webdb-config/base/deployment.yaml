@@ -19,6 +19,12 @@ spec:
         - name: webdb
           image: #@ "harbor.{}/{}/spring-webdb".format(data.values.ingress.domain,data.values.session)
           imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health/readiness
+            initialDelaySeconds: 15
+            periodSeconds: 5
           envFrom:
             - configMapRef:
                 name: webdb-config

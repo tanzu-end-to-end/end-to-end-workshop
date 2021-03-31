@@ -49,10 +49,10 @@ spec:
         value: #@ data.values.ingress.contour_tls_namespace
       - name: CONTOUR_TLS_SECRET
         value: #@ data.values.ingress.contour_tls_secret
-      - name: OBSERVABILITY_URL
-        value: #@ data.values.observability.url
-      - name: OBSERVABILITY_API_TOKEN
-        value: #@ data.values.observability.apiToken
+#      - name: OBSERVABILITY_URL
+#        value: #@ data.values.observability.url
+#      - name: OBSERVABILITY_API_TOKEN
+#        value: #@ data.values.observability.apiToken
     namespaces:
       budget: x-large
       limits:
