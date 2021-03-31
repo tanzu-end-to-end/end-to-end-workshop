@@ -40,3 +40,5 @@ modules:
     exit_sign: Cross-Cloud Global Namespaces
   exercises/07-global-namespaces:
     name: Cross-Cloud Global Namespaces
+  exercises/07-tbs-tsm:
+    name: Cross-Cloud Global Namespaces

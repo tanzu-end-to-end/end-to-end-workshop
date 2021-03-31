@@ -2,6 +2,23 @@ Welcome to the Tanzu End to End demo!  In this session, we'll be exploring the c
 
 We're going to be using Tanzu to deploy an application, deploy dependent services for that application, observe the metrics for that application and supporting infrastructure, and manage the cluster hosting that application.
 
+## Harbor
+
+Use the following link to sign into the Harbor Web UI with the username "admin" and password "{{ ENV_HARBOR_PASSWORD }}". (You will be redirected to the sign-in page)
+
+```dashboard:create-dashboard
+name: Harbor
+url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
+```
+
+## ArgoCD
+
+Log into ArgoCD with username 'admin' and password "{{ ENV_ARGOCD_PASSWORD }}":
+
+```dashboard:open-url
+url: https://argocd.{{ ingress_domain }}/applications/{{ session_namespace }}
+```
+
 # SaaS Services
 **Important**: For the next sections, it is vital that you  make sure to sign-in to cloud.vmware.com with your **@vmware.com** email address and select the **"Tanzu End to End"** organization.  Please be careful not to alter the services or configurations of the clusters in these environments as they are shared for the entire End to End Demo Environment.
 
@@ -39,6 +56,7 @@ url: https://prod-2.nsxservicemesh.vmware.com/global-namespaces-detail/e2e-demo/
 Reorder your tabs in this way so that your demo flow goes left to right:
 * This workshop
 * TAC
+* ArgoCD
 * TMC
 * TO
 * TSM
