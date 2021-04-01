@@ -26,11 +26,11 @@ command: git -C ~/spring-webdb-config push -u origin main
 session: 1
 ```
 
-Now, go back to the ArgoCD console and sync again. Your changes will be deployed, and it will take about 30 seconds for the pod to redeploy with the new configuration. 
+Now, go back to the ArgoCD console and sync again. Your changes will be deployed, and the pod will restart with the new configuration. 
 
 A GitOps approach makes it easy to review, audit, and control access to your deployment configuration. And it allows developers to focus on their source code, without needing to master the details of Kubernetes.
 
-Once the application has restarted, load it again to review your changes:
+The new app should deploy in about a minute. Once the new **webdb** pod shows **1/1 containers** ready, we can access the application here:
 
 ```dashboard:open-url
 name: Application
