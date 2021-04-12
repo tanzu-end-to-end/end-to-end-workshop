@@ -29,7 +29,7 @@ Tanzu Build Service is an important tool for Day 2 Operations as well. Your clus
 We actually told TBS to run that build with an outdated OS image, riddled with security vulnerabilities. Let's see what happens when our platform operator publishes a new base image, triggering a rebuild of the affected container without getting the developer involved:
 
 ```terminal:execute
-command: kp image patch spring-webdb -c default
+command: kp image patch spring-webdb --cluster-builder default
 session: 1
 ```
 
