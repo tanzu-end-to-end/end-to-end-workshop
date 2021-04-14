@@ -2,6 +2,12 @@
 
 Ensure that you have prepared a values.yaml file, by customizing the values-example.yaml file in the root of this repo.
 
+Taint and label **two** dedicated nodes for the Concourse workers:
+```
+kubectl taint node <dedicated-node-name> type=concourse:PreferNoSchedule
+kubectl label node <dedicated-node-name> type=concourse
+```
+
 From this directory in the repo, execute:
 
 ```
