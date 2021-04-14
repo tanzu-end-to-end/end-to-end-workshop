@@ -15,3 +15,11 @@ web:
       hosts: #@ ["concourse.{}".format(data.values.ingress.domain)]
 secrets:
   localUsers: #@ "{}:{}".format(data.values.concourse.username,data.values.concourse.password)
+worker
+  nodeSelector:
+    type: concourse
+  tolerations:
+  - effect: NoSchedule
+    key: type
+    operator: Equal
+    value: concourse
