@@ -1,4 +1,6 @@
-You want your developers to create resilient applications that are easy to operate and can scale to meet demand.  [12 Factor App](https://12factor.net/) design principles, Kubernetes and other modern application development practices are still new to many developers.
+You want your developers to create resilient applications that are easy to operate and can scale to meet demand. We're going to start our story with Cody. He's not a deep expert on container infrastructure, but he's an absolute star in writing business applications using popular languages and frameworks.
+
+![Cody Languages](images/cody-languages.png)
 
 Tanzu provides benefits directly to developers as they are developing or modernizing applications.  VMware is the company behind the most popular Java development framework in the world, [Spring Boot](https://spring.io/).  Spring Boot is popular because it provides developers everything they need to create microservices that power some of the world's most heavily used applications such as Netflix.  It provides modern, reactive services for high performance applications, robust and simplified access to supporting application services like relational databases, messaging services like Kafka, and built-in observability and manageability features that make those applications much easier for operators to run.
 
