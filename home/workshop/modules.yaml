@@ -17,6 +17,9 @@ modules:
   exercises/03-container-registry:
     name: Registries are More than File Servers
     exit_sign: Service Catalog
+  exercises/03-tbs-harbor:
+    name: Registries are More than File Servers
+    exit_sign: Service Catalog
   exercises/04-service-catalog:
     name: Service Catalog
     exit_sign: Centralized Cluster Management

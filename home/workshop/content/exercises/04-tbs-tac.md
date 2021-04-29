@@ -10,4 +10,6 @@ Let's take a look at those capabilties.
 * Click on the Details link to the right of the MySQL Container Image. Show how the customer has access to the security and validation reports that were run when the container was built.
 * Optionally, return to the TAC homepage, and click on the "Add New Applications" button to show how customers can add their own customized artifact to the Catalog.
 
-The developer that created the spring-webdb application needs a relational database backend, so we'll be using a containerized deployment of MySQL from the Tanzu Application Catalog!
+Cody needs a relational database backend for his spring-webdb application, so he'll be using a containerized deployment of MySQL from the Tanzu Application Catalog!
+
+![Tanzu Application Catalog](images/tanzu-application-catalog.png)

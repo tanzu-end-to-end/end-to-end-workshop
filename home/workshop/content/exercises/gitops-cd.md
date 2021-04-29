@@ -2,6 +2,8 @@ In our CI (Continuous Integration) process, we used Tanzu Build Service to synch
 
 Similarly, for our CD (Continuous Delivery) process, we want to use GitOps tooling to synchronize Git deployment repos to the running state of our cluster. Tanzu Advanced Edition works well with any GitOps tooling. For this workshop, we have decided to use ArgoCD. Let's examine the ArgoCD app that will manage deployment of our web application and database.
 
+![Deployment](images/deployment.png)
+
 Let's set a watch for tracking the progress of our deployment:
 
 ```terminal:execute
