@@ -5,7 +5,7 @@ modules:
     - tbs-gitops-setup
     - exercises/01-frameworks
     - exercises/02-tbs-ci
-    - exercises/03-container-registry
+    - exercises/03-tbs-harbor
     - exercises/04-tbs-tac
     - exercises/gitops-cd
     - exercises/gitops-config

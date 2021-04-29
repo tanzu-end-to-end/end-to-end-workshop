@@ -1,14 +1,14 @@
-Your developers are now using the best frameworks and practices in developing their application code, but now they need to package that code up for delivery so that it can be run.  
+Cody is using the best frameworks and practices in developing his application code, but now he needs to package that code up for delivery so that it can be run. But Cody isn't always current on best practices for designing, securing, and optimizing the performance of containers. And patching/updating container dependencies is a chore.
 
-Increasingly, the most popular way to do that is via containers.  But your developers don't want to build an entire container from scratch, so they search around the internet for the best option.  At last count, there were almost **25,000** container images on Docker Hub that mention the word "Java" in them.  So which one is the right on for your developers to use?  And who is responsible for keeping that image updated with the latest security patches?
+Fortunately, Cody has a partner in crime named Alana. She is the DevOps guru who operates the company's Kubernetes clusters, and she's got a plan for automating the container build process so that it happens the right way, every time.
 
-Tanzu makes this process much simpler for developers and operators by providing services that standardize the container creation process using best practices customized for the type of application technologies your developers are using.  This capability is built on top of the Cloud Native Buildpacks project from the Cloud Native Computing Foundation.  Vmware provides support for the base images for your developers, and provides patches and updates for bugs and CVEs associated with those images.
+![Alana Partner](images/alana-partner.png)
 
-And when a patch comes out for a critical issue (Heartbleed, Ghost, Shellshock, etc.), your operators can easily rebase all your images in minutes and then roll out those updates to your clusters.
+Alana's secret weapon is Tanzu Build Service. TBS enables a clear separation of roles, where developers like Cody supply the source code that will be used in the application container image, but operators like Alana specify container design templates. Alana uses Cloud Native Buildpacks supplied by VMware. **Buildpacks** produce Dockerfiles for a broad range of language runtimes, and they have been optimized for security performance. These buildpacks are updated several times a month by VMware, to include the latest application runtime dependencies and security fixes. Alana also selects a **stack** (a base OS image for the container) from VMware. VMware stacks are also rapidly updated, providing protection from the latest CVEs.
 
-Let's look at how this works with Tanzu!
+![Tanzu Build Service](images/tanzu-build-service.png)
 
-With Tanzu Build Service, we will create an **image**. This is a mapping of the Git source repo (or the artifact image) for an application artifact to a container image in our Harbor registry. It is important to note that the artifact provided by the developers does not contain Dockerfiles, Kubernetes manifests, or anything else that requires knowledge of the specific container runtime environment that the application will run in. All of that information will be generated, in an automated and consistent way, during the Tanzu CI/CD process.
+Let's see how this works. With Tanzu Build Service, we will create an **image**. This is a mapping of Cody's source repo (or the application artifact produced by Cody's CI pipeline) to a container image in our Docker registry. Remember that the artifact Cody provides does not contain Dockerfiles, Kubernetes manifests, or anything else that requires knowledge of the specific container runtime environment that the application will run in. All of that information will be generated, in an automated and consistent way, during the Tanzu CI/CD process.
 
 ```terminal:execute
 command: kp image create spring-webdb -c demo-cluster-builder --tag harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-webdb --local-path ~/spring-webdb.jar
@@ -22,11 +22,11 @@ command: kp build logs spring-webdb
 session: 1
 ```
 
-Tanzu Build Service recognizes the source code as Java, and employs a Java Buildpack to compile the source and create a custom container image that runs the application. The container image will include VMware's best practices for container design, including up-to-date runtime depdendencies, Java performance optimization, and security hardening for the container runtime. The application developer does not need to be a containerization expert to produce a secure, performant image.
+Tanzu Build Service recognizes Cody's source code as Java, and employs a Java Buildpack to create a container image that runs the application. The container image will include VMware's best practices for container design, and the latest dependencies. Cody does not need to be a containerization expert to produce a secure, performant image.
 
-Tanzu Build Service is an important tool for Day 2 Operations as well. Your cluster operators can update the buildpacks, or the base OS image used in your containers, and TBS will automatically trigger a rebuild of all affected containers in your environment. This means no involvement from the individual developers is needed to keep your container runtimes patched and secure.
+Tanzu Build Service is an important tool for Day 2 Operations as well. Alana can update the buildpacks, or the stacks, and TBS will automatically trigger a rebuild of all affected containers in her environment. This means Alana doesn't have to work through Cody to keep her container runtimes patched and secure.
 
-We actually told TBS to run that build with an outdated OS image, riddled with security vulnerabilities. Let's see what happens when our platform operator publishes a new base image, triggering a rebuild of the affected container without getting the developer involved:
+Surprise! In the previous command, we actually told Tanzu Build Service to run that build with an outdated OS image, riddled with security vulnerabilities. Let's see what happens when our Alana tells Tanzu Build Service to use publishes a new stack (base image), triggering a rebuild of the affected container without getting Cody involved:
 
 ```terminal:execute
 command: kp image patch spring-webdb --cluster-builder default
