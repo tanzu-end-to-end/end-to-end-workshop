@@ -5,7 +5,7 @@ docker login harbor.$INGRESS_DOMAIN -u admin -p $HARBOR_PASSWORD
 
 set +e
 echo Checking for harbor-creds
-if ! k get secret harbor-creds 2> /dev/null ; then 
+if ! k get secret harbor-creds ; then 
   echo No harbor-creds found, creating
   set -e
   REGISTRY_PASSWORD=$HARBOR_PASSWORD kp secret create harbor-creds --registry harbor.$INGRESS_DOMAIN --registry-user admin
