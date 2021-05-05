@@ -14,7 +14,7 @@ spec:
       name: webdb
       labels:
         app: webdb
-        app.kubernetes.io/part-of: #@ "spring-webdb-{}".format(data.values.ingress.domain,data.values.session)
+        app.kubernetes.io/part-of: #@ "spring-webdb-{}".format(data.values.session)
     spec:
       containers:
         - name: webdb
