@@ -1,4 +1,5 @@
 #!/bin/bash
-helm repo add center https://repo.chartcenter.io
+helm repo add jfrog https://charts.jfrog.io
 helm repo update
-helm upgrade --install artifactory-oss --namespace artifactory-oss center/jfrog/artifactory-oss -f values.yaml
+kubectl -n artifactory-oss apply -f bootstrap-config.yaml
+helm upgrade --install artifactory-oss --namespace artifactory-oss jfrog/artifactory -f values.yaml

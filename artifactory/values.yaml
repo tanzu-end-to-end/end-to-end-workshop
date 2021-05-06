@@ -1,18 +1,23 @@
 postgresql:
-  postgresqlPassword: VMware1!
+  postgresqlPassword: "VMware1!"
 artifactory:
-  nginx:
-    enabled: false
-  ingress:
-    enabled: true
-    hosts:
-    - artifactory.tools.pez.aws.grogscave.net
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-contour-cluster-issuer
-      kubernetes.io/ingress.class: contour
-    service:
-      type: ClusterIP
-    tls:
-      - hosts:
-        - artifactory.tools.pez.aws.grogscave.net
-        secretName: artifactory-cert
+  image:
+    registry: releases-docker.jfrog.io
+    repository: jfrog/artifactory-oss
+  admin:
+    password: "VMware1!"
+  configMapName: artifactory-oss-bootstrap-config
+nginx:
+  enabled: false
+ingress:
+  enabled: true
+  hosts:
+  - artifactory.tools.pez.aws.grogscave.net
+  annotations:
+    kubernetes.io/ingress.class: contour
+  service:
+    type: ClusterIP
+  tls:
+    - hosts:
+      - artifactory.tools.pez.aws.grogscave.net
+      secretName: eduk8s/eduk8s-cert-tls
