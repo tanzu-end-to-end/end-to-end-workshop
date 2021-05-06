@@ -11,6 +11,8 @@ nginx:
   enabled: false
 ingress:
   enabled: true
+  defaultBackend:
+    enabled: false
   hosts:
   - artifactory.tools.pez.aws.grogscave.net
   annotations:
