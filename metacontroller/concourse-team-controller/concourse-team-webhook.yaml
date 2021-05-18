@@ -19,7 +19,7 @@ spec:
     spec:
       initContainers:
       - name: grab-fly
-        image: python:2.7
+        image: #@ "{}/library/python:2.7".format(data.values.registry.dockerhub)
         volumeMounts:
         - name: fly-cmd
           mountPath: /fly-dir
