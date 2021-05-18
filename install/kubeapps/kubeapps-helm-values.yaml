@@ -1,5 +1,7 @@
 #@ load("@ytt:data", "data")
 
+global:
+  imageRegistry: harbor.demo.tanzu.space/dockerhub
 ingress:
   enabled: true
   hostname: #@ "kubeapps.{}".format(data.values.ingress.domain)
