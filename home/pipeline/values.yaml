@@ -15,7 +15,7 @@ petclinic:
   signingSecret: ""
 commonSecrets:
   harborDomain: 
-  notaryUrl: https://notary.tools.pez.aws.grogscave.net
+  notaryUrl: https://notary.harbor.tanzu.space
   harborUser: admin
   harborPassword: Harbor12345
   kubeconfigBuildServer:

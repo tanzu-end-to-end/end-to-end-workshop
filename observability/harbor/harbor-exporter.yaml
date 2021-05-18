@@ -40,7 +40,7 @@ spec:
         runAsUser: 1000
       containers:
         - name: harbor-exporter
-          image: "harbor.tools.pez.aws.grogscave.net/dockerhub/c4po/harbor-exporter:debug"
+          image: "harbor-repo.vmware.com/dockerhub-proxy-cache/c4po/harbor-exporter:debug"
           imagePullPolicy: Always
 # skip metrics can only provide through command line
           # command:

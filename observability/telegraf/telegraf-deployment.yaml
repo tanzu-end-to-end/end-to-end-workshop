@@ -14,7 +14,7 @@ spec:
         app: telegraf
     spec:
       containers:
-        - image: harbor.tools.pez.aws.grogscave.net/dockerhub/library/telegraf:1.16.2
+        - image: harbor-repo.vmware.com/dockerhub-proxy-cache/library/telegraf:1.16.2
           name: telegraf
           envFrom:
             - secretRef:

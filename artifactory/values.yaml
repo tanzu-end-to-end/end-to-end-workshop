@@ -14,12 +14,12 @@ ingress:
   defaultBackend:
     enabled: false
   hosts:
-  - artifactory.tools.pez.aws.grogscave.net
+  - artifactory.demo.tanzu.space
   annotations:
     kubernetes.io/ingress.class: contour
   service:
     type: ClusterIP
   tls:
     - hosts:
-      - artifactory.tools.pez.aws.grogscave.net
+      - artifactory.demo.tanzu.space
       secretName: eduk8s/eduk8s-cert-tls
