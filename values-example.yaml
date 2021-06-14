@@ -7,8 +7,10 @@ ingress:
 concourse:
   username: test
   password: test
+  #! Optionally, you can specify a node selector if you only want to deploy Concourse workers on certain nodes
+  #!   requiredNodeType: concourse
 argocd:
-  adminPassword:  <PASSWORD>  See how to get the auto generated password here: https://github.com/argoproj/argo-cd/blob/master/docs/getting_started.md#4-login-using-the-cli
+  adminPassword: <PASSWORD> #! See how to get the auto generated password here: https://github.com/argoproj/argo-cd/blob/master/docs/getting_started.md#4-login-using-the-cli
 harbor:
   adminPassword: Harbor12345
   diskSize: 50Gi
@@ -32,3 +34,6 @@ observability:
 git:
   account: tanzu-end-to-end
   branch: main
+  #! Optionally, you can specify a Github token. This will be used by Harbor's Trivy scanner to avoid hitting rate limites
+  #!   gitHubToken: <token>
+
