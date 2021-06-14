@@ -28,7 +28,7 @@ psp:
   cluster_role:
 observability:
   url: https://vmware.wavefront.com
-  apiToken: 48b7b6a9-74ef-41f5-8002-f18dec9f82e2
+  apiToken: <wavefront-api-token>
 git:
   account: tanzu-end-to-end
   branch: main
