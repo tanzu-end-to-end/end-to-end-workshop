@@ -21,3 +21,7 @@ persistence:
   #@ end
 externalURL: #@ "https://harbor.{}".format(data.values.ingress.domain)
 harborAdminPassword: #@ data.values.harbor.adminPassword
+#@ if data.values.git.gitHubToken:
+trivy:
+  gitHubToken: #@ data.values.git.gitHubToken
+#@ end
