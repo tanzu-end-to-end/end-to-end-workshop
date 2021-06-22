@@ -95,6 +95,9 @@ spec:
       - apiGroups: [ "*" ]
         resources: [ "*" ]
         verbs: [ get, list, watch ]
+      - apiGroups: [""]
+        resources: [ events ]
+        verbs: [ create ]
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: RoleBinding
       metadata:
