@@ -29,7 +29,7 @@ Tanzu Build Service is an important tool for Day 2 Operations as well. Alana can
 Surprise! In the previous command, we actually told Tanzu Build Service to run that build with an outdated OS image, riddled with security vulnerabilities. Let's see what happens when our Alana tells Tanzu Build Service to use publishes a new stack (base image), triggering a rebuild of the affected container without getting Cody involved:
 
 ```terminal:execute
-command: kp image patch spring-webdb --cluster-builder default
+command: kp image patch spring-webdb --cluster-builder full
 session: 1
 ```
 
