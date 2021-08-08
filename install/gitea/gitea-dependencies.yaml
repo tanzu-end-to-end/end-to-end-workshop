@@ -1,4 +1,19 @@
 #@ load("@ytt:data", "data")
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  namespace: gitea
+  name: gitea
+spec:
+  virtualhost:
+    fqdn: #@ "gitea.{}".format(data.values.ingress.domain)
+    tls:
+      secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
+  routes:
+    - services:
+        - name: gitea-http
+          port: 3000
 
 #@ if data.values.psp.cluster_role:
 ---

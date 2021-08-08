@@ -3,18 +3,6 @@
 image:
   repository: #@ "{}/gitea/gitea".format(data.values.registry.dockerhub)
 
-global:
-  imageRegistry: #@ data.values.registry.dockerhub
-
-service:
-  http:
-    clusterIP:
-ingress:
-  enabled: true
-  hosts: #@ ["gitea.{}".format(data.values.ingress.domain)]
-  tls:
-    - secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
-      hosts: #@ ["gitea.{}".format(data.values.ingress.domain)]
 gitea:
   admin:
     password: #@ data.values.gitea.adminPassword
