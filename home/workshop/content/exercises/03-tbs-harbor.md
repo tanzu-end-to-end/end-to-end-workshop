@@ -7,7 +7,7 @@ name: Harbor
 url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
 ```
 
-We can see that Tanzu Build Service has created a new container image called spring-petclinic, ready to deploy! Click on the image name.
+We can see that Tanzu Build Service has created a new application container image, ready to deploy! Click on the image name.
 
 On the detail view, we can see there are two tagged versions of the image, published a few minutes apart. The first image was produced using the base OS layer from a few months ago, and the second image was built using the recent patched image that Alana received from VMware.
 
