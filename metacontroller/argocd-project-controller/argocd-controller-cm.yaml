@@ -12,10 +12,26 @@ data:
           projectid = object['status']['projectid']
         except KeyError:
           projectid = None
-        if finalizing:
-          return self.do_delete_project(object, projectid)
-        else:
-          return self.do_create_project(object, projectid)
+        try:
+          self.do_login()
+          if finalizing:
+            return self.do_delete_project(object, projectid)
+          else:
+            return self.do_create_project(object, projectid)
+        except RuntimeError as err:
+          print(str(err))
+
+      def do_login(self):
+        argocdHost=os.environ["ARGOCD_HOST"]
+        print("Logging into {}".format(argocdHost))
+        argocdCLICmd = subprocess.Popen(["/argocd/argocd", "login", argocdHost, "--username", os.environ["ARGOCD_USERNAME"].replace("\n", ''), "--password", os.environ["ARGOCD_PASSWORD"].replace("\n", '')], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        argocdCLIOutput,_ = argocdCLICmd.communicate()
+        argocdCLIReturnCode = argocdCLICmd.wait()
+        print("Got process code {} from argocdCLI with output: {} ".format(argocdCLIReturnCode, argocdCLIOutput))
+        sys.stdout.flush()
+        if argocdCLIReturnCode != 0:
+          raise RuntimeError( "ArgoCD Login failed" )
+          #sys.exit()
 
       def do_create_project(self, object, projectid):
         if not projectid:
@@ -80,21 +96,9 @@ data:
         self.end_headers()
         self.wfile.write(json.dumps(desired))
         sys.stdout.flush()
-    
-    argocdHost=os.environ["ARGOCD_HOST"]
-    print("Logging into {}".format(argocdHost))
-    argocdCLICmd = subprocess.Popen(["/argocd/argocd", "login", argocdHost, "--username", os.environ["ARGOCD_USERNAME"].replace("\n", ''), "--password", os.environ["ARGOCD_PASSWORD"].replace("\n", '')], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    argocdCLIOutput,_ = argocdCLICmd.communicate()
-    argocdCLIReturnCode = argocdCLICmd.wait()
-    print("Got process code {} from argocdCLI with output: {} ".format(argocdCLIReturnCode, argocdCLIOutput))
-    if argocdCLIReturnCode == 0:
-      print("Zero return code from login. Starting server.")
-      sys.stdout.flush()
-      HTTPServer(("", 80), Controller).serve_forever()
-    else:
-      print("Non-zero return from login.  Ending.")
-      #sys.exit()
-    
+
+    HTTPServer(("", 80), Controller).serve_forever()
+
 kind: ConfigMap
 metadata:
   name: argocd-project-controller
