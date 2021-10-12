@@ -58,15 +58,15 @@ jobs:
                       <repository>
                         <id>local-artifactory</id>
                         <name>local-artifactory</name>
-                        <url>https://artifactory.tools.pez.aws.grogscave.net/artifactory/all</url>
+                        <url>https://((common-secrets.artifactoryDomain))/artifactory/all</url>
                       </repository>
                     </repositories>
                     <pluginRepositories>
                       <pluginRepository>
-                      <id>local-artifactory-snaps</id>
-                      <name>local-artifactory</name>
-                      <url>https://artifactory.tools.pez.aws.grogscave.net/artifactory/all</url>
-                    </pluginRepository>
+                        <id>local-artifactory-snaps</id>
+                        <name>local-artifactory</name>
+                        <url>https://((common-secrets.artifactoryDomain))/artifactory/all</url>
+                      </pluginRepository>
                     </pluginRepositories>
                   </profile>
                 </profiles>

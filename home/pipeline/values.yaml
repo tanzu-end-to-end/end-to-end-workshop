@@ -15,6 +15,7 @@ petclinic:
   signingSecret: ""
 commonSecrets:
   harborDomain: 
+  artifactoryDomain: 
   notaryUrl: https://notary.tools.pez.aws.grogscave.net
   harborUser: admin
   harborPassword: Harbor12345
