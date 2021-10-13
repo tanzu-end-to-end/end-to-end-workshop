@@ -224,6 +224,7 @@ jobs:
                   applicationName: ((petclinic.wavefrontApplicationName))
                   uri: ((petclinic.wavefrontUri))
                   apiToken: ((petclinic.wavefrontApiToken))
+                ingressSecret: ((petclinic.ingressSecret))
               EOF
               cat config-repo/k8s/values.yml
               

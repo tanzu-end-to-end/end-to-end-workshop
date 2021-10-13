@@ -12,6 +12,7 @@ petclinic:
     deployEventName: 
   tbs:
     namespace:
+  ingressSecret: eduk8s/eduk8s-cert-tls
   signingSecret: ""
 commonSecrets:
   harborDomain: 
