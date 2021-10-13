@@ -28,6 +28,7 @@ command: |-
   read -p "Enter the Git URL of your fork of Pet Clinic: " PETCLINIC_GIT_URL; \
   ytt -f pipeline/secrets.yaml -f pipeline/values.yaml \
   --data-value commonSecrets.harborDomain=harbor.{{ ingress_domain }} \
+  --data-value commonSecrets.harborPassword=$HARBOR_PASSWORD \
   --data-value commonSecrets.artifactoryDomain=artifactory.{{ ingress_domain }} \
   --data-value commonSecrets.kubeconfigBuildServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
   --data-value commonSecrets.kubeconfigAppServer=$(yq d ~/.kube/config 'clusters[0].cluster.certificate-authority' | yq w - 'clusters[0].cluster.certificate-authority-data' "$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt | base64 -w 0)" | yq r - -j) \
