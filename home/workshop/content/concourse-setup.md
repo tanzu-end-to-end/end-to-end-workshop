@@ -39,6 +39,7 @@ command: |-
   --data-value petclinic.image=harbor.{{ ingress_domain }}/{{ session_namespace }}/spring-petclinic \
   --data-value petclinic.tbs.namespace={{ session_namespace }} \
   --data-value petclinic.wavefront.applicationName=petclinic-{{ session_namespace }} \
+  --data-value petclinic.ingressSecret=$INGRESS_SECRET \
   --data-value "petclinic.codeRepo=${PETCLINIC_GIT_URL}" \
    | kubectl apply -f- -n concourse-{{ session_namespace }}
 session: 1
