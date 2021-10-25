@@ -24,7 +24,7 @@ RUN curl -L -o /usr/local/bin/kp https://github.com/vmware-tanzu/kpack-cli/relea
   chmod 755 /usr/local/bin/kp
 RUN curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.20.0/pack-v0.20.0-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack
 # Concourse
-RUN curl -sSL "https://github.com/concourse/concourse/releases/download/v6.7.4/fly-6.7.4-linux-amd64.tgz" |sudo tar -C /usr/local/bin/ --no-same-owner -xzv fly
+RUN curl -sSL "https://github.com/concourse/concourse/releases/download/v7.4.0/fly-7.4.0-linux-amd64.tgz" |sudo tar -C /usr/local/bin/ --no-same-owner -xzv fly
 # ArgoCD
 RUN ARGOCD_VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/') && \
   curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$ARGOCD_VERSION/argocd-linux-amd64 && \
