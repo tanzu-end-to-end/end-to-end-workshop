@@ -37,3 +37,8 @@ git:
   #! Optionally, you can specify a Github token. This will be used by Harbor's Trivy scanner to avoid hitting rate limites
   #!   gitHubToken: <token>
 
+#! Optionally, you can specify the passwords for the educates training portal. If not they will be auto generated
+#! eduk8s:
+#!  adminPassword: <password>
+#!  robotPassword: <password>
+
