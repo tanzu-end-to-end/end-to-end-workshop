@@ -28,3 +28,8 @@ spec:
     reserved: #@ 1 if not hasattr(data.values, "workshop") else data.values.workshop.reserved
     expires: 4h
     orphaned: 2h
+  - name: e2e-workshop
+    capacity: 20
+    reserved: #@ 1 if not hasattr(data.values, "workshop") else data.values.workshop.reserved
+    expires: 4h
+    orphaned: 2h
