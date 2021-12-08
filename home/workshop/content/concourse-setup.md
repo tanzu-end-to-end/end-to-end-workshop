@@ -92,7 +92,7 @@ text: petclinic-{{ session_namespace }}
 ## Tanzu Mission Control
 Open a tab for Tanzu Mission Control
 ```dashboard:open-url
-url: https://tanzuendtoend.tmc.cloud.vmware.com/clusterGroups/end-to-end
+url: https://tanzuendtoend.tmc.cloud.vmware.com/clustergroups/e2e-emea/overview
 ```
 
 ## Tanzu Application Catalog
