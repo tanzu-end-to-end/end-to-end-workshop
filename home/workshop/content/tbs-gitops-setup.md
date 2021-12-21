@@ -47,7 +47,7 @@ url: https://tac.bitnami.com/apps
 ```
 
 ## Tanzu Service Mesh
-Open tab to Tanzu Service Mesh to the `e2e-demo` Global namespace by clicking the link below.  If you don't see the graph for the Global Namespace showing the `e2e-eks` and `e2e-tsm1` clusters, make sure to select the "Tanzu End to End" org, close the tab, and then reopen it again with the link below.
+Open tab to Tanzu Service Mesh to the `e2e-demo` Global namespace by clicking the link below.  If you don't see the graph for the Global Namespace showing the `e2e-catalog` and `e2e-acme` clusters, make sure to select the "Tanzu End to End" org, close the tab, and then reopen it again with the link below.
 ```dashboard:open-url
 url: https://prod-2.nsxservicemesh.vmware.com/global-namespaces-detail/e2e-demo/gns-topology
 ```
