@@ -1,6 +1,6 @@
 #@ load("@ytt:data", "data")
 
-#@ if data.values.psp.cluster_role:
+#@ if hasattr(data.values, "psp"):
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding

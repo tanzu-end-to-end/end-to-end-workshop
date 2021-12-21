@@ -1,0 +1,18 @@
+#@ load("@ytt:data", "data")
+artifactory:
+  postgresql:
+    postgresqlPassword: #@ data.values.artifactory.postgres_password
+  nginx:
+    enabled: false
+  ingress:
+    enabled: true
+    hosts: 
+    - #@ "artifactory.{}".format(data.values.ingress.domain)
+    tls:
+      - hosts:
+        - #@ "artifactory.{}".format(data.values.ingress.domain)
+        secretName: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
+        
+  artifactory:
+    service:
+      type: NodePort

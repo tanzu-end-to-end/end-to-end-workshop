@@ -14,13 +14,13 @@ resources:
     api_token: ((end-to-end-demo-amer.pivnet-token))
     product_slug: build-service
     sort_by: semver
-- name: tbs-dependencies
-  type: pivnet
-  source:
-    endpoint: https://network.pivotal.io/
-    api_token: ((end-to-end-demo-amer.pivnet-token))
-    product_slug: tbs-dependencies
-    sort_by: semver
+# - name: tbs-dependencies
+#   type: pivnet
+#   source:
+#     endpoint: https://network.pivotal.io/
+#     api_token: ((end-to-end-demo-amer.pivnet-token))
+#     product_slug: tbs-dependencies
+#     sort_by: semver
 
 jobs:
 - name: update-tbs
@@ -30,13 +30,12 @@ jobs:
     trigger: true
     resource: tbs
     params:
-      globs: ["build-service-*.tar"]
-      unpack: true
-  - get: tbs-dependencies
-    trigger: true
-    resource: tbs-dependencies
-    params:
-      globs: ["descriptor-*.yaml"]
+      globs: []
+  # - get: tbs-dependencies
+  #   trigger: true
+  #   resource: tbs-dependencies
+  #   params:
+  #     globs: ["descriptor-*.yaml"]
   - task: install-tbs
     config:
       platform: linux
@@ -50,44 +49,49 @@ jobs:
         args:
         - -c
         - |
+          set -e
           mkdir -p ~/.kube
           echo "((end-to-end-demo-amer.cluster-kube-config))" | base64 -d > ~/.kube/config
           docker login registry.pivotal.io -u ((end-to-end-demo-amer.registry-pivotal-io-username)) -p ((end-to-end-demo-amer.registry-pivotal-io-password))
           docker login ((end-to-end-demo-amer.demo-harbor-hostname)) -u ((end-to-end-demo-amer.harbor-username)) -p ((end-to-end-demo-amer.harbor-password))
           IMAGE_REPOSITORY="((end-to-end-demo-amer.demo-harbor-hostname))/tbs/build-service"
-          kbld relocate -f tbs/images.lock --lock-output tbs/images-relocated.lock --repository $IMAGE_REPOSITORY
-          ytt -f tbs/values.yaml \
-            -f tbs/manifests/ \
+          TBS_VERSION="$(jq -r '.Release.Version' tbs/metadata.json)"
+          imgpkg copy -b "registry.pivotal.io/build-service/bundle:$TBS_VERSION" --to-repo $IMAGE_REPOSITORY
+          imgpkg pull -b "$IMAGE_REPOSITORY:$TBS_VERSION" -o tbs/bundle
+          ytt -f tbs/bundle/values.yaml \
+            -f tbs/bundle/config/ \
             -v docker_repository="$IMAGE_REPOSITORY" \
             -v docker_username="((end-to-end-demo-amer.harbor-username))" \
             -v docker_password="((end-to-end-demo-amer.harbor-password))" \
-            | kbld -f tbs/images-relocated.lock -f- \
+            -v tanzunet_username="((end-to-end-demo-amer.registry-pivotal-io-username))" \
+            -v tanzunet_password="((end-to-end-demo-amer.registry-pivotal-io-password))" \
+            | kbld -f tbs/bundle/.imgpkg/images.yml -f- \
             | kapp deploy -a tanzu-build-service -f- -y -c
-- name: update-tbs-dependencies
-  public: true
-  plan:
-  - get: tbs-dependencies
-    trigger: true
-    passed: [update-tbs]
-    resource: tbs-dependencies
-    params:
-      globs: ["descriptor-*.yaml"]
-  - task: import
-    attempts: 3
-    config:
-      platform: linux
-      image_resource:
-        type: registry-image
-        source: {repository: harbor-repo.vmware.com/tsl-end2end/concourse/concourse-helper, tag: latest}
-      inputs:
-      - name: tbs-dependencies
-      run:
-        path: bash
-        args:
-        - -c
-        - |
-          mkdir -p ~/.kube
-          echo "((end-to-end-demo-amer.cluster-kube-config))" | base64 -d > ~/.kube/config
-          docker login registry.pivotal.io -u ((end-to-end-demo-amer.registry-pivotal-io-username)) -p ((end-to-end-demo-amer.registry-pivotal-io-password))
-          docker login ((end-to-end-demo-amer.demo-harbor-hostname)) -u ((end-to-end-demo-amer.harbor-username)) -p ((end-to-end-demo-amer.harbor-password))
-          kp import -f tbs-dependencies/descriptor-*.yaml
+# - name: update-tbs-dependencies
+#   public: true
+#   plan:
+#   - get: tbs-dependencies
+#     trigger: true
+#     passed: [update-tbs]
+#     resource: tbs-dependencies
+#     params:
+#       globs: ["descriptor-*.yaml"]
+#   - task: import
+#     attempts: 3
+#     config:
+#       platform: linux
+#       image_resource:
+#         type: registry-image
+#         source: {repository: harbor-repo.vmware.com/tsl-end2end/concourse/concourse-helper, tag: latest}
+#       inputs:
+#       - name: tbs-dependencies
+#       run:
+#         path: bash
+#         args:
+#         - -c
+#         - |
+#           mkdir -p ~/.kube
+#           echo "((end-to-end-demo-amer.cluster-kube-config))" | base64 -d > ~/.kube/config
+#           docker login registry.pivotal.io -u ((end-to-end-demo-amer.registry-pivotal-io-username)) -p ((end-to-end-demo-amer.registry-pivotal-io-password))
+#           docker login ((end-to-end-demo-amer.demo-harbor-hostname)) -u ((end-to-end-demo-amer.harbor-username)) -p ((end-to-end-demo-amer.harbor-password))
+#           kp import -f tbs-dependencies/descriptor-*.yaml
