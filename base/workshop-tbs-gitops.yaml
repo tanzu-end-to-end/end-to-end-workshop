@@ -50,7 +50,7 @@ spec:
       - name: CONTOUR_TLS_SECRET
         value: #@ data.values.ingress.contour_tls_secret
       - name: TAP_INGRESS_DOMNAIN
-        value: #@data.values.ingress.domain
+        value: #@ data.values.ingress.domain
 #      - name: OBSERVABILITY_URL
 #        value: #@ data.values.observability.url
 #      - name: OBSERVABILITY_API_TOKEN

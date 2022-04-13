@@ -45,7 +45,7 @@ spec:
       - name: CONCOURSE_PASSWORD
         value: #@ data.values.concourse.password
       - name: TAP_INGRESS_DOMNAIN
-        value: #@data.values.ingress.domain
+        value: #@ data.values.ingress.domain
       - name: INGRESS_SECRET
         value: #@ "{}/{}".format(data.values.ingress.contour_tls_namespace,data.values.ingress.contour_tls_secret)
     namespaces:
