@@ -34,5 +34,5 @@ The new app should deploy in about a minute. Once the new **webdb** pod shows **
 
 ```dashboard:open-url
 name: Application
-url: https://webdb-{{ session_namespace }}.{{ ingress_domain }}
+url: https://webdb-{{ session_namespace }}.{{ ENV_TAP_INGRESS_DOMNAIN }}
 ```

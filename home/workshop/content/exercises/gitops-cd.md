@@ -14,7 +14,7 @@ session: 2
 Go to the ArgoCD browser tab:
 
 ```dashboard:open-url
-url: https://argocd.{{ ingress_domain }}/applications/{{ session_namespace }}
+url: https://argocd.{{ ENV_TAP_INGRESS_DOMNAIN }}/applications/{{ session_namespace }}
 ```
 
 Click on the application tile with the yellow highlight to view the deployment configuration for our application. The application operator manages a Git repo that stores the deployments, configmaps, secrets, and ingresses needed to run and access our application.
@@ -27,7 +27,7 @@ It will take a few minutes for the MySQL database to deploy from scratch, and fo
 
 ```dashboard:open-url
 name: Application
-url: https://webdb-{{ session_namespace }}.{{ ingress_domain }}
+url: https://webdb-{{ session_namespace }}.{{ ENV_TAP_INGRESS_DOMNAIN }}
 ```
 
 Pressing the "Add Sensor" button will make writes to the attached MySQL database.

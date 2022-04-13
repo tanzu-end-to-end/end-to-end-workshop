@@ -6,7 +6,7 @@ Let's look at Tanzu's image registry to see how this works. Click the link below
 
 ```dashboard:reload-dashboard
 name: Harbor
-url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
+url: https://harbor.{{ ENV_TAP_INGRESS_DOMNAIN }}/harbor/projects/{{ harbor_project_id }}/repositories
 ```
 
 We can see that Tanzu Build Service has created a new container image called spring-webdb, ready to deploy! Click on the image name.

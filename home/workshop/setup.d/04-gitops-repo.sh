@@ -5,7 +5,7 @@ set +e
 if [ $WORKSHOP_FILE == "workshop-tbs-gitops.yaml" ]
 then
   export YTT_session=${SESSION_NAMESPACE}
-  export YTT_ingress__domain=${INGRESS_DOMAIN}
+  export YTT_ingress__domain=${TAP_INGRESS_DOMNAIN}
   export YTT_ingress__contour_tls_namespace=${CONTOUR_TLS_NAMESPACE}
   export YTT_ingress__contour_tls_secret=${CONTOUR_TLS_SECRET}
 
@@ -27,9 +27,9 @@ then
   git commit -a -m "Initial Commit"
 
   export REPO_NAME=$SESSION_NAMESPACE-$RANDOM
-  git remote add origin https://gitea_admin:$GITEA_PASSWORD@gitea.${INGRESS_DOMAIN}/gitea_admin/$REPO_NAME.git
+  git remote add origin https://gitea_admin:$GITEA_PASSWORD@gitea.${TAP_INGRESS_DOMNAIN}/gitea_admin/$REPO_NAME.git
   git push -u origin main
 
-  argocd login argocd-cli.${INGRESS_DOMAIN} --username admin --password $ARGOCD_PASSWORD
-  argocd app set ${SESSION_NAMESPACE} --repo https://gitea.${INGRESS_DOMAIN}/gitea_admin/$REPO_NAME
+  argocd login argocd-cli.${TAP_INGRESS_DOMNAIN} --username admin --password $ARGOCD_PASSWORD
+  argocd app set ${SESSION_NAMESPACE} --repo https://gitea.${TAP_INGRESS_DOMNAIN}/gitea_admin/$REPO_NAME
 fi

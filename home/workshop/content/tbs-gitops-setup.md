@@ -8,7 +8,7 @@ Use the following link to sign into the Harbor Web UI with the username "admin" 
 
 ```dashboard:create-dashboard
 name: Harbor
-url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}/repositories
+url: https://harbor.{{ ENV_TAP_INGRESS_DOMNAIN }}/harbor/projects/{{ harbor_project_id }}/repositories
 ```
 
 ## ArgoCD
@@ -16,7 +16,7 @@ url: https://harbor.{{ ingress_domain }}/harbor/projects/{{ harbor_project_id }}
 Log into ArgoCD with username 'admin' and password "{{ ENV_ARGOCD_PASSWORD }}":
 
 ```dashboard:open-url
-url: https://argocd.{{ ingress_domain }}/applications/{{ session_namespace }}
+url: https://argocd.{{ ENV_TAP_INGRESS_DOMNAIN }}/applications/{{ session_namespace }}
 ```
 
 # SaaS Services
