@@ -4,7 +4,7 @@ Let's look at Harbor to see how this works. Click the link below to navigate to 
 
 ```dashboard:reload-dashboard
 name: Harbor
-url: https://harbor.{{ ENV_TAP_INGRESS_DOMNAIN }}/harbor/projects/{{ harbor_project_id }}/repositories
+url: https://harbor.{{ ENV_TAP_INGRESS_DOMAIN }}/harbor/projects/{{ harbor_project_id }}/repositories
 ```
 
 We can see that Tanzu Build Service has created a new application container image, ready to deploy! Click on the image name.

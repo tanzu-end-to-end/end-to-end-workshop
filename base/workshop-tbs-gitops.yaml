@@ -49,7 +49,7 @@ spec:
         value: #@ data.values.ingress.contour_tls_namespace
       - name: CONTOUR_TLS_SECRET
         value: #@ data.values.ingress.contour_tls_secret
-      - name: TAP_INGRESS_DOMNAIN
+      - name: TAP_INGRESS_DOMAIN
         value: #@ data.values.ingress.domain
 #      - name: OBSERVABILITY_URL
 #        value: #@ data.values.observability.url

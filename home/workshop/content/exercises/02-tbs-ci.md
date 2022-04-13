@@ -11,7 +11,7 @@ Alana's secret weapon is Tanzu Build Service. TBS enables a clear separation of 
 Let's see how this works. With Tanzu Build Service, we will create an **image**. This is a mapping of Cody's source repo (or the application artifact produced by Cody's CI pipeline) to a container image in our Docker registry. Remember that the artifact Cody provides does not contain Dockerfiles, Kubernetes manifests, or anything else that requires knowledge of the specific container runtime environment that the application will run in. All of that information will be generated, in an automated and consistent way, during the Tanzu CI/CD process.
 
 ```terminal:execute
-command: kp image create spring-webdb -c demo-cluster-builder --tag harbor.{{ ENV_TAP_INGRESS_DOMNAIN }}/{{ session_namespace }}/spring-webdb --local-path ~/spring-webdb.jar
+command: kp image create spring-webdb -c demo-cluster-builder --tag harbor.{{ ENV_TAP_INGRESS_DOMAIN }}/{{ session_namespace }}/spring-webdb --local-path ~/spring-webdb.jar
 session: 1
 ```
 
