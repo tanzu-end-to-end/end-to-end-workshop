@@ -1,4 +1,4 @@
-ARG TANZU_CLI_VERSION=v1.4.0
+ARG TANZU_CLI_VERSION=v0.11.4
 
 FROM apnex/vmw-cli as clis
 ARG MYVMWAREUSER
@@ -7,13 +7,14 @@ ARG TANZU_CLI_VERSION
 ENV VMWUSER=${MYVMWAREUSER}
 ENV VMWPASS=${MYVMWAREPASS}
 RUN vmw-cli ls vmware_tanzu_kubernetes_grid/1_x/PRODUCT_BINARY \
-  && vmw-cli cp tanzu-cli-bundle-linux-amd64.tar
+  && vmw-cli cp tanzu-cli-bundle-linux-amd64.tar.gz
 WORKDIR /files
 ENV HOMEDIR=/root
-RUN tar xf tanzu-cli-bundle-linux-amd64.tar
+RUN tar xzf tanzu-cli-bundle-linux-amd64.tar.gz
 RUN adduser -D -u 1001 eduk8s -g root
 USER 1001
-RUN /files/cli/core/${TANZU_CLI_VERSION}/tanzu-core-linux_amd64 plugin install --local /files/cli all
+RUN /files/cli/core/${TANZU_CLI_VERSION}/tanzu-core-linux_amd64 init
+RUN /files/cli/core/${TANZU_CLI_VERSION}/tanzu-core-linux_amd64 plugin sync
 
 FROM quay.io/eduk8s/base-environment:210508.015017.4546935
 #conftest 
@@ -37,7 +38,7 @@ RUN curl -fL --output /tmp/tac.tar.gz https://downloads.bitnami.com/tac/tac-cli_
   rm /tmp/tac.tar.gz
 # TBS
 # TODO :  Change the logic to identify the latest anbd download  or move to pivnet 
-RUN curl -L -o /usr/local/bin/kp https://github.com/vmware-tanzu/kpack-cli/releases/download/v0.3.1/kp-linux-0.3.1 && \
+RUN curl -L -o /usr/local/bin/kp https://github.com/vmware-tanzu/kpack-cli/releases/download/v0.4.2/kp-linux-0.4.2 && \
   chmod 755 /usr/local/bin/kp
 RUN curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.20.0/pack-v0.20.0-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack
 # Concourse
