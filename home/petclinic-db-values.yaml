@@ -3,11 +3,8 @@ image:
 metrics:
   image:
     registry: $MYSQL_REGISTRY
-db:
-  name: petclinic
-  password: petclinic
-  user: petclinic
-replication:
-  enabled: false
-root:
+auth:
+  rootPassword: petclinic
+  database: petclinic
+  username: petclinic
   password: petclinic
