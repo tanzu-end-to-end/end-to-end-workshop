@@ -8,7 +8,7 @@ petclinic:
   wavefront:
     applicationName: 
     uri: https://vmware.wavefront.com
-    apiToken: 48b7b6a9-74ef-41f5-8002-f18dec9f82e2
+    apiToken: a669db3f-f0bc-4093-8571-15f0d489f482
     deployEventName: 
   tbs:
     namespace:

@@ -80,7 +80,7 @@ url: https://console.cloud.vmware.com
 ## Tanzu Observability
 Open a tab to Tanzu Observability for your Pet Clinic Dashboard.  First, you will need to sign in to the following Wavefront instance.
 ```dashboard:open-url
-url: https://vmware.wavefront.com/u/GVQsHYwxZC?t=vmware
+url: https://vmware.wavefront.com/u/982S38FmkM?t=map-sales-sandbox
 ```
 If you are having trouble accessing this instance, make sure you have the Wavefront-sandbox app added to your Workspace One account.  You can access that app at https://myvmware.workspaceair.com/catalog-portal/ui#/apps/details/WORKSPACE-d689139a-9b94-4b6f-aa23-915763e9b149-Web-Saml20, and then try to click the link above.
 

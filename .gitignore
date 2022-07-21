@@ -1,3 +1,4 @@
 values.yaml
 install/argocd/install.yaml
 chart.yaml
+.DS_Store
